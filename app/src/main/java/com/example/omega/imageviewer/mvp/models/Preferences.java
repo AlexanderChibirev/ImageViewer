@@ -1,0 +1,32 @@
+package com.example.omega.imageviewer.mvp.models;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+/**
+ * Created by Alexander Chibirev on 4/15/2018.
+ */
+
+public class Preferences {
+
+    private static final String PREFERENCES_NAME = "settings";
+
+    private static final String KEY_URL_FOR_DOWNLOAD_IMAGES = "url";
+
+    private SharedPreferences mPreferences;
+
+    public Preferences(Context context) {
+        mPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
+    }
+
+    @Nullable
+    public String getUrlForDownloadImages() {
+        return mPreferences.getString(KEY_URL_FOR_DOWNLOAD_IMAGES, null);
+    }
+
+    public void setUrlForDownloadImages(@NonNull String token) {
+        mPreferences.edit().putString(KEY_URL_FOR_DOWNLOAD_IMAGES, token).apply();
+    }
+}
