@@ -9,5 +9,4 @@ import com.example.omega.imageviewer.mvp.views.BaseView;
 
 public class BasePresenter<T extends BaseView> extends MvpPresenter<T> {
 
-
 }

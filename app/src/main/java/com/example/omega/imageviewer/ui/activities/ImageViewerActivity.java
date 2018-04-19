@@ -1,7 +1,7 @@
 package com.example.omega.imageviewer.ui.activities;
 
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -35,9 +35,9 @@ public class ImageViewerActivity extends BaseActivity implements ImageViewerView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.image_viewer_activity);
+        mImageViewerAdapter.setOnImageItemClickListener(this);
         mRecyclerView.setAdapter(mImageViewerAdapter);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
     }
 
     @Override
@@ -55,12 +55,13 @@ public class ImageViewerActivity extends BaseActivity implements ImageViewerView
         mImageViewerAdapter.update(array);//TODO changed on correct images
     }
 
-    public void showImagePagerScreen() { //TODO changed correct name full image or buautifules
-
+    @Override
+    public void showImagePagerScreen(@NonNull Image image, long position) {
+        startActivity(ImageSliderActivity.createIntent(this, image, position));
     }
 
     @Override
-    public void onImageClick(Image image) {
-        mImageViewerPresenter.onSlideClick(image);
+    public void onImageClick(@NonNull Image image, long position) {
+        mImageViewerPresenter.onSlideClick(image, position);
     }
 }

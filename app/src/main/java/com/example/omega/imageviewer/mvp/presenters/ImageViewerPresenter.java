@@ -22,7 +22,7 @@ public class ImageViewerPresenter extends BasePresenter<ImageViewerView> {
         //TODO added list updated;
     }
 
-    public void onSlideClick(Image image) {
-
+    public void onSlideClick(Image image, long position) {
+        getViewState().showImagePagerScreen(image, position);
     }
 }

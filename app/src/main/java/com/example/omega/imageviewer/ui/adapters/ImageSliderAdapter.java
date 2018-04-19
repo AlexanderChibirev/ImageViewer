@@ -1,7 +1,6 @@
 package com.example.omega.imageviewer.ui.adapters;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -14,17 +13,15 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * Created by Alexander Chibirev on 4/16/2018.
+ * Created by Alexander Chibirev on 4/19/2018.
  */
 
-public class ImageViewerAdapter extends BaseRecyclerImageAdapter<BaseRecyclerImageAdapter.BaseViewHolder> {
-    @Nullable
-    protected OnImageClickListener mListener;
+public class ImageSliderAdapter extends BaseRecyclerImageAdapter<BaseRecyclerImageAdapter.BaseViewHolder> {
 
     @NonNull
     @Override
     public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(inflateView(parent, R.layout.item_viewer));
+        return new ViewHolder(inflateView(parent, R.layout.item_slider));
     }
 
     @Override
@@ -33,17 +30,13 @@ public class ImageViewerAdapter extends BaseRecyclerImageAdapter<BaseRecyclerIma
     }
 
     @Override
-    public void update(List<Image> images) {
-        super.update(images);
-    }
-
-    @Override
     public int getItemCount() {
         return mImages.size();
     }
 
-    public void setOnImageItemClickListener(OnImageClickListener listener) {
-        mListener = listener;
+    @Override
+    public void update(List<Image> images) {
+        super.update(images);
     }
 
     class ViewHolder extends BaseViewHolder {
@@ -56,17 +49,11 @@ public class ImageViewerAdapter extends BaseRecyclerImageAdapter<BaseRecyclerIma
 
         @Override
         protected void onClick(int position) {
-            if (position >= 0 && mListener != null) {
-                mListener.onImageClick(mImages.get(position), position);
-            }
+            //nothing
         }
 
         void updateImage(int position) {
             imageView.setBackgroundResource(mImages.get(position).getUrl());
         }
-    }
-
-    public interface OnImageClickListener {
-        void onImageClick(@NonNull Image image, long position);
     }
 }
