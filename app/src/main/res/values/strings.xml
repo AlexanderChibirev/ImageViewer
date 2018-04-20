@@ -3,4 +3,7 @@
     <string name="error_connection">It seems that the internet connection has been lost. Please try again.</string>
     <string name="error_unknown">Unknown error</string>
     <string name="label_image_slider">Image Slider</string>
+    <string name="splash_first_part_title">andex</string>
+    <string name="splash_description">Mobile development school</string>
+    <string name="splash_second_part_title">Y</string>
 </resources>
