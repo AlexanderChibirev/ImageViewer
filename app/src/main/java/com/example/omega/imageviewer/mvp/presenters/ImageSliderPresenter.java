@@ -9,10 +9,12 @@ import com.example.omega.imageviewer.mvp.views.ImageSliderView;
  */
 
 @InjectViewState
-public class ImageSliderPresenter extends BasePresenter<ImageSliderView> {
-
+public class ImageSliderPresenter extends BaseImagePresenter<ImageSliderView> {
+    private final static float MAX_SCALE_FOR_IMAGE = 1.0f;
+    private final static float MIN_SCALE_FOR_IMAGE = 0.8f;
 
     public ImageSliderPresenter(Image image, long position) {
-        super();
+        getViewState().setSelection(position);
+        getViewState().transformImages(MAX_SCALE_FOR_IMAGE, MIN_SCALE_FOR_IMAGE);
     }
 }

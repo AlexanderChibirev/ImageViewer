@@ -5,19 +5,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray"
     tools:context=".ui.activities.ImageSliderActivity">
+    <include
+        android:id="@+id/include_toolbar"
+        layout="@layout/toolbar">
+    </include>
 
-    <android.support.v7.widget.RecyclerView
+    <com.omega_r.libs.omegarecyclerview.viewpager.OmegaPagerRecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        app:infinite="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include_toolbar"
         app:layout_constraintVertical_bias="1.0"
         tools:listitem="@layout/item_slider"/>
 

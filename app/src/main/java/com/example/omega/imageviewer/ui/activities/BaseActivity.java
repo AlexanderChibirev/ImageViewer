@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
  * Created by Alexander Chibirev on 4/15/2018.
  */
 
-public class BaseActivity extends MvpAppCompatActivity implements BaseView {
+public abstract class BaseActivity extends MvpAppCompatActivity implements BaseView {
 
     @Nullable
     @BindView(R.id.toolbar)

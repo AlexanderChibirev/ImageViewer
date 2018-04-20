@@ -5,5 +5,7 @@ package com.example.omega.imageviewer.mvp.views;
  */
 
 public interface ImageSliderView extends BaseImageView {
+    void transformImages(final float maxScale, final float minScale);
 
+    void setSelection(long position);
 }

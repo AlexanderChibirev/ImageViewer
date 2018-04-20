@@ -5,7 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray"
     tools:context=".ui.activities.ImageViewerActivity">
+
+    <include
+        android:id="@+id/include_toolbar"
+        layout="@layout/toolbar">
+    </include>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"
@@ -17,7 +23,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include_toolbar"
         app:layout_constraintVertical_bias="1.0"
         app:spanCount="2"
         tools:listitem="@layout/item_viewer"/>

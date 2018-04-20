@@ -1,13 +1,17 @@
 package com.example.omega.imageviewer.ui.adapters;
 
+import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.omega.imageviewer.mvp.models.Image;
+import com.example.omega.imageviewer.utils.ImageLoadingUtils;
+import com.omega_r.libs.omegarecyclerview.OmegaRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,9 +36,9 @@ public abstract class BaseRecyclerImageAdapter<VH extends BaseRecyclerImageAdapt
         return LayoutInflater.from(parent.getContext()).inflate(layout, parent, false);
     }
 
-    public static abstract class BaseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static abstract class BaseViewHolder extends OmegaRecyclerView.ViewHolder implements View.OnClickListener {
 
-        public BaseViewHolder(View itemView) {
+        BaseViewHolder(@NonNull final View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
@@ -49,5 +53,13 @@ public abstract class BaseRecyclerImageAdapter<VH extends BaseRecyclerImageAdapt
         }
 
         protected abstract void onClick(int position);
+
+        protected void updateImageView(@NonNull ImageView imageView, @NonNull List<Image> images,
+                                       @DrawableRes int placeholderErrorLoadingImage, int position) {
+            ImageLoadingUtils.loadImageFromUrl(
+                    imageView,
+                    images.get(position).getUrl(),
+                    placeholderErrorLoadingImage);
+        }
     }
 }

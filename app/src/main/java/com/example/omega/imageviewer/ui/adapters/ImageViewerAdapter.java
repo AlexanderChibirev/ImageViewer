@@ -29,7 +29,7 @@ public class ImageViewerAdapter extends BaseRecyclerImageAdapter<BaseRecyclerIma
 
     @Override
     public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
-        ((ViewHolder) holder).updateImage(position);
+        holder.updateImageView(((ViewHolder) holder).imageView, mImages, R.drawable.placeholder_error_loading_image, position);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class ImageViewerAdapter extends BaseRecyclerImageAdapter<BaseRecyclerIma
         return mImages.size();
     }
 
-    public void setOnImageItemClickListener(OnImageClickListener listener) {
+    public void setOnImageItemClickListener(@Nullable OnImageClickListener listener) {
         mListener = listener;
     }
 
@@ -61,8 +61,11 @@ public class ImageViewerAdapter extends BaseRecyclerImageAdapter<BaseRecyclerIma
             }
         }
 
-        void updateImage(int position) {
-            imageView.setBackgroundResource(mImages.get(position).getUrl());
+        @Override
+        protected void updateImageView(@NonNull ImageView imageView,
+                                       @NonNull List<Image> images,
+                                       int placeholderErrorLoadingImage, int position) {
+            super.updateImageView(this.imageView, mImages, R.drawable.placeholder_error_loading_image, position);
         }
     }
 

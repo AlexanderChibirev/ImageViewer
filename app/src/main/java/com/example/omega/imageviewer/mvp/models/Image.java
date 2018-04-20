@@ -1,6 +1,5 @@
 package com.example.omega.imageviewer.mvp.models;
 
-import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 
 import java.io.Serializable;
@@ -11,16 +10,15 @@ import java.io.Serializable;
 
 public class Image implements Serializable {
 
+    @NonNull
+    private String mUrl;
 
-    @DrawableRes
-    private int mUrl;
-
-    public Image(int url) {
+    public Image(@NonNull String url) {
         mUrl = url;
     }
 
-    @DrawableRes
-    public int getUrl() {
+    @NonNull
+    public String getUrl() {
         return mUrl;
     }
 }

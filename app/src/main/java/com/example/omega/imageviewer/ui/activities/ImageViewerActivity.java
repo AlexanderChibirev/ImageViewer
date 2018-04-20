@@ -43,20 +43,33 @@ public class ImageViewerActivity extends BaseActivity implements ImageViewerView
     @Override
     public void updateImages() {
         List<Image> array = new ArrayList<>();
-        array.add(new Image(R.drawable.placeholder_error_loading_image));
-        array.add(new Image(R.drawable.placeholder_error_loading_image));
-        array.add(new Image(R.drawable.placeholder_error_loading_image));
-        array.add(new Image(R.drawable.placeholder_error_loading_image));
-        array.add(new Image(R.drawable.placeholder_error_loading_image));
-        array.add(new Image(R.drawable.placeholder_error_loading_image));
-        array.add(new Image(R.drawable.placeholder_error_loading_image));
-        array.add(new Image(R.drawable.placeholder_error_loading_image));
-        array.add(new Image(R.drawable.placeholder_error_loading_image));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
         mImageViewerAdapter.update(array);//TODO changed on correct images
     }
 
     @Override
-    public void showImagePagerScreen(@NonNull Image image, long position) {
+    public void showImageSliderScreen(@NonNull Image image, long position) {
         startActivity(ImageSliderActivity.createIntent(this, image, position));
     }
 

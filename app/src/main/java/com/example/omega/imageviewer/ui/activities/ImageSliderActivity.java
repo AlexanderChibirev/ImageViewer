@@ -3,7 +3,7 @@ package com.example.omega.imageviewer.ui.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
+import android.support.annotation.NonNull;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -12,6 +12,8 @@ import com.example.omega.imageviewer.mvp.models.Image;
 import com.example.omega.imageviewer.mvp.presenters.ImageSliderPresenter;
 import com.example.omega.imageviewer.mvp.views.ImageSliderView;
 import com.example.omega.imageviewer.ui.adapters.ImageSliderAdapter;
+import com.omega_r.libs.omegarecyclerview.viewpager.OmegaPagerRecyclerView;
+import com.omega_r.libs.omegarecyclerview.viewpager.default_transformers.ScaleTransformer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,14 +33,15 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
     ImageSliderPresenter mImageSliderPresenter;
 
     @BindView(R.id.recyclerview)
-    RecyclerView mRecyclerView;
+    OmegaPagerRecyclerView mRecyclerView;
 
+    @NonNull
     private ImageSliderAdapter mImageSliderAdapter = new ImageSliderAdapter();
 
     public static Intent createIntent(Context context, Image image, long position) {
-        Intent intent = new Intent(context, ImageViewerActivity.class);
+        Intent intent = new Intent(context, ImageSliderActivity.class);
         intent.putExtra(EXTRA_IMAGE, image);
-        intent.putExtra(EXTRA_IMAGE, position);
+        intent.putExtra(EXTRA_IMAGE_POSITION, position);
         return intent;
     }
 
@@ -59,17 +62,32 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
     }
 
     @Override
+    public void transformImages(final float maxScale, final float minScale) {
+        mRecyclerView.setItemTransformer(new ScaleTransformer.Builder()
+                .setMaxScale(maxScale)
+                .setMinScale(minScale)
+                .build());
+    }
+
+    @Override
+    public void setSelection(long position) {
+        mRecyclerView.scrollToPosition((int) position);
+    }
+
+    @Override
     public void updateImages() {
         List<Image> array = new ArrayList<>();
-        array.add(new Image(R.drawable.placeholder_error_loading_image));
-        array.add(new Image(R.drawable.placeholder_error_loading_image));
-        array.add(new Image(R.drawable.placeholder_error_loading_image));
-        array.add(new Image(R.drawable.placeholder_error_loading_image));
-        array.add(new Image(R.drawable.placeholder_error_loading_image));
-        array.add(new Image(R.drawable.placeholder_error_loading_image));
-        array.add(new Image(R.drawable.placeholder_error_loading_image));
-        array.add(new Image(R.drawable.placeholder_error_loading_image));
-        array.add(new Image(R.drawable.placeholder_error_loading_image));
+        array.add(new Image("https://www.hd-wallpapersdownload.com/script/bulk-upload/lion-big-photos-wallpaper.jpg"));
+        array.add(new Image("https://upload.wikimedia.org/wikipedia/commons/9/91/F-15_vertical_deploy.jpg"));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
+        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
         mImageSliderAdapter.update(array);//TODO changed on correct images
     }
 }

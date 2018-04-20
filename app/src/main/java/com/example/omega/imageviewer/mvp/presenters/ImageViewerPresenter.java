@@ -10,19 +10,9 @@ import com.example.omega.imageviewer.mvp.views.ImageViewerView;
  */
 
 @InjectViewState
-public class ImageViewerPresenter extends BasePresenter<ImageViewerView> {
-
-    public ImageViewerPresenter() {
-        getViewState().updateImages();
-    }
-
-    @Override
-    protected void onFirstViewAttach() {
-        super.onFirstViewAttach();
-        //TODO added list updated;
-    }
+public class ImageViewerPresenter extends BaseImagePresenter<ImageViewerView> {
 
     public void onSlideClick(Image image, long position) {
-        getViewState().showImagePagerScreen(image, position);
+        getViewState().showImageSliderScreen(image, position);
     }
 }

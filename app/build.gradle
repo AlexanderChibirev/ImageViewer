@@ -1,5 +1,9 @@
 apply plugin: 'com.android.application'
 
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -27,8 +31,8 @@ def retrofitVersion = '2.3.0'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "com.android.support:appcompat-v7:$supportVersion"
-    implementation "com.android.support:recyclerview-v7:$supportVersion"
-    implementation "com.android.support:cardview-v7:$supportVersion" //TODO maybe dont need
+    implementation "com.android.support:design:$supportVersion"
+    implementation "com.android.support:cardview-v7:$supportVersion"
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
@@ -41,10 +45,8 @@ dependencies {
     implementation "com.google.dagger:dagger:$daggerVersion"
     annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
 
-
     implementation "com.jakewharton:butterknife:$butterKnifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
-
 
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
@@ -53,5 +55,8 @@ dependencies {
     implementation 'com.squareup.moshi:moshi:1.5.0'
     implementation 'com.squareup.okhttp3:okhttp:3.9.1'
     implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    implementation 'com.github.Omega-R:OmegaRecyclerView:1.6.11@aar'
+
 
 }

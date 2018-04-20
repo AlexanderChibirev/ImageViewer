@@ -13,6 +13,6 @@ import com.example.omega.imageviewer.mvp.models.Image;
 public interface ImageViewerView extends BaseImageView {
 
     @StateStrategyType(OneExecutionStateStrategy.class)
-    void showImagePagerScreen(@NonNull Image image, long position);
+    void showImageSliderScreen(@NonNull Image image, long position);
 
 }
