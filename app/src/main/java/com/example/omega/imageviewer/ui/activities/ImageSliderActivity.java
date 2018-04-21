@@ -56,7 +56,7 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.image_slider_activity);
+        setContentView(R.layout.activity_image_slider);
         showBackButton();
         mRecyclerView.setAdapter(mImageSliderAdapter);
     }

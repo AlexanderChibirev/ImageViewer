@@ -41,7 +41,7 @@ public class ImageViewerActivity extends BaseActivity implements ImageViewerView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.image_viewer_activity);
+        setContentView(R.layout.activity_image_viewer);
         mImageViewerAdapter.setOnImageItemClickListener(this);
         mRecyclerView.setAdapter(mImageViewerAdapter);
     }

@@ -1,7 +1,7 @@
 package com.example.omega.imageviewer.di;
 
 
-import com.example.omega.imageviewer.di.modules.PreferencesModule;
+import com.example.omega.imageviewer.di.modules.ContextModule;
 
 import javax.inject.Singleton;
 
@@ -12,6 +12,6 @@ import dagger.Component;
  */
 
 @Singleton
-@Component(modules = {PreferencesModule.class})
+@Component(modules = {ContextModule.class})
 public interface AppComponent {
 }
