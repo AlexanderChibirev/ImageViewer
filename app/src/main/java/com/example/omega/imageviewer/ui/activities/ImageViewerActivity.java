@@ -1,5 +1,7 @@
 package com.example.omega.imageviewer.ui.activities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -26,6 +28,10 @@ public class ImageViewerActivity extends BaseActivity implements ImageViewerView
     RecyclerView mRecyclerView;
 
     private ImageViewerAdapter mImageViewerAdapter = new ImageViewerAdapter();
+
+    public static Intent createIntent(Context context) {
+        return new Intent(context, ImageViewerActivity.class);
+    }
 
     @ProvidePresenter
     ImageViewerPresenter provideImageViewerPresenter() {

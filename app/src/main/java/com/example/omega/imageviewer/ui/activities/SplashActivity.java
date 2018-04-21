@@ -2,6 +2,7 @@ package com.example.omega.imageviewer.ui.activities;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.UiThread;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.transition.ChangeBounds;
@@ -30,13 +31,26 @@ public class SplashActivity extends BaseActivity implements SplashView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_start_activity);
+
+    }
+
+    @UiThread
+    @Override
+    public void startAnimate(@NonNull final ChangeBounds transition) {
+        this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ConstraintSet newConstraintSet = new ConstraintSet();
+                newConstraintSet.clone(getApplicationContext(), R.layout.splash_end_activity);
+                newConstraintSet.applyTo(mConstraintLayout);
+                TransitionManager.beginDelayedTransition(mConstraintLayout, transition);
+            }
+        });
     }
 
     @Override
-    public void startAnimate(@NonNull ChangeBounds transition) {
-        ConstraintSet newConstraintSet = new ConstraintSet();
-        newConstraintSet.clone(this, R.layout.splash_end_activity);
-        newConstraintSet.applyTo(mConstraintLayout);
-        TransitionManager.beginDelayedTransition(mConstraintLayout, transition);
+    public void showViewerScreen() {
+        startActivity(ImageViewerActivity.createIntent(this));
+        finish();
     }
 }
