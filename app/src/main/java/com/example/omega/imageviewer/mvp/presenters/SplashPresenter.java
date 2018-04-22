@@ -30,17 +30,17 @@ public class SplashPresenter extends BasePresenter<SplashView> {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                startAnimate();
+                getViewState().startAnimate(createTransition());
             }
-        }, POST_DELAYED);
+        }, POST_DELAYED);//for correct animation
     }
 
-    private void startAnimate() {
+    private ChangeBounds createTransition() {
         ChangeBounds transition = new ChangeBounds();
         transition.setInterpolator(new BounceInterpolator());
         transition.setDuration(DURATION_ANIMATION);
         transition.addListener(createTransitionListener());
-        getViewState().startAnimate(transition);
+        return transition;
     }
 
     private TransitionListenerWrapper createTransitionListener() {

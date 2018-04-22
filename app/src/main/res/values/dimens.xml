@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="item_viewer_image_height">120dp</dimen>
+    <dimen name="item_viewer_card_elevations">2dp</dimen>
+    <dimen name="item_viewer_margin">2dp</dimen>
+</resources>

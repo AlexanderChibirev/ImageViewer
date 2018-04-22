@@ -13,6 +13,9 @@ import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.mvp.presenters.SplashPresenter;
 import com.example.omega.imageviewer.mvp.views.SplashView;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import butterknife.BindView;
 
 /**
@@ -31,7 +34,6 @@ public class SplashActivity extends BaseActivity implements SplashView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_start_activity);
-
     }
 
     @UiThread
