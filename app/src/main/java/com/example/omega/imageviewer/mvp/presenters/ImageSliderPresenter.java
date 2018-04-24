@@ -4,6 +4,8 @@ import com.arellomobile.mvp.InjectViewState;
 import com.example.omega.imageviewer.mvp.models.Image;
 import com.example.omega.imageviewer.mvp.views.ImageSliderView;
 
+import javax.inject.Inject;
+
 /**
  * Created by Alexander Chibirev on 4/19/2018.
  */
@@ -13,6 +15,7 @@ public class ImageSliderPresenter extends BaseImagePresenter<ImageSliderView> {
     private final static float MAX_SCALE_FOR_IMAGE = 1.0f;
     private final static float MIN_SCALE_FOR_IMAGE = 0.8f;
 
+    @Inject
     public ImageSliderPresenter(Image image, long position) {
         getViewState().setSelection(position);
         getViewState().transformImages(MAX_SCALE_FOR_IMAGE, MIN_SCALE_FOR_IMAGE);

@@ -13,9 +13,6 @@ import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.mvp.presenters.SplashPresenter;
 import com.example.omega.imageviewer.mvp.views.SplashView;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import butterknife.BindView;
 
 /**
@@ -39,14 +36,11 @@ public class SplashActivity extends BaseActivity implements SplashView {
     @UiThread
     @Override
     public void startAnimate(@NonNull final ChangeBounds transition) {
-        this.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                ConstraintSet newConstraintSet = new ConstraintSet();
-                newConstraintSet.clone(getApplicationContext(), R.layout.splash_end_activity);
-                newConstraintSet.applyTo(mConstraintLayout);
-                TransitionManager.beginDelayedTransition(mConstraintLayout, transition);
-            }
+        this.runOnUiThread(() -> {
+            ConstraintSet newConstraintSet = new ConstraintSet();
+            newConstraintSet.clone(getApplicationContext(), R.layout.splash_end_activity);
+            newConstraintSet.applyTo(mConstraintLayout);
+            TransitionManager.beginDelayedTransition(mConstraintLayout, transition);
         });
     }
 

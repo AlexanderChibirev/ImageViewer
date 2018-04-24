@@ -48,7 +48,7 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
     @ProvidePresenter
     ImageSliderPresenter provideImageSliderPresenter() {
         Intent intent = getIntent();
-        Image image = intent.getParcelableExtra(EXTRA_IMAGE);
+        Image image = (Image) intent.getSerializableExtra(EXTRA_IMAGE);
         long position = intent.getLongExtra(EXTRA_IMAGE_POSITION, DEFAULT_VALUE);
         return new ImageSliderPresenter(image, position);
     }
@@ -57,8 +57,13 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_slider);
-        showBackButton();
         mRecyclerView.setAdapter(mImageSliderAdapter);
+    }
+
+    @Override
+    protected void initToolbar() {
+        super.initToolbar();
+        showBackButton();
     }
 
     @Override
@@ -75,19 +80,7 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
     }
 
     @Override
-    public void updateImages() {
-        List<Image> array = new ArrayList<>();
-        array.add(new Image("https://www.hd-wallpapersdownload.com/script/bulk-upload/lion-big-photos-wallpaper.jpg"));
-        array.add(new Image("https://upload.wikimedia.org/wikipedia/commons/9/91/F-15_vertical_deploy.jpg"));
-        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
-        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
-        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
-        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
-        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
-        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
-        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
-        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
-        array.add(new Image("https://lh3.googleusercontent.com/X2g2LKEruoxITTE1hXG5Lp3tJALhptCDp0gKZ932SWwt=w950-h713-no"));
-        mImageSliderAdapter.update(array);//TODO changed on correct images
+    public void updateImages(@NonNull List<Image> images) {
+        mImageSliderAdapter.update(images);
     }
 }

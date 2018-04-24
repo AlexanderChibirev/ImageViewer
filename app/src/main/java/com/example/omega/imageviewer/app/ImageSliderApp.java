@@ -1,25 +1,17 @@
 package com.example.omega.imageviewer.app;
 
-import android.app.Application;
-
-import com.example.omega.imageviewer.di.AppComponent;
 import com.example.omega.imageviewer.di.DaggerAppComponent;
+
+import dagger.android.AndroidInjector;
+import dagger.android.support.DaggerApplication;
 
 /**
  * Created by Alexander Chibirev on 4/15/2018.
  */
 
-public class ImageSliderApp extends Application {
-    private static AppComponent sAppComponent;
-
+public class ImageSliderApp extends DaggerApplication {
     @Override
-    public void onCreate() {
-        super.onCreate();
-        sAppComponent = DaggerAppComponent.builder().build();
+    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
+        return DaggerAppComponent.builder().application(this).build();
     }
-
-    public static AppComponent getAppComponent() {
-        return sAppComponent;
-    }
-
 }

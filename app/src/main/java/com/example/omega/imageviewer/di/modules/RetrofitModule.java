@@ -1,5 +1,12 @@
 package com.example.omega.imageviewer.di.modules;
 
+import android.arch.core.BuildConfig;
+
+import com.example.omega.imageviewer.backend.call.CallWrapper;
+import com.example.omega.imageviewer.backend.call.TaskCallAdapterFactory;
+import com.example.omega.imageviewer.mvp.models.Text;
+import com.example.omega.imageviewer.tools.task.TaskExecutor;
+import com.example.omega.imageviewer.tools.type_adapters.TextTypeAdapter;
 import com.squareup.moshi.Moshi;
 
 import java.util.Set;
@@ -8,8 +15,10 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import dagger.multibindings.IntoSet;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
 import retrofit2.converter.moshi.MoshiConverterFactory;
@@ -26,8 +35,17 @@ public class RetrofitModule {
 
     @Provides
     @Singleton
-    public Retrofit provideRetrofit(Retrofit.Builder builder, String url) {
-        return builder.baseUrl(url).build();
+    public Retrofit provideRetrofit(Retrofit.Builder builder) {
+        return builder.baseUrl("").build();
+    }
+
+    @Provides
+    @Singleton
+    public Retrofit.Builder provideRetrofitBuilder(Converter.Factory converterFactory, OkHttpClient client, TaskExecutor taskExecutor) {
+        return new Retrofit.Builder()
+                .addConverterFactory(converterFactory)
+                .addCallAdapterFactory(new TaskCallAdapterFactory(taskExecutor))
+                .callFactory(new CallWrapper.Factory(client));
     }
 
     @Provides
@@ -41,6 +59,16 @@ public class RetrofitModule {
     }
 
     @Provides
+    @IntoSet
+    @Interceptors(NETWORK)
+    public okhttp3.Interceptor provideLoggingInterceptor() {
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(BuildConfig.DEBUG ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
+
+        return interceptor;
+    }
+
+    @Provides
     @Singleton
     public Converter.Factory provideConverterFactory(Moshi moshi) {
         return MoshiConverterFactory.create(moshi);
@@ -49,6 +77,8 @@ public class RetrofitModule {
     @Provides
     @Singleton
     public Moshi provideMoshi() {
-        return new Moshi.Builder().build();
+        return new Moshi.Builder()
+                .add(Text.class, new TextTypeAdapter())
+                .build();
     }
 }

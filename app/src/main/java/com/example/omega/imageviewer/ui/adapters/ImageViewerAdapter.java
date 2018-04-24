@@ -19,7 +19,7 @@ import butterknife.BindView;
 
 public class ImageViewerAdapter extends BaseRecyclerImageAdapter<BaseRecyclerImageAdapter.BaseViewHolder> {
     @Nullable
-    protected OnImageClickListener mListener;
+    private OnImageClickListener mListener;
 
     @NonNull
     @Override
