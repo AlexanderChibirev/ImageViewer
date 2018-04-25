@@ -7,25 +7,29 @@ import android.support.annotation.StringRes;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.mvp.models.Text;
 import com.example.omega.imageviewer.tools.type_adapters.TextTypeAdapter;
-import com.squareup.moshi.Json;
-import com.squareup.moshi.Moshi;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Alexander Chibirev on 4/22/2018.
  */
 
 public class Error {
+
     public static final Text UNKNOWN = Text.from(R.string.error_unknown);
 
-    private static final Moshi sMoshi = new Moshi.Builder()
-            .add(Text.class, new TextTypeAdapter()).build();
+    private static final Gson sGson = new GsonBuilder()
+            .registerTypeAdapter(Text.class, new TextTypeAdapter())
+            .create();
 
-    @Json(name = "message")
-    private transient Text mMessage;
-
-    @Json(name = "code")
-    private transient int mCode;
-
+    @Expose
+    @SerializedName("message")
+    private Text mMessage;
+    @Expose
+    @SerializedName("code")
+    private int mCode;
 
     public Error(String message) {
         mMessage = Text.from(message);
@@ -37,9 +41,8 @@ public class Error {
 
     @Nullable
     public static Error createWithJson(String json) {
-        //ErrorContainer errorContainer = sMoshi.fromJson(json, ErrorContainer.class); //TODO changed on normal logic
-        //return errorContainer.error;
-        return null;
+        ErrorContainer errorContainer = sGson.fromJson(json, ErrorContainer.class);
+        return errorContainer.error;
     }
 
     public String getMessage(Resources resources) {
@@ -55,9 +58,9 @@ public class Error {
     }
 
     private class ErrorContainer {
-        @Json(name = "error")
-        private transient Error error;
+        @Expose
+        @SerializedName("error")
+        private Error error;
     }
-
 
 }

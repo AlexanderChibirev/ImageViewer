@@ -74,12 +74,14 @@ dependencies {
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
 
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion" //todo compare with moshi
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
 
     implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
     implementation 'com.squareup.okio:okio:1.14.0'
-    implementation 'com.squareup.moshi:moshi:1.5.0' //compare with gson
+
+  //  implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"//todo compare with gson
+ //   implementation 'com.squareup.moshi:moshi:1.5.0' //todo compare with gson
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.github.Omega-R:OmegaRecyclerView:1.6.11@aar'

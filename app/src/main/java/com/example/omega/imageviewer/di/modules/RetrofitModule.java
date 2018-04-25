@@ -9,7 +9,8 @@ import com.example.omega.imageviewer.mvp.models.Preferences;
 import com.example.omega.imageviewer.mvp.models.Text;
 import com.example.omega.imageviewer.tools.task.TaskExecutor;
 import com.example.omega.imageviewer.tools.type_adapters.TextTypeAdapter;
-import com.squareup.moshi.Moshi;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.Set;
 
@@ -23,7 +24,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
-import retrofit2.converter.moshi.MoshiConverterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.omega.imageviewer.di.modules.Interceptors.Type.BASE;
 import static com.example.omega.imageviewer.di.modules.Interceptors.Type.NETWORK;
@@ -80,15 +81,16 @@ public class RetrofitModule {
 
     @Provides
     @Singleton
-    public Converter.Factory provideConverterFactory(Moshi moshi) {
-        return MoshiConverterFactory.create(moshi);
+    public Converter.Factory provideConverterFactory(Gson gson) {
+        return GsonConverterFactory.create(gson);
     }
 
     @Provides
     @Singleton
-    public Moshi provideMoshi() {
-        return new Moshi.Builder()
-                .add(Text.class, new TextTypeAdapter()) // registerTypeAdapter
-                .build();
+    public Gson provideGson() {
+        return new GsonBuilder()
+                .registerTypeAdapter(Text.class, new TextTypeAdapter())
+                .create();
     }
+
 }
