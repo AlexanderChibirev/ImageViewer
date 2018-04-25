@@ -7,4 +7,11 @@
     <string name="splash_description">Mobile development school</string>
     <string name="splash_second_part_title">Y</string>
     <string name="all_content_description">I\'m sorry that you are blind</string>
+    <string name="font_family_medium" translatable="false">sans-serif-medium</string>
+    <string name="font_family_regular" translatable="false">sans-serif</string>
+    <string name="label_attention">Attention</string>
+    <string name="cancel">Cancel</string>
+    <string name="yes">Yes</string>
+    <string name="go_offline_mode">No internet connection, go offline mode?</string>
+
 </resources>

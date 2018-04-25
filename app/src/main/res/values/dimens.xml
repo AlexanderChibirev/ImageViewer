@@ -3,4 +3,6 @@
     <dimen name="item_viewer_image_height">120dp</dimen>
     <dimen name="item_viewer_card_elevations">2dp</dimen>
     <dimen name="item_viewer_margin">2dp</dimen>
+    <dimen name="dialog_corner_radius">16dp</dimen>
+    <dimen name="dialog_waiting_padding">16dp</dimen>
 </resources>

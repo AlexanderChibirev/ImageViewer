@@ -14,12 +14,13 @@ import com.example.omega.imageviewer.mvp.presenters.ImageViewerPresenter;
 import com.example.omega.imageviewer.mvp.views.ImageViewerView;
 import com.example.omega.imageviewer.ui.adapters.ImageViewerAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 
-public class ImageViewerActivity extends BaseActivity implements ImageViewerView, ImageViewerAdapter.OnImageClickListener {
+public class ImageViewerActivity extends BaseActivity implements
+        ImageViewerView,
+        ImageViewerAdapter.OnImageClickListener {
 
     @InjectPresenter
     ImageViewerPresenter mImageViewerPresenter;
@@ -59,5 +60,11 @@ public class ImageViewerActivity extends BaseActivity implements ImageViewerView
     @Override
     public void onImageClick(@NonNull Image image, long position) {
         mImageViewerPresenter.onSlideClick(image, position);
+    }
+
+    @Override
+    public void onConnectivityChanged(boolean availableNow) {
+        super.onConnectivityChanged(availableNow);
+        mImageViewerPresenter.onConnectivityChanged(availableNow);
     }
 }

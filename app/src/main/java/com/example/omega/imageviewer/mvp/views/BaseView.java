@@ -13,6 +13,10 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
 @StateStrategyType(AddToEndSingleStrategy.class)
 public interface BaseView extends MvpView {
+
+    long DELAY_SHOW_WAITING = 500;
+
     void showToast(@StringRes int message);
+
     void showToast(@NonNull String message);
 }

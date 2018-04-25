@@ -15,7 +15,6 @@ import com.example.omega.imageviewer.ui.adapters.ImageSliderAdapter;
 import com.omega_r.libs.omegarecyclerview.viewpager.OmegaPagerRecyclerView;
 import com.omega_r.libs.omegarecyclerview.viewpager.default_transformers.ScaleTransformer;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -82,5 +81,11 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
     @Override
     public void updateImages(@NonNull List<Image> images) {
         mImageSliderAdapter.update(images);
+    }
+
+    @Override
+    public void onConnectivityChanged(boolean availableNow) {
+        super.onConnectivityChanged(availableNow);
+        mImageSliderPresenter.onConnectivityChanged(availableNow);
     }
 }
