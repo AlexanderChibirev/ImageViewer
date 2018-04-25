@@ -5,10 +5,11 @@ import android.app.Application;
 
 import com.example.omega.imageviewer.app.ImageSliderApp;
 import com.example.omega.imageviewer.di.modules.AppModule;
+import com.example.omega.imageviewer.di.modules.AppServiceModule;
 import com.example.omega.imageviewer.di.modules.CloudDriveModule;
-import com.example.omega.imageviewer.di.modules.ImageSliderModule;
-import com.example.omega.imageviewer.di.modules.ImageViewerModule;
-import com.example.omega.imageviewer.di.modules.SplashActivityModule;
+import com.example.omega.imageviewer.di.modules.ExecutorModule;
+import com.example.omega.imageviewer.di.modules.PreferencesModule;
+import com.example.omega.imageviewer.tools.cloud_drive.CloudDrive;
 
 import javax.inject.Singleton;
 
@@ -22,14 +23,14 @@ import dagger.android.support.AndroidSupportInjectionModule;
  */
 
 @Singleton
-@Component(modules = {
-        AppModule.class,
+@Component(modules = {AppModule.class,
+        ExecutorModule.class,
+        AppServiceModule.class,
+        PreferencesModule.class,
         CloudDriveModule.class,
-        SplashActivityModule.class,
-        ImageViewerModule.class,
-        ImageSliderModule.class,
         AndroidSupportInjectionModule.class})
 public interface AppComponent extends AndroidInjector<ImageSliderApp> {
+
     @Component.Builder
     interface Builder {
 
@@ -39,4 +40,5 @@ public interface AppComponent extends AndroidInjector<ImageSliderApp> {
         AppComponent build();
     }
 
+    CloudDrive getCloudDrive();
 }

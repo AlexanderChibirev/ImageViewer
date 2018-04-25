@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 /**
  * Created by Alexander Chibirev on 4/22/2018.
  */
+
 public class Task<O> {
     @NonNull
     private final Worker<O> mWorker;

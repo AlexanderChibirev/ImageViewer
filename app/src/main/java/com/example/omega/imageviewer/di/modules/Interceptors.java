@@ -5,6 +5,8 @@ import java.lang.annotation.Retention;
 
 import javax.inject.Qualifier;
 
+import dagger.Provides;
+
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
@@ -16,9 +18,9 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 public @interface Interceptors {
 
-    Type value() default Type.BASE;
+    Type value();
 
     enum Type {
-        BASE, NETWORK
+        BASE, NETWORK // for all logs
     }
 }

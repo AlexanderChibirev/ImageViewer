@@ -1,22 +1,21 @@
 package com.example.omega.imageviewer.di.modules;
 
-import com.example.omega.imageviewer.backend.AppService;
+import android.app.Application;
+import android.content.Context;
 
 import javax.inject.Singleton;
 
+import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
 
 /**
- * Created by Alexander Chibirev on 4/22/2018.
+ * Created by Alexander Chibirev on 4/25/2018.
  */
 
-@Module(includes = {ApiModule.class})
-public class AppModule {
+@Module
+public abstract class AppModule {
 
-    @Provides
-    @Singleton
-    AppService provideAppService() {
-        return new AppService();
-    }
+    @Binds
+    abstract Context bindContext(Application application);
 }

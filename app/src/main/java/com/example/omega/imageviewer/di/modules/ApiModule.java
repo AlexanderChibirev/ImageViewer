@@ -15,6 +15,7 @@ import retrofit2.Retrofit;
 
 @Module(includes = RetrofitModule.class)
 public class ApiModule {
+
     @Provides
     @Singleton
     public CloudDriverApi provideCloudDriverApi(Retrofit retrofit) {

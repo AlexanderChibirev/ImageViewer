@@ -1,5 +1,6 @@
 package com.example.omega.imageviewer.app;
 
+import com.example.omega.imageviewer.di.AppComponent;
 import com.example.omega.imageviewer.di.DaggerAppComponent;
 
 import dagger.android.AndroidInjector;
@@ -10,8 +11,22 @@ import dagger.android.support.DaggerApplication;
  */
 
 public class ImageSliderApp extends DaggerApplication {
+
+    private static AppComponent sAppComponent;
+
+    public static AppComponent getAppComponent() {
+        return sAppComponent;
+    }
+
     @Override
     protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
-        return DaggerAppComponent.builder().application(this).build();
+        sAppComponent =
+                DaggerAppComponent
+                .builder()
+                .application(this)
+                .build();
+
+        return sAppComponent;
     }
+
 }

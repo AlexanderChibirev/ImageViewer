@@ -1,10 +1,9 @@
 package com.example.omega.imageviewer.mvp.presenters;
 
-import com.example.omega.imageviewer.mvp.views.BaseImageView;
-import com.example.omega.imageviewer.mvp.views.BaseView;
-import com.example.omega.imageviewer.tools.cloud_drive.CloudDrive;
+import android.support.annotation.NonNull;
 
-import javax.inject.Inject;
+import com.example.omega.imageviewer.mvp.views.BaseImageView;
+import com.example.omega.imageviewer.tools.cloud_drive.CloudDrive;
 
 /**
  * Created by Alexander Chibirev on 4/15/2018.
@@ -12,10 +11,15 @@ import javax.inject.Inject;
 
 public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V> {
 
-    @Inject
-    CloudDrive mCloudDrive;
+    @NonNull
+    protected CloudDrive mCloudDrive;
 
-    public BaseImagePresenter() {
+    public BaseImagePresenter(@NonNull CloudDrive cloudDrive) {
+        mCloudDrive = cloudDrive;
+    }
 
+    @Override
+    protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
     }
 }

@@ -2,8 +2,10 @@ package com.example.omega.imageviewer.di.modules;
 
 import android.arch.core.BuildConfig;
 
+import com.example.omega.imageviewer.backend.TokenInterceptor;
 import com.example.omega.imageviewer.backend.call.CallWrapper;
 import com.example.omega.imageviewer.backend.call.TaskCallAdapterFactory;
+import com.example.omega.imageviewer.mvp.models.Preferences;
 import com.example.omega.imageviewer.mvp.models.Text;
 import com.example.omega.imageviewer.tools.task.TaskExecutor;
 import com.example.omega.imageviewer.tools.type_adapters.TextTypeAdapter;
@@ -23,6 +25,7 @@ import retrofit2.Converter;
 import retrofit2.Retrofit;
 import retrofit2.converter.moshi.MoshiConverterFactory;
 
+import static com.example.omega.imageviewer.di.modules.Interceptors.Type.BASE;
 import static com.example.omega.imageviewer.di.modules.Interceptors.Type.NETWORK;
 
 
@@ -36,7 +39,7 @@ public class RetrofitModule {
     @Provides
     @Singleton
     public Retrofit provideRetrofit(Retrofit.Builder builder) {
-        return builder.baseUrl("").build();
+        return builder.baseUrl("https://api.quickblox.com").build();
     }
 
     @Provides
@@ -50,7 +53,7 @@ public class RetrofitModule {
 
     @Provides
     @Singleton
-    public OkHttpClient provideClient(@Interceptors Set<Interceptor> interceptors,
+    public OkHttpClient provideClient(@Interceptors(BASE) Set<Interceptor> interceptors,
                                       @Interceptors(NETWORK) Set<okhttp3.Interceptor> networkInterceptors) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.interceptors().addAll(interceptors);
@@ -69,6 +72,13 @@ public class RetrofitModule {
     }
 
     @Provides
+    @IntoSet
+    @Interceptors(BASE)
+    public okhttp3.Interceptor provideTokenInterceptor(Preferences preferences) {
+        return new TokenInterceptor(preferences);
+    }
+
+    @Provides
     @Singleton
     public Converter.Factory provideConverterFactory(Moshi moshi) {
         return MoshiConverterFactory.create(moshi);
@@ -78,7 +88,7 @@ public class RetrofitModule {
     @Singleton
     public Moshi provideMoshi() {
         return new Moshi.Builder()
-                .add(Text.class, new TextTypeAdapter())
+                .add(Text.class, new TextTypeAdapter()) // registerTypeAdapter
                 .build();
     }
 }

@@ -7,6 +7,7 @@ import android.support.transition.Transition;
 import android.view.animation.BounceInterpolator;
 
 import com.arellomobile.mvp.InjectViewState;
+import com.example.omega.imageviewer.app.ImageSliderApp;
 import com.example.omega.imageviewer.mvp.views.SplashView;
 import com.example.omega.imageviewer.tools.TransitionListenerWrapper;
 import com.example.omega.imageviewer.tools.cloud_drive.CloudDrive;
@@ -25,11 +26,16 @@ public class SplashPresenter extends BasePresenter<SplashView> implements CloudD
     @Inject
     CloudDrive mCloudDrive;
 
+    @Inject
+    public SplashPresenter() {
+        mCloudDrive = ImageSliderApp.getAppComponent().getCloudDrive();
+        mCloudDrive.addCallback(this); //transfer callback in ImageSlideActivity
+        mCloudDrive.requestImages(100, 0); //TODo remove magic number
+    }
+
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
-        mCloudDrive.addCallback(this); //transfer callback in ImageSlideActivity
-        mCloudDrive.requestImages(100, 0); //TODo remove magic number
         final Handler handler = new Handler();
         //for correct animation
         handler.postDelayed(() -> getViewState().startAnimate(createTransition()), POST_DELAYED);

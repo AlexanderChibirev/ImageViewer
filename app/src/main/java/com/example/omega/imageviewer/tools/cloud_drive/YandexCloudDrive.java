@@ -15,8 +15,7 @@ import java.util.List;
 public class YandexCloudDrive extends BaseYandexCloudDrive {
     private static final String QUERY_MEDIA_TYPE = "image";
 
-    private CloudDriverApi mCloudDriverApi;
-
+    private final CloudDriverApi mCloudDriverApi;
     @NonNull
     private List<Image> mImages = new ArrayList<>();
 

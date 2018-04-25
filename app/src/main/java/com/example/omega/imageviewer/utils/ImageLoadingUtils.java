@@ -10,6 +10,7 @@ import com.squareup.picasso.Picasso;
 /**
  * Created by Alexander Chibirev on 4/20/2018.
  */
+
 public class ImageLoadingUtils {
 
     public static void loadImageFromUrl(@NonNull final ImageView imageView,

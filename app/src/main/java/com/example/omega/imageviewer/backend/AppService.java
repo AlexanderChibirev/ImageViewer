@@ -8,15 +8,17 @@ import com.example.omega.imageviewer.tools.task.Task;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 /**
  * Created by Alexander Chibirev on 4/22/2018.
  */
 
 public class AppService {
-    @Inject
-    CloudDriverApi mCloudDriverApi;
+
+    private CloudDriverApi mCloudDriverApi;
+
+    public AppService(CloudDriverApi cloudDriverApi) {
+        mCloudDriverApi = cloudDriverApi;
+    }
 
     public Task<List<Image>> requestImages(@NonNull String mediaType, int limit, int offSet) {
         return mCloudDriverApi.requestImages(limit, mediaType, offSet);
