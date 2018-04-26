@@ -16,7 +16,7 @@ import butterknife.OnClick;
 /**
  * Created by Alexander Chibirev on 4/25/2018.
  */
-public class OfflineModeDialog extends BaseDialog {
+public class AttentionDialog extends BaseDialog {
 
     @BindView(R.id.textview_message)
     TextView mMessageTextView;
@@ -34,15 +34,15 @@ public class OfflineModeDialog extends BaseDialog {
     private OnOkButtonListener mOnOkButtonListener;
     private OnCancelButtonListener mOnCancelButtonListener;
 
-    public OfflineModeDialog(@NonNull Context context) {
+    public AttentionDialog(@NonNull Context context) {
         super(context);
     }
 
-    public OfflineModeDialog(@NonNull Context context, int themeResId) {
+    public AttentionDialog(@NonNull Context context, int themeResId) {
         super(context, themeResId);
     }
 
-    protected OfflineModeDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
+    protected AttentionDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
         super(context, cancelable, cancelListener);
     }
 
@@ -82,6 +82,7 @@ public class OfflineModeDialog extends BaseDialog {
     @OnClick(R.id.button_ok)
     public void onOkButtonClick() {
         if (mOnOkButtonListener != null) {
+            this.dismiss();;
             mOnOkButtonListener.onOkButtonPressed();
         }
     }

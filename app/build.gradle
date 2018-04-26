@@ -22,7 +22,8 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.config
-        buildConfigField "String", "BASE_URL", "\"https://disk.yandex.ru/client/disk/\""
+        buildConfigField "String", "CLIENT_ID", "\"4c67d7a1684b43c78098fa4cac61c5ad\""
+        buildConfigField "String", "AUTH_URL", "\"https://oauth.yandex.ru/authorize?response_type=token&client_id=\""
     }
     buildTypes {
         release {
@@ -85,6 +86,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.github.Omega-R:OmegaRecyclerView:1.6.11@aar'
+    implementation 'com.github.Omega-R.OmegaIntentBuilder:core:1.1.1'
 
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.10'

@@ -13,8 +13,8 @@ import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.example.omega.imageviewer.R;
-import com.example.omega.imageviewer.ui.dialogs.delegates.OfflineModeDialogDelegate;
-import com.example.omega.imageviewer.ui.dialogs.delegates.OfflineModeDialogDelegateImpl;
+import com.example.omega.imageviewer.ui.dialogs.delegates.AttentionDelegate;
+import com.example.omega.imageviewer.ui.dialogs.delegates.AttentionDelegateImpl;
 import com.example.omega.imageviewer.mvp.views.BaseView;
 import com.example.omega.imageviewer.tools.NetworkChecker;
 import com.example.omega.imageviewer.ui.dialogs.WaitingDialog;
@@ -34,7 +34,7 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
-    protected OfflineModeDialogDelegate mOfflineModeDialog;
+    protected AttentionDelegate mAttentionDialogDelegate;
 
     @Nullable
     private WaitingDialog mWaitingDialog;
@@ -45,7 +45,7 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mNetworkChecker = new NetworkChecker(this);
-        mOfflineModeDialog = new OfflineModeDialogDelegateImpl(this);
+        mAttentionDialogDelegate = new AttentionDelegateImpl(this);
     }
 
     @Override

@@ -9,6 +9,8 @@ import com.example.omega.imageviewer.di.modules.AppServiceModule;
 import com.example.omega.imageviewer.di.modules.CloudDriveModule;
 import com.example.omega.imageviewer.di.modules.ExecutorModule;
 import com.example.omega.imageviewer.di.modules.PreferencesModule;
+import com.example.omega.imageviewer.di.modules.UserManagerModule;
+import com.example.omega.imageviewer.mvp.models.UserManager;
 import com.example.omega.imageviewer.tools.cloud_drive.CloudDrive;
 
 import javax.inject.Singleton;
@@ -29,6 +31,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
         AppServiceModule.class,
         PreferencesModule.class,
         CloudDriveModule.class,
+        UserManagerModule.class,
         AndroidSupportInjectionModule.class})
 public interface AppComponent extends AndroidInjector<ImageSliderApp> {
 
@@ -42,4 +45,6 @@ public interface AppComponent extends AndroidInjector<ImageSliderApp> {
     }
 
     CloudDrive getCloudDrive();
+
+    UserManager getUserManager();
 }
