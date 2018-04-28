@@ -9,7 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.omega.imageviewer.R;
-import com.example.omega.imageviewer.mvp.models.Image;
+import com.example.omega.imageviewer.models.Image;
 import com.example.omega.imageviewer.ui.screens.base.BaseActivity;
 import com.example.omega.imageviewer.ui.screens.slider.ImageSliderActivity;
 

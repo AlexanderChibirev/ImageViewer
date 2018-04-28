@@ -2,7 +2,7 @@ package com.example.omega.imageviewer.di.modules;
 
 import android.content.Context;
 
-import com.example.omega.imageviewer.mvp.models.Preferences;
+import com.example.omega.imageviewer.models.Preferences;
 
 import javax.inject.Singleton;
 

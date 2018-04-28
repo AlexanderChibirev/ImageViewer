@@ -10,8 +10,8 @@ import com.example.omega.imageviewer.di.modules.CloudDriveModule;
 import com.example.omega.imageviewer.di.modules.ExecutorModule;
 import com.example.omega.imageviewer.di.modules.PreferencesModule;
 import com.example.omega.imageviewer.di.modules.UserManagerModule;
-import com.example.omega.imageviewer.mvp.models.Preferences;
-import com.example.omega.imageviewer.mvp.models.UserManager;
+import com.example.omega.imageviewer.models.Preferences;
+import com.example.omega.imageviewer.models.UserManager;
 import com.example.omega.imageviewer.cloud_drive.CloudDrive;
 
 import javax.inject.Singleton;

@@ -1,6 +1,6 @@
 package com.example.omega.imageviewer.tools.type_adapters;
 
-import com.example.omega.imageviewer.mvp.models.Text;
+import com.example.omega.imageviewer.models.Text;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;

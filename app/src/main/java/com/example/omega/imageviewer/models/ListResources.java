@@ -1,4 +1,4 @@
-package com.example.omega.imageviewer.mvp.models;
+package com.example.omega.imageviewer.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

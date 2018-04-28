@@ -2,10 +2,12 @@ package com.example.omega.imageviewer.backend;
 
 import android.support.annotation.NonNull;
 
-import com.example.omega.imageviewer.mvp.models.Preferences;
+import com.example.omega.imageviewer.BuildConfig;
+import com.example.omega.imageviewer.models.Preferences;
 
 import java.io.IOException;
 
+import okhttp3.Headers;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -34,7 +36,8 @@ public class TokenInterceptor implements Interceptor {
             String token = mPreferences.getToken();
 
             if (token != null) {
-                builder.header(Constants.X_TOKEN, token);
+                builder.header(BuildConfig.HEADER_NAME_AUTHORIZATION,
+                        BuildConfig.HEADER_VALUE_AUTHORIZATION + token);
             }
 
             Request request = builder.build();

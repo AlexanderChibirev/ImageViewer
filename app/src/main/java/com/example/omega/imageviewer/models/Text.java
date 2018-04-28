@@ -1,4 +1,4 @@
-package com.example.omega.imageviewer.mvp.models;
+package com.example.omega.imageviewer.models;
 
 import android.content.res.Resources;
 import android.support.annotation.StringRes;
@@ -26,8 +26,6 @@ public interface Text extends Serializable {
     String getString(Resources resources);
 
     boolean isEmpty();
-
-
 
     class StringText implements Text {
 

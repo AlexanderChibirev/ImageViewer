@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
-import com.example.omega.imageviewer.mvp.models.Text;
+import com.example.omega.imageviewer.models.Text;
 
 /**
  * Created by Alexander Chibirev on 4/15/2018.

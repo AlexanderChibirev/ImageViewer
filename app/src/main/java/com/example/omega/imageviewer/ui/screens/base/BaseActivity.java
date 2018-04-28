@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.example.omega.imageviewer.R;
-import com.example.omega.imageviewer.mvp.models.Text;
+import com.example.omega.imageviewer.models.Text;
 import com.example.omega.imageviewer.tools.NetworkChecker;
 import com.example.omega.imageviewer.ui.dialogs.WaitingDialog;
 import com.example.omega.imageviewer.ui.dialogs.delegates.AttentionDelegate;

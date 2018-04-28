@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.omega.imageviewer.R;
-import com.example.omega.imageviewer.mvp.models.Image;
+import com.example.omega.imageviewer.models.Image;
 import com.example.omega.imageviewer.ui.screens.base.BaseRecyclerImageAdapter;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.example.omega.imageviewer.cloud_drive;
 
-import com.example.omega.imageviewer.mvp.models.Image;
+import com.example.omega.imageviewer.models.Image;
 
 import java.util.List;
 

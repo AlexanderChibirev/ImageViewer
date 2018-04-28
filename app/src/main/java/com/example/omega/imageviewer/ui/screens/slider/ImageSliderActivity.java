@@ -8,7 +8,7 @@ import android.support.annotation.NonNull;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.omega.imageviewer.R;
-import com.example.omega.imageviewer.mvp.models.Image;
+import com.example.omega.imageviewer.models.Image;
 import com.example.omega.imageviewer.ui.screens.base.BaseActivity;
 import com.omega_r.libs.omegarecyclerview.viewpager.OmegaPagerRecyclerView;
 import com.omega_r.libs.omegarecyclerview.viewpager.default_transformers.ScaleTransformer;

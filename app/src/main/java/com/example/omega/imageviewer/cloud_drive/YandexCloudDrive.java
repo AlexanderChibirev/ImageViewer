@@ -3,9 +3,8 @@ package com.example.omega.imageviewer.cloud_drive;
 import android.support.annotation.NonNull;
 
 import com.example.omega.imageviewer.backend.api.CloudDriverApi;
-import com.example.omega.imageviewer.mvp.models.Image;
-import com.example.omega.imageviewer.mvp.models.ListResources;
-import com.example.omega.imageviewer.mvp.models.Preferences;
+import com.example.omega.imageviewer.models.Image;
+import com.example.omega.imageviewer.models.ListResources;
 
 import java.util.ArrayList;
 import java.util.List;

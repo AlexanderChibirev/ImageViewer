@@ -1,15 +1,9 @@
-package com.example.omega.imageviewer.mvp.models;
-
-import android.support.annotation.NonNull;
+package com.example.omega.imageviewer.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 
 /**
  * Created by Alexander Chibirev on 4/16/2018.

@@ -1,7 +1,8 @@
 package com.example.omega.imageviewer.backend.api;
 
-import com.example.omega.imageviewer.mvp.models.Image;
-import com.example.omega.imageviewer.mvp.models.ListResources;
+
+import com.example.omega.imageviewer.models.Image;
+import com.example.omega.imageviewer.models.ListResources;
 import com.example.omega.imageviewer.tools.task.Task;
 
 import retrofit2.http.GET;
@@ -15,7 +16,6 @@ import static com.example.omega.imageviewer.backend.Constants.X_TOKEN_REQUIRE;
  */
 
 public interface CloudDriverApi {
-
     @Headers(X_TOKEN_REQUIRE)
     @GET("resources/last-uploaded")
     Task<ListResources<Image>> requestImages(

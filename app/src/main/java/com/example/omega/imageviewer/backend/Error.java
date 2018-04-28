@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 
 import com.example.omega.imageviewer.R;
-import com.example.omega.imageviewer.mvp.models.Text;
+import com.example.omega.imageviewer.models.Text;
 import com.example.omega.imageviewer.tools.type_adapters.TextTypeAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

@@ -12,8 +12,8 @@ import com.arellomobile.mvp.InjectViewState;
 import com.example.omega.imageviewer.BuildConfig;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.app.ImageSliderApp;
-import com.example.omega.imageviewer.mvp.models.Preferences;
-import com.example.omega.imageviewer.mvp.models.UserManager;
+import com.example.omega.imageviewer.models.Preferences;
+import com.example.omega.imageviewer.models.UserManager;
 import com.example.omega.imageviewer.tools.DefaultTransitionListener;
 import com.example.omega.imageviewer.cloud_drive.CloudDrive;
 import com.example.omega.imageviewer.ui.screens.base.BasePresenter;
@@ -41,7 +41,6 @@ public class SplashPresenter extends BasePresenter<SplashView> {
     @Inject
     Preferences mPreferences;
 
-    @Inject //TODO deleted maybe
     public SplashPresenter() {
         mUserManager = ImageSliderApp.getAppComponent().getUserManager();
         mCloudDrive = ImageSliderApp.getAppComponent().getCloudDrive();

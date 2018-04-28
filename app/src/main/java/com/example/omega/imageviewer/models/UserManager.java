@@ -1,4 +1,4 @@
-package com.example.omega.imageviewer.mvp.models;
+package com.example.omega.imageviewer.models;
 
 /**
  * Created by Alexander Chibirev on 4/25/2018.

@@ -1,4 +1,4 @@
-package com.example.omega.imageviewer.mvp.models;
+package com.example.omega.imageviewer.models;
 
 import android.content.Context;
 import android.content.SharedPreferences;

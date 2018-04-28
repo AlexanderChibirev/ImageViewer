@@ -1,7 +1,7 @@
 package com.example.omega.imageviewer.di.modules;
 
-import com.example.omega.imageviewer.mvp.models.Preferences;
-import com.example.omega.imageviewer.mvp.models.UserManager;
+import com.example.omega.imageviewer.models.Preferences;
+import com.example.omega.imageviewer.models.UserManager;
 
 import javax.inject.Singleton;
 
