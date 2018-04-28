@@ -1,9 +1,8 @@
-package com.example.omega.imageviewer.mvp.presenters;
+package com.example.omega.imageviewer.ui.screens.slider;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.example.omega.imageviewer.app.ImageSliderApp;
-import com.example.omega.imageviewer.mvp.models.Image;
-import com.example.omega.imageviewer.mvp.views.ImageSliderView;
+import com.example.omega.imageviewer.ui.screens.base.BaseImagePresenter;
 
 import javax.inject.Inject;
 
@@ -17,7 +16,7 @@ public class ImageSliderPresenter extends BaseImagePresenter<ImageSliderView> {
     private final static float MIN_SCALE_FOR_IMAGE = 0.8f;
 
     @Inject
-    public ImageSliderPresenter(Image image, long position) {
+    public ImageSliderPresenter(long position) {
         super(ImageSliderApp.getAppComponent().getCloudDrive());
         getViewState().setSelection(position);
         getViewState().transformImages(MAX_SCALE_FOR_IMAGE, MIN_SCALE_FOR_IMAGE);

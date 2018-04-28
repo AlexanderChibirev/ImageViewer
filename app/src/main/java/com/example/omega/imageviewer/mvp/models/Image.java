@@ -1,9 +1,15 @@
 package com.example.omega.imageviewer.mvp.models;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 /**
  * Created by Alexander Chibirev on 4/16/2018.
@@ -11,17 +17,21 @@ import java.io.Serializable;
 
 public class Image implements Serializable {
 
-    @Expose //for excludeFieldsWithoutExposeAnnotation()
-    @SerializedName("public_key")
-    private String publicKey;
-
     @Expose
     @SerializedName("name")
     private String name;
 
     @Expose
-    @SerializedName("publicUrl")
+    @SerializedName("path")
+    private String path;
+
+    @Expose
+    @SerializedName("file")
     private String publicUrl;
+
+    @Expose
+    @SerializedName("created")
+    private String date;
 
     public String getUrl() {
         return publicUrl;
@@ -31,7 +41,12 @@ public class Image implements Serializable {
         return name;
     }
 
-    public String getPublicKey() {
-        return publicKey;
+    public String getDate() {
+        return date;
     }
+
+    public String getPath() {
+        return path;
+    }
+
 }

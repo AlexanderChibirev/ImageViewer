@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray"
-    tools:context=".ui.activities.ImageViewerActivity">
+    tools:context=".ui.screens.viewer.ImageViewerActivity">
 
     <include
         android:id="@+id/include_toolbar"

@@ -1,4 +1,4 @@
-package com.example.omega.imageviewer.ui.adapters;
+package com.example.omega.imageviewer.ui.screens.base;
 
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
@@ -38,7 +38,7 @@ public abstract class BaseRecyclerImageAdapter<VH extends BaseRecyclerImageAdapt
 
     public static abstract class BaseViewHolder extends OmegaRecyclerView.ViewHolder implements View.OnClickListener {
 
-        BaseViewHolder(@NonNull final View itemView) {
+        protected BaseViewHolder(@NonNull final View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
@@ -54,8 +54,8 @@ public abstract class BaseRecyclerImageAdapter<VH extends BaseRecyclerImageAdapt
 
         protected abstract void onClick(int position);
 
-        protected void updateImageView(@NonNull ImageView imageView, @NonNull List<Image> images,
-                                       @DrawableRes int placeholderErrorLoadingImage, int position) {
+        public void updateImageView(@NonNull ImageView imageView, @NonNull List<Image> images,
+                                    @DrawableRes int placeholderErrorLoadingImage, int position) {
             ImageLoadingUtils.loadImageFromUrl(
                     imageView,
                     images.get(position).getUrl(),

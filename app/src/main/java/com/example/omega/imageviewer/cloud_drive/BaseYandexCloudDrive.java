@@ -1,4 +1,4 @@
-package com.example.omega.imageviewer.tools.cloud_drive;
+package com.example.omega.imageviewer.cloud_drive;
 
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -19,6 +19,10 @@ public abstract class BaseYandexCloudDrive implements CloudDrive {
     @Override
     public void removeCallback(Callback callback) {
         mCallbackSet.remove(callback);
+    }
+
+    protected boolean isEmptyCallbacks() {
+        return mCallbackSet.isEmpty();
     }
 
     protected void onChangedStateDownloadImages(DownloadState downloadState) {

@@ -10,8 +10,9 @@ import com.example.omega.imageviewer.di.modules.CloudDriveModule;
 import com.example.omega.imageviewer.di.modules.ExecutorModule;
 import com.example.omega.imageviewer.di.modules.PreferencesModule;
 import com.example.omega.imageviewer.di.modules.UserManagerModule;
+import com.example.omega.imageviewer.mvp.models.Preferences;
 import com.example.omega.imageviewer.mvp.models.UserManager;
-import com.example.omega.imageviewer.tools.cloud_drive.CloudDrive;
+import com.example.omega.imageviewer.cloud_drive.CloudDrive;
 
 import javax.inject.Singleton;
 
@@ -47,4 +48,6 @@ public interface AppComponent extends AndroidInjector<ImageSliderApp> {
     CloudDrive getCloudDrive();
 
     UserManager getUserManager();
+
+    Preferences getPreferences();
 }

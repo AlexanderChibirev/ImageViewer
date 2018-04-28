@@ -1,4 +1,4 @@
-package com.example.omega.imageviewer.ui.activities;
+package com.example.omega.imageviewer.ui.screens.viewer;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,9 +10,8 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.mvp.models.Image;
-import com.example.omega.imageviewer.mvp.presenters.ImageViewerPresenter;
-import com.example.omega.imageviewer.mvp.views.ImageViewerView;
-import com.example.omega.imageviewer.ui.adapters.ImageViewerAdapter;
+import com.example.omega.imageviewer.ui.screens.base.BaseActivity;
+import com.example.omega.imageviewer.ui.screens.slider.ImageSliderActivity;
 
 import java.util.List;
 
@@ -53,13 +52,13 @@ public class ImageViewerActivity extends BaseActivity implements
     }
 
     @Override
-    public void showImageSliderScreen(@NonNull Image image, long position) {
-        startActivity(ImageSliderActivity.createIntent(this, image, position));
+    public void showImageSliderScreen(long position) {
+        startActivity(ImageSliderActivity.createIntent(this, position));
     }
 
     @Override
-    public void onImageClick(@NonNull Image image, long position) {
-        mImageViewerPresenter.onSlideClick(image, position);
+    public void onImageClick(long position) {
+        mImageViewerPresenter.onSlideClick(position);
     }
 
     @Override

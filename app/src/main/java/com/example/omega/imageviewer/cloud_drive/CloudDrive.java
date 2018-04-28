@@ -1,4 +1,4 @@
-package com.example.omega.imageviewer.tools.cloud_drive;
+package com.example.omega.imageviewer.cloud_drive;
 
 import com.example.omega.imageviewer.mvp.models.Image;
 

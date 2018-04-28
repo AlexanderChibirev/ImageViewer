@@ -1,4 +1,4 @@
-package com.example.omega.imageviewer.ui.activities;
+package com.example.omega.imageviewer.ui.screens.slider;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,9 +9,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.mvp.models.Image;
-import com.example.omega.imageviewer.mvp.presenters.ImageSliderPresenter;
-import com.example.omega.imageviewer.mvp.views.ImageSliderView;
-import com.example.omega.imageviewer.ui.adapters.ImageSliderAdapter;
+import com.example.omega.imageviewer.ui.screens.base.BaseActivity;
 import com.omega_r.libs.omegarecyclerview.viewpager.OmegaPagerRecyclerView;
 import com.omega_r.libs.omegarecyclerview.viewpager.default_transformers.ScaleTransformer;
 
@@ -24,7 +22,7 @@ import butterknife.BindView;
  */
 
 public class ImageSliderActivity extends BaseActivity implements ImageSliderView {
-    private static final String EXTRA_IMAGE = "image";
+
     private static final String EXTRA_IMAGE_POSITION = "image_position";
     private static final long DEFAULT_VALUE = -1;
 
@@ -37,9 +35,8 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
     @NonNull
     private ImageSliderAdapter mImageSliderAdapter = new ImageSliderAdapter();
 
-    public static Intent createIntent(Context context, Image image, long position) {
+    public static Intent createIntent(Context context, long position) {
         Intent intent = new Intent(context, ImageSliderActivity.class);
-        intent.putExtra(EXTRA_IMAGE, image);
         intent.putExtra(EXTRA_IMAGE_POSITION, position);
         return intent;
     }
@@ -47,9 +44,8 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
     @ProvidePresenter
     ImageSliderPresenter provideImageSliderPresenter() {
         Intent intent = getIntent();
-        Image image = (Image) intent.getSerializableExtra(EXTRA_IMAGE);
         long position = intent.getLongExtra(EXTRA_IMAGE_POSITION, DEFAULT_VALUE);
-        return new ImageSliderPresenter(image, position);
+        return new ImageSliderPresenter(position);
     }
 
     @Override
@@ -75,7 +71,12 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
 
     @Override
     public void setSelection(long position) {
-        mRecyclerView.scrollToPosition((int) position);
+        mRecyclerView.post(new Runnable() {
+            @Override
+            public void run() {
+                mRecyclerView.scrollToPosition((int) position);
+            }
+        });
     }
 
     @Override

@@ -27,7 +27,7 @@ public class TaskCallAdapterFactory extends CallAdapter.Factory {
     }
 
     @Override
-    public CallAdapter<?, ?> get(@NonNull Type returnType, @NonNull Annotation[] annotations, @NonNull Retrofit retrofit) {
+    public CallAdapter<?> get(Type returnType, Annotation[] annotations, Retrofit retrofit) {
         if (getRawType(returnType) != Task.class) {
             return null;
         }
@@ -50,7 +50,7 @@ public class TaskCallAdapterFactory extends CallAdapter.Factory {
         return createAdapter(responseType, annotations);
     }
 
-    private CallAdapter<Task<?>, Task<?>> createAdapter(Type responseType, Annotation[] annotations) {
+    private CallAdapter<Task<?>> createAdapter(Type responseType, Annotation[] annotations) {
         for (Annotation annotation : annotations) {
             if (annotation instanceof PeriodicTask) {
                 return new PeriodicTaskAdapter(responseType, mExecutor, (PeriodicTask) annotation);
@@ -59,7 +59,7 @@ public class TaskCallAdapterFactory extends CallAdapter.Factory {
         return new TaskAdapter(responseType, mExecutor);
     }
 
-    public static class TaskAdapter implements CallAdapter<Task<?>, Task<?>> {
+    public static class TaskAdapter implements CallAdapter<Task<?>> {
 
         private final Type responseType;
         private TaskExecutor executor;
@@ -69,19 +69,18 @@ public class TaskCallAdapterFactory extends CallAdapter.Factory {
             this.executor = taskExecutor;
         }
 
-
         @Override
         public Type responseType() {
             return responseType;
         }
 
         @Override
-        public Task<?> adapt(@NonNull Call<Task<?>> call) {
+        public <R> Task<?> adapt(Call<R> call) {
             return executor.runTask(() -> call.execute().body());
         }
     }
 
-    public static class PeriodicTaskAdapter implements CallAdapter<Task<?>, Task<?>> {
+    public static class PeriodicTaskAdapter implements CallAdapter<Task<?>> {
 
         private final Type responseType;
         private final PeriodicTask periodicTaskParams;
@@ -93,14 +92,13 @@ public class TaskCallAdapterFactory extends CallAdapter.Factory {
             this.periodicTaskParams = taskParams;
         }
 
-
         @Override
         public Type responseType() {
             return responseType;
         }
 
         @Override
-        public Task<?> adapt(@NonNull Call<Task<?>> call) {
+        public <R> Task<?> adapt(Call<R> call) {
             return executor.runPeriodicTask(
                     periodicTaskParams.delayMills(),
                     periodicTaskParams.timeoutMills(),

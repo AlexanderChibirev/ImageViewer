@@ -1,9 +1,11 @@
-package com.example.omega.imageviewer.tools.cloud_drive;
+package com.example.omega.imageviewer.cloud_drive;
 
 import android.support.annotation.NonNull;
 
 import com.example.omega.imageviewer.backend.api.CloudDriverApi;
 import com.example.omega.imageviewer.mvp.models.Image;
+import com.example.omega.imageviewer.mvp.models.ListResources;
+import com.example.omega.imageviewer.mvp.models.Preferences;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,7 @@ public class YandexCloudDrive extends BaseYandexCloudDrive {
     private static final String QUERY_MEDIA_TYPE = "image";
 
     private final CloudDriverApi mCloudDriverApi;
+
     @NonNull
     private List<Image> mImages = new ArrayList<>();
 
@@ -31,8 +34,8 @@ public class YandexCloudDrive extends BaseYandexCloudDrive {
                 .onFinish(() -> onChangedStateDownloadImages(DownloadState.FINISH));
     }
 
-    private void addImages(@NonNull List<Image> images) {
-        mImages.addAll(images);
+    private void addImages(@NonNull ListResources<Image> resources) {
+        mImages.addAll(resources.getResources());
         onChangedStateDownloadImages(DownloadState.SUCCESS);
     }
 

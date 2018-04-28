@@ -1,4 +1,4 @@
-package com.example.omega.imageviewer.ui.adapters;
+package com.example.omega.imageviewer.ui.screens.slider;
 
 import android.support.annotation.NonNull;
 import android.view.View;
@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.mvp.models.Image;
+import com.example.omega.imageviewer.ui.screens.base.BaseRecyclerImageAdapter;
 
 import java.util.List;
 
@@ -54,9 +55,9 @@ public class ImageSliderAdapter extends BaseRecyclerImageAdapter<BaseRecyclerIma
         }
 
         @Override
-        protected void updateImageView(@NonNull ImageView imageView,
-                                       @NonNull List<Image> images,
-                                       int placeholderErrorLoadingImage, int position) {
+        public void updateImageView(@NonNull ImageView imageView,
+                                    @NonNull List<Image> images,
+                                    int placeholderErrorLoadingImage, int position) {
             super.updateImageView(this.imageView, mImages, R.drawable.placeholder_error_loading_image, position);
         }
     }

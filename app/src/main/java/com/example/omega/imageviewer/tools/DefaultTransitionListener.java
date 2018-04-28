@@ -7,7 +7,7 @@ import android.support.transition.Transition;
  * Created by Alexander Chibirev on 4/21/2018.
  */
 
-public abstract class TransitionListenerWrapper implements Transition.TransitionListener {
+public abstract class DefaultTransitionListener implements Transition.TransitionListener {
     @Override
     public void onTransitionStart(@NonNull Transition transition) {
         //nothing

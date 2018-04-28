@@ -1,4 +1,4 @@
-package com.example.omega.imageviewer.mvp.views;
+package com.example.omega.imageviewer.ui.screens.base;
 
 import android.support.annotation.NonNull;
 

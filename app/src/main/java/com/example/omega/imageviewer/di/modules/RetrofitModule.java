@@ -1,7 +1,7 @@
 package com.example.omega.imageviewer.di.modules;
 
-import android.arch.core.BuildConfig;
 
+import com.example.omega.imageviewer.BuildConfig;
 import com.example.omega.imageviewer.backend.TokenInterceptor;
 import com.example.omega.imageviewer.backend.call.CallWrapper;
 import com.example.omega.imageviewer.backend.call.TaskCallAdapterFactory;
@@ -40,7 +40,7 @@ public class RetrofitModule {
     @Provides
     @Singleton
     public Retrofit provideRetrofit(Retrofit.Builder builder) {
-        return builder.baseUrl("https://api.quickblox.com").build();
+        return builder.baseUrl(BuildConfig.BASE_URL).build();
     }
 
     @Provides

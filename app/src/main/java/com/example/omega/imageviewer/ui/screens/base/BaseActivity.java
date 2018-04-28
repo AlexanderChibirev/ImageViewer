@@ -1,4 +1,4 @@
-package com.example.omega.imageviewer.ui.activities;
+package com.example.omega.imageviewer.ui.screens.base;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -13,11 +13,11 @@ import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.example.omega.imageviewer.R;
-import com.example.omega.imageviewer.ui.dialogs.delegates.AttentionDelegate;
-import com.example.omega.imageviewer.ui.dialogs.delegates.AttentionDelegateImpl;
-import com.example.omega.imageviewer.mvp.views.BaseView;
+import com.example.omega.imageviewer.mvp.models.Text;
 import com.example.omega.imageviewer.tools.NetworkChecker;
 import com.example.omega.imageviewer.ui.dialogs.WaitingDialog;
+import com.example.omega.imageviewer.ui.dialogs.delegates.AttentionDelegate;
+import com.example.omega.imageviewer.ui.dialogs.delegates.AttentionDelegateImpl;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -107,13 +107,8 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements
     }
 
     @Override
-    public void showToast(int message) {
-        showToast(getString(message));
-    }
-
-    @Override
-    public void showToast(@NonNull String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    public void showToast(@NonNull Text message) {
+        Toast.makeText(this, message.getString(getResources()), Toast.LENGTH_SHORT).show();
     }
 
     public void setShowWaiting(boolean showWaiting) {

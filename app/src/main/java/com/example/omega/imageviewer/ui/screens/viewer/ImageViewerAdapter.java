@@ -1,4 +1,4 @@
-package com.example.omega.imageviewer.ui.adapters;
+package com.example.omega.imageviewer.ui.screens.viewer;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.mvp.models.Image;
+import com.example.omega.imageviewer.ui.screens.base.BaseRecyclerImageAdapter;
 
 import java.util.List;
 
@@ -57,19 +58,19 @@ public class ImageViewerAdapter extends BaseRecyclerImageAdapter<BaseRecyclerIma
         @Override
         protected void onClick(int position) {
             if (position >= 0 && mListener != null) {
-                mListener.onImageClick(mImages.get(position), position);
+                mListener.onImageClick(position);
             }
         }
 
         @Override
-        protected void updateImageView(@NonNull ImageView imageView,
-                                       @NonNull List<Image> images,
-                                       int placeholderErrorLoadingImage, int position) {
+        public void updateImageView(@NonNull ImageView imageView,
+                                    @NonNull List<Image> images,
+                                    int placeholderErrorLoadingImage, int position) {
             super.updateImageView(this.imageView, mImages, R.drawable.placeholder_error_loading_image, position);
         }
     }
 
     public interface OnImageClickListener {
-        void onImageClick(@NonNull Image image, long position);
+        void onImageClick(long position);
     }
 }

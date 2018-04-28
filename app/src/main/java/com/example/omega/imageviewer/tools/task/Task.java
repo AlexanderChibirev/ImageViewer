@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
  */
 
 public class Task<O> {
+
     @NonNull
     private final Worker<O> mWorker;
 
@@ -98,4 +99,5 @@ public class Task<O> {
     public interface OnFinishRequestListener {
         void onFinishRequest();
     }
+
 }

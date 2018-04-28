@@ -11,14 +11,13 @@ import com.google.gson.JsonSerializer;
 import java.lang.reflect.Type;
 
 /**
- * Created by Alexander Chibirev on 4/22/2018.
+ * Created by Alexander Chibirev on 4/27/2018.
  */
 
 public class TextTypeAdapter implements JsonSerializer<Text>, JsonDeserializer<Text> {
 
     @Override
-    public Text deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-            throws JsonParseException {
+    public Text deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         return Text.from(json.getAsString());
     }
 

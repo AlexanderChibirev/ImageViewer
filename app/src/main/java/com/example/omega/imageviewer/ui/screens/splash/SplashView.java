@@ -1,4 +1,4 @@
-package com.example.omega.imageviewer.mvp.views;
+package com.example.omega.imageviewer.ui.screens.splash;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,6 +9,7 @@ import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
 import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 import com.example.omega.imageviewer.ui.dialogs.AttentionDialog;
+import com.example.omega.imageviewer.ui.screens.base.BaseView;
 
 /**
  * Created by Alexander Chibirev on 4/20/2018.
@@ -23,11 +24,11 @@ public interface SplashView extends BaseView {
     void showViewerScreen();
 
     @StateStrategyType(AddToEndSingleStrategy.class)
-    void showAuthorizationScreen(@StringRes int message,
-                                 @StringRes int negativeLabel,
-                                 @StringRes int positiveLabel,
-                                 AttentionDialog.OnCancelButtonListener onNegativeListener,
-                                 @Nullable AttentionDialog.OnOkButtonListener onPositiveListener);
+    void showAuthorizationMessage(@StringRes int message,
+                                  @StringRes int negativeLabel,
+                                  @StringRes int positiveLabel,
+                                  AttentionDialog.OnCancelButtonListener onNegativeListener,
+                                  @Nullable AttentionDialog.OnOkButtonListener onPositiveListener);
 
     @StateStrategyType(OneExecutionStateStrategy.class)
     void showWebScreen(@NonNull String url);
