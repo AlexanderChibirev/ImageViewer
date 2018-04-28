@@ -1,5 +1,7 @@
 package com.example.omega.imageviewer.di.modules;
 
+import android.support.annotation.NonNull;
+
 import com.example.omega.imageviewer.models.Preferences;
 import com.example.omega.imageviewer.models.UserManager;
 
@@ -16,7 +18,7 @@ import dagger.Provides;
 public class UserManagerModule {
     @Provides
     @Singleton
-    UserManager provideUserManager(Preferences preferences) {
+    UserManager provideUserManager(@NonNull Preferences preferences) {
         return new UserManager(preferences);
     }
 }

@@ -1,13 +1,16 @@
 package com.example.omega.imageviewer.models;
 
+import android.support.annotation.NonNull;
+
 /**
  * Created by Alexander Chibirev on 4/25/2018.
  */
 public class UserManager {
 
+    @NonNull
     private final Preferences mPreferences;
 
-    public UserManager(Preferences preferences) {
+    public UserManager(@NonNull Preferences preferences) {
         mPreferences = preferences;
     }
 

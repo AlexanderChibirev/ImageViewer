@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.cloud_drive.CloudDrive;
+import com.example.omega.imageviewer.models.Text;
 
 /**
  * Created by Alexander Chibirev on 4/15/2018.
@@ -35,6 +36,7 @@ public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V
                 getViewState().updateImages(mCloudDrive.getImages());
                 break;
             case FINISH:
+                getViewState().showToast(Text.from(R.string.app_name));
                 //TODO add logic
                 break;
             case ERROR:

@@ -12,35 +12,43 @@ import java.io.Serializable;
 public class Image implements Serializable {
 
     @Expose
-    @SerializedName("name")
-    private String name;
+    @SerializedName("mName")
+    private String mName;
 
     @Expose
-    @SerializedName("path")
-    private String path;
+    @SerializedName("mPath")
+    private String mPath;
 
     @Expose
     @SerializedName("file")
-    private String publicUrl;
+    private String mPublicUrl;
 
     @Expose
     @SerializedName("created")
-    private String date;
+    private String mDate;
 
-    public String getUrl() {
-        return publicUrl;
+    public Image(String name, String path,
+                 String publicUrl, String date) {
+        mName = name;
+        mPath = path;
+        mPublicUrl = publicUrl;
+        mDate = date;
+    }
+
+    public String getPublicUrl() {
+        return mPublicUrl;
     }
 
     public String getName() {
-        return name;
+        return mName;
     }
 
     public String getDate() {
-        return date;
+        return mDate;
     }
 
     public String getPath() {
-        return path;
+        return mPath;
     }
 
 }

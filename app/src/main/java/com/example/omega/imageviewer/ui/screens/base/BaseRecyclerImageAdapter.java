@@ -58,7 +58,7 @@ public abstract class BaseRecyclerImageAdapter<VH extends BaseRecyclerImageAdapt
                                     @DrawableRes int placeholderErrorLoadingImage, int position) {
             ImageLoadingUtils.loadImageFromUrl(
                     imageView,
-                    images.get(position).getUrl(),
+                    images.get(position).getPublicUrl(),
                     placeholderErrorLoadingImage);
         }
     }
