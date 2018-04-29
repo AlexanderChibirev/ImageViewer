@@ -9,7 +9,15 @@ import com.example.omega.imageviewer.ui.screens.base.BasePresenter;
 
 @InjectViewState
 public class MainPresenter extends BasePresenter<MainView> {
-    public void onMenuMainClicked() {
+
+    public void onMenuItemMainClicked() {
         getViewState().showMainPage();
+    }
+
+    public void onMenuItemOfflineClicked() {
+    }
+
+    public void onMenuItemLogoutClicked() {
+
     }
 }

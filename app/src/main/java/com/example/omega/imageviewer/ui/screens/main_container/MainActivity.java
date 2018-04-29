@@ -36,7 +36,6 @@ public class MainActivity extends BaseActivity implements MainView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         if (savedInstanceState == null) showPage(mImageViewerFragment);
         mContainerView.setOnProgressMenuChangedListener(this::onProgressMenuChanged);
     }
@@ -46,13 +45,15 @@ public class MainActivity extends BaseActivity implements MainView {
         switch (v.getId()) {
             case R.id.textview_menu_item_online:
                 showPage(mImageViewerFragment);
-                mMainPresenter.onMenuMainClicked();
+                mMainPresenter.onMenuItemMainClicked();
                 break;
             case R.id.textview_menu_item_offline:
                 showPage(mImageViewerFragment);
-                mMainPresenter.onMenuMainClicked();
+                mMainPresenter.onMenuItemOfflineClicked();
                 break;
-            //TODO added listener cache, logout
+            case R.id.textview_menu_item_logout:
+                mMainPresenter.onMenuItemLogoutClicked();
+                break;
         }
     }
 
