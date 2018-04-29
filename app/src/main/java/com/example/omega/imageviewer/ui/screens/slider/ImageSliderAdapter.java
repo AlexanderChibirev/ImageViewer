@@ -1,5 +1,6 @@
 package com.example.omega.imageviewer.ui.screens.slider;
 
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,7 @@ public class ImageSliderAdapter extends BaseRecyclerImageAdapter<BaseRecyclerIma
     @Override
     public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
         holder.updateImageView(((ViewHolder) holder).imageView, mImages,
-                R.drawable.placeholder_error_loading_image, position);
+                R.drawable.placeholder, R.drawable.error_placeholder, position);
     }
 
     @Override
@@ -52,13 +53,6 @@ public class ImageSliderAdapter extends BaseRecyclerImageAdapter<BaseRecyclerIma
         @Override
         protected void onClick(int position) {
             //nothing
-        }
-
-        @Override
-        public void updateImageView(@NonNull ImageView imageView,
-                                    @NonNull List<Image> images,
-                                    int placeholderErrorLoadingImage, int position) {
-            super.updateImageView(this.imageView, mImages, R.drawable.placeholder_error_loading_image, position);
         }
     }
 }

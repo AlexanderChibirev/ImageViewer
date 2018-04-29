@@ -27,16 +27,15 @@ public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V
     }
 
     public void onConnectivityChanged(boolean availableNow) {
-        if (!availableNow) showToast(R.string.error_connection);
+        if (!availableNow) showToast(R.string.error_connection);//changed on pop_up
     }
 
-    private void onChangedStateDownloadImages(CloudDrive.DownloadState state) {
+    private void onChangedStateDownloadImages(CloudDrive.DownloadState state, Text message) {
         switch (state) {
             case SUCCESS:
                 getViewState().updateImages(mCloudDrive.getImages());
                 break;
             case FINISH:
-                getViewState().showToast(Text.from(R.string.app_name));
                 //TODO add logic
                 break;
             case ERROR:

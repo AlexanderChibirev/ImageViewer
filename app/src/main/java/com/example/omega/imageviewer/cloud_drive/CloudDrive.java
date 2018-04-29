@@ -1,6 +1,7 @@
 package com.example.omega.imageviewer.cloud_drive;
 
 import com.example.omega.imageviewer.models.Image;
+import com.example.omega.imageviewer.models.Text;
 
 import java.util.List;
 
@@ -18,8 +19,8 @@ public interface CloudDrive {
 
     List<Image> getImages();
 
-    interface Callback {
-        void onChangedStateDownloadImages(DownloadState state);
+    interface Callback { //TODO changed on callback error
+        void onChangedStateDownloadImages(DownloadState state, Text message);
     }
 
     enum DownloadState {

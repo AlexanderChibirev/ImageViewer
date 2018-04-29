@@ -7,4 +7,4 @@
     android:layout_height="match_parent"
     android:scaleType="fitCenter"
     tools:ignore="ContentDescription"
-    tools:src="@drawable/placeholder_error_loading_image"/>
+    tools:src="@drawable/placeholder"/>

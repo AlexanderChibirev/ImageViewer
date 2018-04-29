@@ -16,8 +16,8 @@ import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.models.Text;
 import com.example.omega.imageviewer.tools.NetworkChecker;
 import com.example.omega.imageviewer.ui.dialogs.WaitingDialog;
-import com.example.omega.imageviewer.ui.dialogs.delegates.AttentionDelegate;
-import com.example.omega.imageviewer.ui.dialogs.delegates.AttentionDelegateImpl;
+import com.example.omega.imageviewer.ui.dialogs.delegates.AttentionDialogDelegate;
+import com.example.omega.imageviewer.ui.dialogs.delegates.AttentionDialogDelegateImpl;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,7 +34,7 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
-    protected AttentionDelegate mAttentionDialogDelegate;
+    protected AttentionDialogDelegate mAttentionDialogDelegate;
 
     @Nullable
     private WaitingDialog mWaitingDialog;
@@ -45,7 +45,7 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mNetworkChecker = new NetworkChecker(this);
-        mAttentionDialogDelegate = new AttentionDelegateImpl(this);
+        mAttentionDialogDelegate = new AttentionDialogDelegateImpl(this);
     }
 
     @Override
@@ -131,4 +131,8 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements
         //TODO go to offline mode if !availableNow and you not offline mode
     }
 
+    /*@Override
+    public void showErrorMessage(Text error, AttentionDialogDelegate.OnAttentionCancelListener onCancelListener) {
+       //TODO rename attention dialog added two dialog with one button ok showInfoDialog
+    }*/
 }

@@ -10,7 +10,7 @@ import com.example.omega.imageviewer.ui.dialogs.AttentionDialog;
  * Created by Alexander Chibirev on 4/25/2018.
  */
 
-public interface AttentionDelegate {
+public interface AttentionDialogDelegate {
 
     void showConfirmDialog(@StringRes int message, @StringRes int cancelLabel, @StringRes int okLabel,
                            AttentionDialog.OnCancelButtonListener onCancelListener,

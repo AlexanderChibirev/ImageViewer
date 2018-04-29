@@ -9,7 +9,7 @@ import android.support.annotation.StringRes;
 import android.support.annotation.UiThread;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
-import android.support.transition.ChangeBounds;
+import android.support.transition.Transition;
 import android.support.transition.TransitionManager;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -42,13 +42,11 @@ public class SplashActivity extends BaseActivity implements SplashView {
 
     @UiThread
     @Override
-    public void startAnimate(@NonNull final ChangeBounds transition) {
-        this.runOnUiThread(() -> {
-            ConstraintSet newConstraintSet = new ConstraintSet();
-            newConstraintSet.clone(getApplicationContext(), R.layout.activity_splash_end);
-            newConstraintSet.applyTo(mConstraintLayout);
-            TransitionManager.beginDelayedTransition(mConstraintLayout, transition);
-        });
+    public void startAnimate(@NonNull final Transition transition) {
+        ConstraintSet newConstraintSet = new ConstraintSet();
+        newConstraintSet.clone(getApplicationContext(), R.layout.activity_splash_end);
+        newConstraintSet.applyTo(mConstraintLayout);
+        TransitionManager.beginDelayedTransition(mConstraintLayout, transition);
     }
 
     @Override

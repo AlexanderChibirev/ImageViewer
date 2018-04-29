@@ -1,7 +1,10 @@
 package com.example.omega.imageviewer.ui.screens.splash;
 
+import android.content.AsyncTaskLoader;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.transition.ChangeBounds;
 import android.support.transition.Transition;
@@ -12,10 +15,10 @@ import com.arellomobile.mvp.InjectViewState;
 import com.example.omega.imageviewer.BuildConfig;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.app.ImageSliderApp;
+import com.example.omega.imageviewer.cloud_drive.CloudDrive;
 import com.example.omega.imageviewer.models.Preferences;
 import com.example.omega.imageviewer.models.UserManager;
 import com.example.omega.imageviewer.tools.DefaultTransitionListener;
-import com.example.omega.imageviewer.cloud_drive.CloudDrive;
 import com.example.omega.imageviewer.ui.screens.base.BasePresenter;
 
 import java.util.regex.Matcher;
@@ -59,7 +62,7 @@ public class SplashPresenter extends BasePresenter<SplashView> {
     }
 
     private void startPostDelayedAnimate() {
-        final Handler handler = new Handler(); //for correct animation
+        final Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(() -> getViewState().startAnimate(createTransition()), POST_DELAYED);
     }
 
@@ -76,12 +79,11 @@ public class SplashPresenter extends BasePresenter<SplashView> {
         getViewState().finishScreen();
     }
 
-    private ChangeBounds createTransition() {
-        ChangeBounds transition = new ChangeBounds();
-        transition.setInterpolator(new BounceInterpolator());
-        transition.setDuration(DURATION_ANIMATION);
-        transition.addListener(createTransitionListener());
-        return transition;
+    private Transition createTransition() {
+        return new ChangeBounds()
+                .setInterpolator(new BounceInterpolator())
+                .setDuration(DURATION_ANIMATION)
+                .addListener(createTransitionListener());
     }
 
     private DefaultTransitionListener createTransitionListener() {
@@ -104,7 +106,6 @@ public class SplashPresenter extends BasePresenter<SplashView> {
         }
         startPostDelayedAnimate();
     }
-
 
     public void onScreenClosed() {
         showAuthorizationMessage();

@@ -2,9 +2,11 @@ package com.example.omega.imageviewer.cloud_drive;
 
 import android.support.annotation.NonNull;
 
+import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.backend.api.CloudDriverApi;
 import com.example.omega.imageviewer.models.Image;
 import com.example.omega.imageviewer.models.ListResources;
+import com.example.omega.imageviewer.models.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,18 +30,20 @@ public class YandexCloudDrive extends BaseYandexCloudDrive {
     @Override
     public void requestImages(int limit, int offSet) {
         mCloudDriverApi.requestImages(limit, QUERY_MEDIA_TYPE, offSet)
-                .onResult(this::addImages)
+                .onResult(this::updateImages)
                 .onError(this::handleError)
-                .onFinish(() -> onChangedStateDownloadImages(DownloadState.FINISH));
+                .onFinish(() -> onChangedStateDownloadImages(DownloadState.FINISH,
+                        Text.from(R.string.request_finish)));
     }
 
-    private void addImages(@NonNull ListResources<Image> resources) {
+    private void updateImages(@NonNull ListResources<Image> resources) {
+        mImages.clear();
         mImages.addAll(resources.getResources());
-        onChangedStateDownloadImages(DownloadState.SUCCESS);
+        onChangedStateDownloadImages(DownloadState.SUCCESS, Text.from(R.string.image_success_download));
     }
 
-    private void handleError(Exception e) {
-        onChangedStateDownloadImages(DownloadState.ERROR);
+    private void handleError(Exception error) {
+        onChangedStateDownloadImages(DownloadState.ERROR, getErrorMessage(error));
     }
 
     @NonNull

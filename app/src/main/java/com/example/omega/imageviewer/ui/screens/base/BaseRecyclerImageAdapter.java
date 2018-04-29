@@ -55,11 +55,12 @@ public abstract class BaseRecyclerImageAdapter<VH extends BaseRecyclerImageAdapt
         protected abstract void onClick(int position);
 
         public void updateImageView(@NonNull ImageView imageView, @NonNull List<Image> images,
-                                    @DrawableRes int placeholderErrorLoadingImage, int position) {
+                                    @DrawableRes int placeholder, @DrawableRes int errorPlaceholder,
+                                    int position) {
             ImageLoadingUtils.loadImageFromUrl(
                     imageView,
                     images.get(position).getPublicUrl(),
-                    placeholderErrorLoadingImage);
+                    placeholder, errorPlaceholder);
         }
     }
 }

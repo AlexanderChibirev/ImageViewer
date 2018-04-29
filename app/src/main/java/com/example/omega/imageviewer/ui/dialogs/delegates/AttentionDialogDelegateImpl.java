@@ -1,7 +1,6 @@
 package com.example.omega.imageviewer.ui.dialogs.delegates;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 
@@ -11,12 +10,12 @@ import com.example.omega.imageviewer.ui.dialogs.AttentionDialog;
  * Created by Alexander Chibirev on 4/25/2018.
  */
 
-public class AttentionDelegateImpl implements AttentionDelegate {
+public class AttentionDialogDelegateImpl implements AttentionDialogDelegate {
 
     private Context mContext;
     private AttentionDialog mAttentionDialog;
 
-    public AttentionDelegateImpl(Context context) {
+    public AttentionDialogDelegateImpl(Context context) {
         mContext = context;
     }
 

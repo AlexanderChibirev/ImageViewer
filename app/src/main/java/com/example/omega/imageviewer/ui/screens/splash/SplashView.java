@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.transition.ChangeBounds;
+import android.support.transition.Transition;
 
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
 import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy;
@@ -18,7 +19,7 @@ import com.example.omega.imageviewer.ui.screens.base.BaseView;
 public interface SplashView extends BaseView {
 
     @StateStrategyType(OneExecutionStateStrategy.class)
-    void startAnimate(@NonNull ChangeBounds transition);
+    void startAnimate(@NonNull Transition transition);
 
     @StateStrategyType(OneExecutionStateStrategy.class)
     void showViewerScreen();

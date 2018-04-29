@@ -1,6 +1,5 @@
 package com.example.omega.imageviewer.utils;
 
-import android.content.Context;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.widget.ImageView;
@@ -15,16 +14,19 @@ public class ImageLoadingUtils {
 
     public static void loadImageFromUrl(@NonNull final ImageView imageView,
                                         @NonNull final String imageUrl,
-                                        @DrawableRes final int fallbackImage) {
+                                        @DrawableRes final int placeholder,
+                                        @DrawableRes final int errorPlaceholder) {
         if (imageUrl.isEmpty()) {
-            imageView.setImageResource(fallbackImage);
+            Picasso.get().load(errorPlaceholder).into(imageView);
         } else {
-            final Context context = imageView.getContext();
-            Picasso.with(context)
+            Picasso.get()
                     .load(imageUrl)
-                    .placeholder(fallbackImage)
-                    .error(fallbackImage)
+                    .fit()
+                    .centerInside()
+                    .placeholder(placeholder)
+                    .error(errorPlaceholder)
                     .into(imageView);
+
         }
     }
 }

@@ -16,4 +16,6 @@
     <string name="yes">Yes</string>
     <string name="go_offline_mode">No internet connection, go offline mode?</string>
     <string name="auth_message">Start browser to authorize?</string>
+    <string name="image_success_download">image success download</string>
+    <string name="request_finish">request finish</string>
 </resources>
