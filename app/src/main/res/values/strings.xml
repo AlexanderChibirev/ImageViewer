@@ -4,7 +4,7 @@
     <string name="error_unknown">Unknown error</string>
     <string name="label_image_slider">Image Slider</string>
     <string name="splash_first_part_title">andex</string>
-    <string name="web_view_title">Yandex</string>
+    <string name="yandex_title">Yandex</string>
     <string name="splash_description">Mobile development school</string>
     <string name="splash_second_part_title">Y</string>
     <string name="all_content_description">I\'m sorry that you are blind</string>
@@ -12,10 +12,14 @@
     <string name="font_family_regular" translatable="false">sans-serif</string>
     <string name="label_attention">Attention</string>
     <string name="cancel">Cancel</string>
+    <string name="logout">Logout</string>
     <string name="exit">Exit</string>
     <string name="yes">Yes</string>
     <string name="go_offline_mode">No internet connection, go offline mode?</string>
     <string name="auth_message">Start browser to authorize?</string>
     <string name="image_success_download">image success download</string>
     <string name="request_finish">request finish</string>
+    <string name="menu_main_page">Online mode</string>
+    <string name="menu_offline_page">Offline mode</string>
+
 </resources>

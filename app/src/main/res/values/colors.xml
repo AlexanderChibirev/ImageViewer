@@ -13,5 +13,6 @@
     <color name="white">#FFFFFF</color>
     <color name="orange">#f15d2b</color>
     <color name="brownish_grey">#616161</color>
-
+    <color name="white_10">#1affffff</color>
+    <color name="transparent">#0000</color>
 </resources>

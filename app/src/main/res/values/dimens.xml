@@ -5,4 +5,9 @@
     <dimen name="item_viewer_margin">2dp</dimen>
     <dimen name="dialog_corner_radius">16dp</dimen>
     <dimen name="dialog_waiting_padding">16dp</dimen>
+    <dimen name="menu_item_padding_start">32dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="nav_header_imageview_icon_size">100dp</dimen>
+    <dimen name="button_logout_width">170dp</dimen>
+
 </resources>

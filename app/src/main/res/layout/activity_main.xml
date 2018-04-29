@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include layout="@layout/menu"/>
+
+    <com.omega_r.libs.navigationmenu.ContentMenuLayout
+        android:id="@+id/layout_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:visibility="gone">
+
+        <android.support.design.widget.CoordinatorLayout
+            android:id="@+id/framelayout_fragment_container"
+            android:layout_width="match_parent"
+            app:statusBarBackground="@color/colorPrimary"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"/>
+
+    </com.omega_r.libs.navigationmenu.ContentMenuLayout>
+
+</FrameLayout>

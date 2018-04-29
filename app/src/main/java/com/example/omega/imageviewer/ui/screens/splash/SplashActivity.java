@@ -16,7 +16,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.ui.dialogs.AttentionDialog;
 import com.example.omega.imageviewer.ui.screens.base.BaseActivity;
-import com.example.omega.imageviewer.ui.screens.viewer.ImageViewerActivity;
+import com.example.omega.imageviewer.ui.screens.main_container.MainActivity;
 
 import butterknife.BindView;
 
@@ -51,7 +51,7 @@ public class SplashActivity extends BaseActivity implements SplashView {
 
     @Override
     public void showViewerScreen() {
-        startActivity(ImageViewerActivity.createIntent(this));
+        startActivity(MainActivity.createIntent(this));
         finishScreen();
     }
 
