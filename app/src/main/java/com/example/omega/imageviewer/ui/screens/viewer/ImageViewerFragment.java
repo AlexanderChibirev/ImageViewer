@@ -3,6 +3,7 @@ package com.example.omega.imageviewer.ui.screens.viewer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -27,7 +28,8 @@ import butterknife.BindView;
 public class ImageViewerFragment extends ScreenMenuBinderFragment implements
         ImageViewerView,
         ImageViewerAdapter.OnImageClickListener,
-        OptionsDialog.OnClickListener {
+        OptionsDialog.OnClickListener,
+        SwipeRefreshLayout.OnRefreshListener {
 
     private static final String KEY_FRAGMENT_MODE = "mode";
 
@@ -36,6 +38,9 @@ public class ImageViewerFragment extends ScreenMenuBinderFragment implements
 
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerView;
+
+    @BindView(R.id.swiperefreshlayout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
     private final ImageViewerAdapter mImageViewerAdapter = new ImageViewerAdapter();
     private OptionsDialogDelegate mOptionsDialog;
@@ -57,6 +62,7 @@ public class ImageViewerFragment extends ScreenMenuBinderFragment implements
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mImageViewerAdapter.setOnImageItemClickListener(this);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
         mRecyclerView.setAdapter(mImageViewerAdapter);
         mOptionsDialog = new OptionsDialogDelegateImpl(getContext());
     }
@@ -120,5 +126,15 @@ public class ImageViewerFragment extends ScreenMenuBinderFragment implements
     @Override
     public void deletedImage(int itemPositionDeleted) {
         mImageViewerAdapter.deleteItem(itemPositionDeleted);
+    }
+
+    @Override
+    public void onRefresh() {
+        mImageViewerPresenter.onRefresh();
+    }
+
+    @Override
+    public void hideSwipeLoading() {
+        if (mSwipeRefreshLayout.isRefreshing()) mSwipeRefreshLayout.setRefreshing(false);
     }
 }

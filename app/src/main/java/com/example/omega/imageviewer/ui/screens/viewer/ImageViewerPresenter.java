@@ -41,4 +41,9 @@ public class ImageViewerPresenter extends BaseImagePresenter<ImageViewerView> {
     protected void onDeleteClicked() {
         super.onDeleteClicked();
     }
+
+    @Override
+    protected void onRefresh() {
+        super.onRefresh();
+    }
 }

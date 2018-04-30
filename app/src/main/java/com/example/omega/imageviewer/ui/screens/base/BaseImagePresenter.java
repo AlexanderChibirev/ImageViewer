@@ -10,7 +10,7 @@ import com.example.omega.imageviewer.models.Text;
  * Created by Alexander Chibirev on 4/15/2018.
  */
 
-public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V>
+public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V>  //TODO changed "if else" on pattern strategy "base interface two classes"
         implements CloudDrive.Callback {
 
     private static final int LIMIT_IMAGES_TO_UPLOAD = 50;
@@ -19,6 +19,7 @@ public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V
     @NonNull
     protected CloudDrive mCloudDrive;
     protected int mItemPositionLongClicked;
+    private int mOldSizeImages;
 
     public BaseImagePresenter(@NonNull CloudDrive cloudDrive, boolean isOnlineMode) {
         mIsOnlineMode = isOnlineMode;
@@ -32,7 +33,7 @@ public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V
         if (mIsOnlineMode) {
             int size = mCloudDrive.getImages().size();
             if (size >= LIMIT_IMAGES_TO_UPLOAD) {
-                mCloudDrive.requestImages(LIMIT_IMAGES_TO_UPLOAD, size);
+                requestImagesFromCloudDrive(LIMIT_IMAGES_TO_UPLOAD, size);
             } else {
                 getViewState().updateImages(mCloudDrive.getImages());
             }
@@ -41,6 +42,10 @@ public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V
         }
     }
 
+    private void requestImagesFromCloudDrive(final int limit, final int offSet) {
+        mOldSizeImages = mCloudDrive.getImages().size();
+        mCloudDrive.requestImages(limit, offSet);
+    }
 
     public void onConnectivityChanged(boolean availableNow) {
         if (!availableNow) showToast(R.string.error_connection);//changed on pop_up
@@ -50,7 +55,10 @@ public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V
     public void onChangedStateDownloadImages(CloudDrive.State state, Text message) {
         switch (state) {
             case SUCCESS:
-                getViewState().updateImages(mCloudDrive.getImages());
+                if (mOldSizeImages != mCloudDrive.getImages().size()) {
+                    getViewState().updateImages(mCloudDrive.getImages());
+                }
+                getViewState().hideSwipeLoading();
                 break;
             case ERROR:
                 getViewState().showErrorMessage(R.string.download_image_failed, null);
@@ -84,6 +92,17 @@ public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V
     protected void onDeleteClicked() {
         if (mIsOnlineMode) {
             mCloudDrive.deleteImage(mItemPositionLongClicked);
+        } else {
+            //TODO added logic delete from data base
+        }
+    }
+
+    protected void onRefresh() {
+        if (mIsOnlineMode) {
+            int size = mCloudDrive.getImages().size();
+            mOldSizeImages = size;
+            requestImagesFromCloudDrive(size + LIMIT_IMAGES_TO_UPLOAD,
+                    0);
         } else {
             //TODO added logic delete from data base
         }

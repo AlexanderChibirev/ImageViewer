@@ -97,4 +97,9 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
     public void deletedImage(int itemPositionDeleted) {
         mImageSliderAdapter.deleteItem(itemPositionDeleted);
     }
+
+    @Override
+    public void hideSwipeLoading() {
+        //nothing
+    }
 }
