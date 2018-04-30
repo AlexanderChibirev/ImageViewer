@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.view.Display;
-import android.view.LayoutInflater;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -26,6 +24,7 @@ import butterknife.BindView;
 public class ImageSliderActivity extends BaseActivity implements ImageSliderView {
 
     private static final String EXTRA_IMAGE_POSITION = "image_position";
+    private static final String EXTRA_IS_ONLINE_MODE = "is_online_mode";
     private static final long DEFAULT_VALUE = -1;
 
     @InjectPresenter
@@ -37,9 +36,10 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
     @NonNull
     private ImageSliderAdapter mImageSliderAdapter = new ImageSliderAdapter();
 
-    public static Intent createIntent(Context context, long position) {
+    public static Intent createIntent(Context context, long position, boolean isOnlineMode) {
         Intent intent = new Intent(context, ImageSliderActivity.class);
         intent.putExtra(EXTRA_IMAGE_POSITION, position);
+        intent.putExtra(EXTRA_IS_ONLINE_MODE, isOnlineMode);
         return intent;
     }
 
@@ -47,7 +47,8 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
     ImageSliderPresenter provideImageSliderPresenter() {
         Intent intent = getIntent();
         long position = intent.getLongExtra(EXTRA_IMAGE_POSITION, DEFAULT_VALUE);
-        return new ImageSliderPresenter(position);
+        boolean isOnlineMode = intent.getBooleanExtra(EXTRA_IS_ONLINE_MODE, false);
+        return new ImageSliderPresenter(position, isOnlineMode);
     }
 
     @Override
@@ -73,7 +74,7 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
 
     @Override
     public void setSelection(long position) {
-        mRecyclerView.post(new Runnable() {
+        mRecyclerView.post(new Runnable() {//TODO set correct selection
             @Override
             public void run() {
                 mRecyclerView.scrollToPosition((int) position);
@@ -93,12 +94,7 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
     }
 
     @Override
-    public void showCloudDriveOptionsScreen() {
-        //nothing
-    }
-
-    @Override
     public void deletedImage(int itemPositionDeleted) {
-        //nothing
+        mImageSliderAdapter.deleteItem(itemPositionDeleted);
     }
 }

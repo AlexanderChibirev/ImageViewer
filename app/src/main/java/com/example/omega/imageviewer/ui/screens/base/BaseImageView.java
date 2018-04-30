@@ -2,8 +2,6 @@ package com.example.omega.imageviewer.ui.screens.base;
 
 import android.support.annotation.NonNull;
 
-import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy;
-import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 import com.example.omega.imageviewer.models.Image;
 
 import java.util.List;
@@ -14,9 +12,6 @@ import java.util.List;
 
 public interface BaseImageView extends BaseView {
     void updateImages(@NonNull List<Image> images);
-
-    @StateStrategyType(OneExecutionStateStrategy.class)
-    void showCloudDriveOptionsScreen();
 
     void deletedImage(int itemPositionDeleted);
 }

@@ -14,12 +14,14 @@ public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V
         implements CloudDrive.Callback {
 
     private static final int LIMIT_IMAGES_TO_UPLOAD = 50;
+    protected final boolean mIsOnlineMode;
 
     @NonNull
     protected CloudDrive mCloudDrive;
     protected int mItemPositionLongClicked;
 
-    public BaseImagePresenter(@NonNull CloudDrive cloudDrive) {
+    public BaseImagePresenter(@NonNull CloudDrive cloudDrive, boolean isOnlineMode) {
+        mIsOnlineMode = isOnlineMode;
         mCloudDrive = cloudDrive;
         mCloudDrive.addCallback(this);
     }
@@ -27,8 +29,18 @@ public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
-        mCloudDrive.requestImages(LIMIT_IMAGES_TO_UPLOAD, mCloudDrive.getImages().size());//TODO added check on repeat
+        if (mIsOnlineMode) {
+            int size = mCloudDrive.getImages().size();
+            if (size >= LIMIT_IMAGES_TO_UPLOAD) {
+                mCloudDrive.requestImages(LIMIT_IMAGES_TO_UPLOAD, size);
+            } else {
+                getViewState().updateImages(mCloudDrive.getImages());
+            }
+        } else {
+            //TODO added logic loading from data base
+        }
     }
+
 
     public void onConnectivityChanged(boolean availableNow) {
         if (!availableNow) showToast(R.string.error_connection);//changed on pop_up
@@ -47,7 +59,8 @@ public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V
     }
 
     @Override
-    public void onChangedStateDeleteImage(CloudDrive.State state, Text message, int itemPositionDeleted) {
+    public void onChangedStateDeleteImage(CloudDrive.State state, Text message,
+                                          int itemPositionDeleted) {
         switch (state) {
             case SUCCESS:
                 getViewState().deletedImage(itemPositionDeleted);
@@ -64,15 +77,15 @@ public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V
         mCloudDrive.removeCallback(this);
     }
 
-    protected void onFullModeImageClicked() {
-        //nothing
-    }
-
     protected void onSaveImageClicked() {
         //TODO added logic save on sd
     }
 
     protected void onDeleteClicked() {
-        mCloudDrive.deleteImage(mItemPositionLongClicked);
+        if (mIsOnlineMode) {
+            mCloudDrive.deleteImage(mItemPositionLongClicked);
+        } else {
+            //TODO added logic delete from data base
+        }
     }
 }

@@ -17,7 +17,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.ui.dialogs.confirm.ConfirmDialog;
 import com.example.omega.imageviewer.ui.screens.base.BaseActivity;
-import com.example.omega.imageviewer.ui.screens.main_container.MainActivity;
+import com.example.omega.imageviewer.ui.screens.main.MainActivity;
 
 import butterknife.BindView;
 

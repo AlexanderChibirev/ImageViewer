@@ -98,4 +98,5 @@ dependencies {
 
     implementation 'com.github.Omega-R:OmegaRecyclerView:1.6.11@aar'
     implementation 'com.github.Omega-R:OmegaNavigationMenu:1.0.1'
+    //TODO added OmegaIntentBuilder for save image on cloud api
 }

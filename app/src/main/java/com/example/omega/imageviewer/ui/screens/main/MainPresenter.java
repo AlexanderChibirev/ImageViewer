@@ -1,7 +1,8 @@
-package com.example.omega.imageviewer.ui.screens.main_container;
+package com.example.omega.imageviewer.ui.screens.main;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.example.omega.imageviewer.app.ImageSliderApp;
+import com.example.omega.imageviewer.models.Text;
 import com.example.omega.imageviewer.models.UserManager;
 import com.example.omega.imageviewer.ui.screens.base.BasePresenter;
 
@@ -23,6 +24,7 @@ public class MainPresenter extends BasePresenter<MainView> {
 
     public void onMenuItemOfflineClicked() {
         getViewState().showOfflinePage();
+        getViewState().showToast(Text.from("в разработке")); //TODO deleted and change on normal logic
     }
 
     public void onMenuItemLogoutClicked() {

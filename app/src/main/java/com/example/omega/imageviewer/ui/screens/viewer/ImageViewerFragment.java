@@ -7,12 +7,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.models.Image;
 import com.example.omega.imageviewer.ui.dialogs.cloud_drive_options.OptionsDialog;
 import com.example.omega.imageviewer.ui.dialogs.cloud_drive_options.OptionsDialogDelegate;
 import com.example.omega.imageviewer.ui.dialogs.cloud_drive_options.OptionsDialogDelegateImpl;
-import com.example.omega.imageviewer.ui.screens.main_container.ScreenMenuBinderFragment;
+import com.example.omega.imageviewer.ui.screens.main.ScreenMenuBinderFragment;
 import com.example.omega.imageviewer.ui.screens.slider.ImageSliderActivity;
 
 import java.util.List;
@@ -28,6 +29,8 @@ public class ImageViewerFragment extends ScreenMenuBinderFragment implements
         ImageViewerAdapter.OnImageClickListener,
         OptionsDialog.OnClickListener {
 
+    private static final String KEY_FRAGMENT_MODE = "mode";
+
     @InjectPresenter
     ImageViewerPresenter mImageViewerPresenter;
 
@@ -36,6 +39,19 @@ public class ImageViewerFragment extends ScreenMenuBinderFragment implements
 
     private final ImageViewerAdapter mImageViewerAdapter = new ImageViewerAdapter();
     private OptionsDialogDelegate mOptionsDialog;
+
+    public static ImageViewerFragment newInstance(boolean isOnlineMode) {
+        Bundle args = new Bundle();
+        args.putBoolean(KEY_FRAGMENT_MODE, isOnlineMode);
+        ImageViewerFragment fragment = new ImageViewerFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @ProvidePresenter
+    ImageViewerPresenter provideImageViewerPresenter() {
+        return new ImageViewerPresenter(getArguments().getBoolean(KEY_FRAGMENT_MODE));
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -57,8 +73,8 @@ public class ImageViewerFragment extends ScreenMenuBinderFragment implements
     }
 
     @Override
-    public void showImageSliderScreen(long position) {
-        startActivity(ImageSliderActivity.createIntent(getContext(), position));
+    public void showImageSliderScreen(long position, boolean isOnlineMode) {
+        startActivity(ImageSliderActivity.createIntent(getContext(), position, isOnlineMode));
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.example.omega.imageviewer.ui.screens.main_container;
+package com.example.omega.imageviewer.ui.screens.main;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.omega.imageviewer.R;
+import com.example.omega.imageviewer.models.Text;
 import com.example.omega.imageviewer.ui.screens.base.BaseActivity;
 import com.example.omega.imageviewer.ui.screens.splash.SplashActivity;
 import com.example.omega.imageviewer.ui.screens.viewer.ImageViewerFragment;
@@ -22,7 +23,8 @@ import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity implements MainView {
 
-    private final ImageViewerFragment mImageViewerFragment = new ImageViewerFragment();
+    private final ImageViewerFragment mImageViewerOfflineFragment = ImageViewerFragment.newInstance(false);
+    private final ImageViewerFragment mImageViewerOnlineFragment = ImageViewerFragment.newInstance(true);
 
     @InjectPresenter
     MainPresenter mMainPresenter;
@@ -37,7 +39,7 @@ public class MainActivity extends BaseActivity implements MainView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (savedInstanceState == null) showPage(mImageViewerFragment);
+        if (savedInstanceState == null) showPage(mImageViewerOnlineFragment);
         mContainerView.setOnProgressMenuChangedListener(this::onProgressMenuChanged);
     }
 
@@ -47,11 +49,9 @@ public class MainActivity extends BaseActivity implements MainView {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.textview_menu_item_online:
-                showPage(mImageViewerFragment);
                 mMainPresenter.onMenuItemMainClicked();
                 break;
             case R.id.textview_menu_item_offline:
-                showPage(mImageViewerFragment);
                 mMainPresenter.onMenuItemOfflineClicked();
                 break;
             case R.id.textview_menu_item_logout:
@@ -101,12 +101,12 @@ public class MainActivity extends BaseActivity implements MainView {
 
     @Override
     public void showMainPage() {
-        showPage(mImageViewerFragment);
+        showPage(mImageViewerOnlineFragment);
     }
 
     @Override
     public void showOfflinePage() {
-        //TODO added show offline page
+        showPage(mImageViewerOfflineFragment);
     }
 
     @Override

@@ -35,7 +35,7 @@
             android:label="@string/label_image_slider"/>
 
         <activity
-            android:name=".ui.screens.main_container.MainActivity"
+            android:name=".ui.screens.main.MainActivity"
             android:label="@string/app_name"/>
     </application>
 

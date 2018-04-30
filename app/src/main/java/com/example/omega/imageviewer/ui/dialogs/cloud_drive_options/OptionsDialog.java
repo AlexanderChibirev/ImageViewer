@@ -60,10 +60,12 @@ public class OptionsDialog extends BaseDialog {
     }
 
     public interface OnClickListener {
+
         void onFullModeImageClicked();
 
         void onSaveImageClicked();
 
         void onDeleteClicked();
+
     }
 }

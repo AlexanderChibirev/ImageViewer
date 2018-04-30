@@ -1,4 +1,4 @@
-package com.example.omega.imageviewer.ui.screens.main_container;
+package com.example.omega.imageviewer.ui.screens.main;
 
 import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;

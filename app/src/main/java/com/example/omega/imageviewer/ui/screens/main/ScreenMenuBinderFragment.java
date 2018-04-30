@@ -1,4 +1,4 @@
-package com.example.omega.imageviewer.ui.screens.main_container;
+package com.example.omega.imageviewer.ui.screens.main;
 
 import android.os.Bundle;
 import android.support.annotation.FloatRange;
