@@ -18,7 +18,7 @@
     <string name="yes">Yes</string>
     <string name="go_offline_mode">No internet connection, go offline mode?</string>
     <string name="auth_message">Start browser to authorize?</string>
-    <string name="image_success_download">image success download</string>
+    <string name="image_success_download">Image success download</string>
     <string name="request_finish">request finish</string>
     <string name="menu_main_page">Online mode</string>
     <string name="menu_offline_page">Offline mode</string>
@@ -31,6 +31,9 @@
     <string name="label_save_image">Save image</string>
     <string name="label_delete_image">Delete image</string>
     <string name="label_full_mode_image">Full mode image</string>
-    <string name="ok">Ok</string>
-    <string name="image_success_deleted">image success deleted</string>
+    <string name="ok">OK</string>
+
+    <string name="image_success_deleted">Image success deleted</string>
+    <string name="download_image_failed">Could not update photo feed</string>
+    <string name="delete_image_failed">Delete image failed</string>
 </resources>

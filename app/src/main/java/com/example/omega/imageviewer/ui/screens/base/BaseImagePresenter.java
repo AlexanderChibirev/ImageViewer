@@ -13,6 +13,8 @@ import com.example.omega.imageviewer.models.Text;
 public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V>
         implements CloudDrive.Callback {
 
+    private static final int LIMIT_IMAGES_TO_UPLOAD = 50;
+
     @NonNull
     protected CloudDrive mCloudDrive;
     protected int mItemPositionLongClicked;
@@ -25,7 +27,7 @@ public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
-        mCloudDrive.requestImages(100, mCloudDrive.getImages().size());//TODO remove magic number
+        mCloudDrive.requestImages(LIMIT_IMAGES_TO_UPLOAD, mCloudDrive.getImages().size());//TODO added check on repeat
     }
 
     public void onConnectivityChanged(boolean availableNow) {
@@ -38,11 +40,8 @@ public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V
             case SUCCESS:
                 getViewState().updateImages(mCloudDrive.getImages());
                 break;
-            case FINISH:
-                //TODO add logic
-                break;
             case ERROR:
-                //TODO add logic
+                getViewState().showErrorMessage(R.string.download_image_failed, null);
                 break;
         }
     }
@@ -53,11 +52,8 @@ public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V
             case SUCCESS:
                 getViewState().deletedImage(itemPositionDeleted);
                 break;
-            case FINISH:
-                //TODO add logic
-                break;
             case ERROR:
-                //TODO add logic
+                getViewState().showErrorMessage(R.string.delete_image_failed, null);
                 break;
         }
     }
@@ -69,7 +65,7 @@ public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V
     }
 
     protected void onFullModeImageClicked() {
-        //TODO added logic
+        //nothing
     }
 
     protected void onSaveImageClicked() {
@@ -78,6 +74,5 @@ public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V
 
     protected void onDeleteClicked() {
         mCloudDrive.deleteImage(mItemPositionLongClicked);
-        //TODO added logic
     }
 }

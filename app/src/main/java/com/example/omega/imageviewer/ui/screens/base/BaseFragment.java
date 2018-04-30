@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -16,9 +17,9 @@ import android.widget.Toast;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.models.Text;
-import com.example.omega.imageviewer.ui.dialogs.cloud_drive_options.OptionsDialog;
-import com.example.omega.imageviewer.ui.dialogs.cloud_drive_options.OptionsDialogDelegate;
-import com.example.omega.imageviewer.ui.dialogs.cloud_drive_options.OptionsDialogDelegateImpl;
+import com.example.omega.imageviewer.ui.dialogs.attention.AttentionDialog;
+import com.example.omega.imageviewer.ui.dialogs.attention.AttentionDialogDelegate;
+import com.example.omega.imageviewer.ui.dialogs.attention.AttentionDialogDelegateImpl;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -33,6 +34,7 @@ public abstract class BaseFragment extends MvpAppCompatFragment implements BaseV
     protected abstract int getLayoutRes();
 
     private Unbinder mUnbinder;
+    protected AttentionDialogDelegate mAttentionDialog;
 
     @Nullable
     @Override
@@ -45,6 +47,7 @@ public abstract class BaseFragment extends MvpAppCompatFragment implements BaseV
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mUnbinder = ButterKnife.bind(this, view);
+        mAttentionDialog = new AttentionDialogDelegateImpl(getContext());
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (toolbar != null) {
@@ -89,5 +92,10 @@ public abstract class BaseFragment extends MvpAppCompatFragment implements BaseV
     @Override
     public void showToast(@NonNull Text message) {
         Toast.makeText(getContext(), message.getString(getResources()), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showErrorMessage(@StringRes int message, AttentionDialog.OnOkClickListener onOkClickListener) {
+        mAttentionDialog.showAttentionDialog(message, onOkClickListener);
     }
 }

@@ -15,7 +15,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target(METHOD)
 @Retention(RUNTIME)
 public @interface PeriodicTask {
-    long delayMills() default 2000;
+    long delayMills() default 2000; // 2 sec
 
     long timeoutMills() default 2 * 60 * 1000; // 2 min
 }

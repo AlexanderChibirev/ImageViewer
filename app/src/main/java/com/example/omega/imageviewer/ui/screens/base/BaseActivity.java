@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -15,9 +16,12 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.models.Text;
 import com.example.omega.imageviewer.tools.NetworkChecker;
-import com.example.omega.imageviewer.ui.dialogs.waiting.WaitingDialog;
+import com.example.omega.imageviewer.ui.dialogs.attention.AttentionDialog;
+import com.example.omega.imageviewer.ui.dialogs.attention.AttentionDialogDelegate;
+import com.example.omega.imageviewer.ui.dialogs.attention.AttentionDialogDelegateImpl;
 import com.example.omega.imageviewer.ui.dialogs.confirm.ConfirmDialogDelegate;
 import com.example.omega.imageviewer.ui.dialogs.confirm.ConfirmDialogDelegateImpl;
+import com.example.omega.imageviewer.ui.dialogs.waiting.WaitingDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,6 +39,7 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements
     Toolbar mToolbar;
 
     protected ConfirmDialogDelegate mConfirmDialogDelegate;
+    protected AttentionDialogDelegate mAttentionDialog;
 
     @Nullable
     private WaitingDialog mWaitingDialog;
@@ -46,6 +51,7 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements
         super.onCreate(savedInstanceState);
         mNetworkChecker = new NetworkChecker(this);
         mConfirmDialogDelegate = new ConfirmDialogDelegateImpl(this);
+        mAttentionDialog = new AttentionDialogDelegateImpl(this);
     }
 
     @Override
@@ -129,16 +135,18 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements
     @Override
     protected void onDestroy() {
         mConfirmDialogDelegate.onDestroy();
+        mAttentionDialog.onDestroy();
         super.onDestroy();
     }
 
     @Override
     public void onConnectivityChanged(boolean availableNow) {
+
         //TODO go to offline mode if !availableNow and you not offline mode
     }
 
-    /*@Override
-    public void showErrorMessage(Text error, ConfirmDialogDelegate.OnAttentionCancelListener onCancelListener) {
-       //TODO rename attention dialog added two dialog with one button ok showInfoDialog
-    }*/
+    @Override
+    public void showErrorMessage(@StringRes int message, AttentionDialog.OnOkClickListener onOkClickListener) {
+        mAttentionDialog.showAttentionDialog(message, onOkClickListener);
+    }
 }
