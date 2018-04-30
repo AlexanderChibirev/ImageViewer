@@ -1,5 +1,6 @@
 package com.example.omega.imageviewer.ui.screens.splash;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -92,5 +93,9 @@ public class SplashActivity extends BaseActivity implements SplashView {
                     super.onActivityResult(resultCode, resultCode, intent);
             }
         }
+    }
+
+    public static Intent createIntent(Context context) {
+        return new Intent(context, SplashActivity.class);
     }
 }

@@ -8,8 +8,12 @@ import com.example.omega.imageviewer.ui.screens.base.BaseView;
  * Created by Alexander Chibirev on 4/29/2018.
  */
 
+@StateStrategyType(OneExecutionStateStrategy.class)
 public interface MainView extends BaseView {
 
-    @StateStrategyType(OneExecutionStateStrategy.class)
     void showMainPage();
+
+    void showOfflinePage();
+
+    void showSplashScreen();
 }

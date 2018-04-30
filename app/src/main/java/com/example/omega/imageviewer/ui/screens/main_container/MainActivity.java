@@ -9,6 +9,7 @@ import android.view.View;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.ui.screens.base.BaseActivity;
+import com.example.omega.imageviewer.ui.screens.splash.SplashActivity;
 import com.example.omega.imageviewer.ui.screens.viewer.ImageViewerFragment;
 import com.omega_r.libs.navigationmenu.ContentMenuLayout;
 
@@ -40,7 +41,9 @@ public class MainActivity extends BaseActivity implements MainView {
         mContainerView.setOnProgressMenuChangedListener(this::onProgressMenuChanged);
     }
 
-    @OnClick({R.id.textview_menu_item_online, R.id.textview_menu_item_offline})
+    @OnClick({R.id.textview_menu_item_online,
+            R.id.textview_menu_item_offline,
+            R.id.textview_menu_item_logout})
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.textview_menu_item_online:
@@ -99,5 +102,16 @@ public class MainActivity extends BaseActivity implements MainView {
     @Override
     public void showMainPage() {
         showPage(mImageViewerFragment);
+    }
+
+    @Override
+    public void showOfflinePage() {
+        //TODO added show offline page
+    }
+
+    @Override
+    public void showSplashScreen() {
+        startActivity(SplashActivity.createIntent(this));
+        finish();
     }
 }

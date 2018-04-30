@@ -27,7 +27,7 @@ public abstract class BaseRecyclerImageAdapter<VH extends BaseRecyclerImageAdapt
     @NonNull
     protected List<Image> mImages = new ArrayList<>();
 
-    protected void update(List<Image> images) {
+    protected void update(List<Image> images) { //TODO added pull refresh
         mImages = images;
         notifyDataSetChanged();
     }
