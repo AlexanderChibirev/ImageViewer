@@ -1,6 +1,7 @@
 package com.example.omega.imageviewer.ui.dialogs.confirm;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.omega.imageviewer.R;
+import com.example.omega.imageviewer.models.Text;
 import com.example.omega.imageviewer.ui.dialogs.base.BaseDialog;
 
 import butterknife.BindView;
@@ -28,9 +30,9 @@ public class ConfirmDialog extends BaseDialog {
     @BindView(R.id.button_ok)
     Button mOkButton;
 
-    private String mMessage;
-    private String mOkButtonLabel;
-    private String mCancelButtonLabel;
+    private Text mMessage;
+    private Text mOkButtonLabel;
+    private Text mCancelButtonLabel;
 
     private OnOkButtonListener mOnOkButtonListener;
     private OnCancelButtonListener mOnCancelButtonListener;
@@ -55,12 +57,13 @@ public class ConfirmDialog extends BaseDialog {
     @Override
     protected void onPostCreate() {
         super.onPostCreate();
-        mMessageTextView.setText(mMessage);
-        mOkButton.setText(mOkButtonLabel);
-        mCancelButton.setText(mCancelButtonLabel);
+        Resources resources = getContext().getResources();
+        mMessageTextView.setText(mMessage.getString(resources));
+        mOkButton.setText(mOkButtonLabel.getString(resources));
+        mCancelButton.setText(mCancelButtonLabel.getString(resources));
     }
 
-    public void show(String message, String okButtonLabel, String cancelButtonLabel) {
+    public void show(Text message, Text okButtonLabel, Text cancelButtonLabel) {
         mMessage = message;
         mOkButtonLabel = okButtonLabel;
         mCancelButtonLabel = cancelButtonLabel;
@@ -68,8 +71,7 @@ public class ConfirmDialog extends BaseDialog {
     }
 
     public void show(@StringRes int message, @StringRes int okButtonLabel, @StringRes int cancelButtonLabel) {
-        Context context = getContext();
-        show(context.getString(message), context.getString(okButtonLabel), context.getString(cancelButtonLabel));
+        show(Text.from(message), Text.from(okButtonLabel), Text.from(cancelButtonLabel));
     }
 
     public void setOnOkButtonListener(OnOkButtonListener listener) {
@@ -83,7 +85,7 @@ public class ConfirmDialog extends BaseDialog {
     @OnClick(R.id.button_ok)
     public void onOkButtonClick() {
         if (mOnOkButtonListener != null) {
-            this.dismiss();;
+            this.dismiss();
             mOnOkButtonListener.onOkButtonPressed();
         }
     }

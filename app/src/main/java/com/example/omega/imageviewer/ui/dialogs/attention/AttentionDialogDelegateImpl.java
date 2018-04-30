@@ -4,6 +4,8 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 
+import com.example.omega.imageviewer.models.Text;
+
 /**
  * Created by Alexander Chibirev on 4/30/2018.
  */
@@ -23,7 +25,7 @@ public class AttentionDialogDelegateImpl implements AttentionDialogDelegate {
 
         mAttentionDialog = new AttentionDialog(mContext);
         mAttentionDialog.setOnOkClickListener(listener);
-        mAttentionDialog.show(message);
+        mAttentionDialog.show(Text.from(message));
     }
 
     @Override

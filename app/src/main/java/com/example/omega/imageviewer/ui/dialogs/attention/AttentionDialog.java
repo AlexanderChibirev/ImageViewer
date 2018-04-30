@@ -9,6 +9,7 @@ import android.support.annotation.StyleRes;
 import android.widget.TextView;
 
 import com.example.omega.imageviewer.R;
+import com.example.omega.imageviewer.models.Text;
 import com.example.omega.imageviewer.ui.dialogs.base.BaseDialog;
 
 import butterknife.BindView;
@@ -20,7 +21,7 @@ import butterknife.OnClick;
 
 public class AttentionDialog extends BaseDialog {
 
-    private String mMessage;
+    private Text mMessage;
 
     @BindView(R.id.textview_message)
     TextView mMessageTextView;
@@ -48,10 +49,10 @@ public class AttentionDialog extends BaseDialog {
     @Override
     protected void onPostCreate() {
         super.onPostCreate();
-        mMessageTextView.setText(mMessage);
+        mMessageTextView.setText(mMessage.getString(getContext().getResources()));
     }
 
-    public void show(String message) {
+    public void show(Text message) {
         mMessage = message;
         show();
     }
@@ -61,7 +62,7 @@ public class AttentionDialog extends BaseDialog {
     }
 
     public void show(@StringRes int message) {
-        show(getContext().getString(message));
+        show(Text.from(message));
     }
 
     @OnClick(R.id.button_ok)

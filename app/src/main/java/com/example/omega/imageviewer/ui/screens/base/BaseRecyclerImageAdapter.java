@@ -36,25 +36,23 @@ public abstract class BaseRecyclerImageAdapter<VH extends BaseRecyclerImageAdapt
         return LayoutInflater.from(parent.getContext()).inflate(layout, parent, false);
     }
 
-    public static abstract class BaseViewHolder extends OmegaRecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+    public static abstract class BaseViewHolder extends OmegaRecyclerView.ViewHolder {
 
         protected BaseViewHolder(@NonNull final View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            itemView.setOnClickListener(this);
-            itemView.setOnLongClickListener(this);
+            itemView.setOnClickListener(this::onClick);
+            itemView.setOnLongClickListener(this::onLongClick);
         }
 
         protected abstract void onClick(int position);
 
         protected abstract void onLongClick(int position);
 
-        @Override
-        public void onClick(View v) {
+        public void onClick(View view) {
             checkClick(false);
         }
 
-        @Override
         public boolean onLongClick(View view) {
             checkClick(true);
             return true;
