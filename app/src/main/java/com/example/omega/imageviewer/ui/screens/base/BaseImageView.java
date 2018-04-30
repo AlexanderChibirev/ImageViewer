@@ -15,5 +15,5 @@ public interface BaseImageView extends BaseView {
 
     void deletedImage(int itemPositionDeleted);
 
-    void hideSwipeLoading();
+    void hideLoading();
 }

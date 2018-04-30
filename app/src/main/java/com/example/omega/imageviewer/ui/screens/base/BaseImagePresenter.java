@@ -19,7 +19,6 @@ public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V
     @NonNull
     protected CloudDrive mCloudDrive;
     protected int mItemPositionLongClicked;
-    private int mOldSizeImages;
 
     public BaseImagePresenter(@NonNull CloudDrive cloudDrive, boolean isOnlineMode) {
         mIsOnlineMode = isOnlineMode;
@@ -43,7 +42,6 @@ public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V
     }
 
     private void requestImagesFromCloudDrive(final int limit, final int offSet) {
-        mOldSizeImages = mCloudDrive.getImages().size();
         mCloudDrive.requestImages(limit, offSet);
     }
 
@@ -55,13 +53,16 @@ public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V
     public void onChangedStateDownloadImages(CloudDrive.State state, Text message) {
         switch (state) {
             case SUCCESS:
-                if (mOldSizeImages != mCloudDrive.getImages().size()) {
-                    getViewState().updateImages(mCloudDrive.getImages());
+                getViewState().updateImages(mCloudDrive.getImages());
+                break;
+            case FINISH:
+                if (mCloudDrive.getImages().isEmpty()) {
+                    getViewState().showMessage(R.string.images_empty, null);
                 }
-                getViewState().hideSwipeLoading();
+                getViewState().hideLoading();
                 break;
             case ERROR:
-                getViewState().showErrorMessage(R.string.download_image_failed, null);
+                getViewState().showMessage(R.string.download_image_failed, null);
                 break;
         }
     }
@@ -74,7 +75,7 @@ public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V
                 getViewState().deletedImage(itemPositionDeleted);
                 break;
             case ERROR:
-                getViewState().showErrorMessage(R.string.delete_image_failed, null);
+                getViewState().showMessage(R.string.delete_image_failed, null);
                 break;
         }
     }
@@ -100,7 +101,6 @@ public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V
     protected void onRefresh() {
         if (mIsOnlineMode) {
             int size = mCloudDrive.getImages().size();
-            mOldSizeImages = size;
             requestImagesFromCloudDrive(size + LIMIT_IMAGES_TO_UPLOAD,
                     0);
         } else {

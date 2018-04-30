@@ -16,10 +16,8 @@ import com.example.omega.imageviewer.ui.dialogs.attention.AttentionDialog;
 @StateStrategyType(AddToEndSingleStrategy.class)
 public interface BaseView extends MvpView {
 
-    long DELAY_SHOW_WAITING = 500; // TODO for feature waiting
-
     void showToast(@NonNull Text message);
 
-    void showErrorMessage(@StringRes int message, AttentionDialog.OnOkClickListener onOkClickListener);
+    void showMessage(@StringRes int message, AttentionDialog.OnOkClickListener onOkClickListener);
 
 }

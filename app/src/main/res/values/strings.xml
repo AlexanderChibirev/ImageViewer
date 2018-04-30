@@ -36,4 +36,6 @@
     <string name="image_success_deleted">Image success deleted</string>
     <string name="download_image_failed">Could not update photo feed</string>
     <string name="delete_image_failed">Delete image failed</string>
+    <string name="loading">loading</string>
+    <string name="images_empty">there are no images on the cloud disk, download and pull them down</string>
 </resources>

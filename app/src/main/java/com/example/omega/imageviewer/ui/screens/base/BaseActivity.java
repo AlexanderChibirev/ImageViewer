@@ -40,11 +40,7 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements
 
     protected ConfirmDialogDelegate mConfirmDialogDelegate;
     protected AttentionDialogDelegate mAttentionDialog;
-
-    @Nullable
-    private WaitingDialog mWaitingDialog;
     private NetworkChecker mNetworkChecker;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,21 +113,6 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements
         Toast.makeText(this, message.getString(getResources()), Toast.LENGTH_SHORT).show();
     }
 
-    public void setShowWaiting(boolean showWaiting) {
-        if (showWaiting) {
-            if (mWaitingDialog != null) {
-                mWaitingDialog.dismiss();
-            }
-            mWaitingDialog = new WaitingDialog(this);
-            mWaitingDialog.postShow(DELAY_SHOW_WAITING);
-        } else {
-            if (mWaitingDialog != null) {
-                mWaitingDialog.dismiss();
-                mWaitingDialog = null;
-            }
-        }
-    }
-
     @Override
     protected void onDestroy() {
         mConfirmDialogDelegate.onDestroy();
@@ -141,12 +122,11 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements
 
     @Override
     public void onConnectivityChanged(boolean availableNow) {
-
         //TODO go to offline mode if !availableNow and you not offline mode
     }
 
     @Override
-    public void showErrorMessage(@StringRes int message, AttentionDialog.OnOkClickListener onOkClickListener) {
+    public void showMessage(@StringRes int message, AttentionDialog.OnOkClickListener onOkClickListener) {
         mAttentionDialog.showAttentionDialog(message, onOkClickListener);
     }
 }

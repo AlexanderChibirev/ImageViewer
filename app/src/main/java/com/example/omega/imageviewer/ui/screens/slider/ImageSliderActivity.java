@@ -74,12 +74,7 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
 
     @Override
     public void setSelection(long position) {
-        mRecyclerView.post(new Runnable() {//TODO set correct selection
-            @Override
-            public void run() {
-                mRecyclerView.scrollToPosition((int) position);
-            }
-        });
+        mRecyclerView.scrollToPosition((int) position);
     }
 
     @Override
@@ -99,7 +94,7 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
     }
 
     @Override
-    public void hideSwipeLoading() {
+    public void hideLoading() {
         //nothing
     }
 }

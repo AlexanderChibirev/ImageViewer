@@ -51,4 +51,12 @@ public class Image implements Serializable {
         return mPath;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Image) {
+            Image image = (Image) obj;
+            return image.mPath.equals(mPath);
+        }
+        return false;
+    }
 }

@@ -48,9 +48,11 @@ public class YandexCloudDrive extends BaseYandexCloudDrive {
     }
 
     private void updateImages(@NonNull ListResources<Image> resources) {
-        mImages.clear();
-        mImages.addAll(resources.getResources());
-        onChangedStateDownloadImages(State.SUCCESS, Text.from(R.string.image_success_download));
+        if (!resources.getResources().equals(mImages)) {
+            mImages.clear();
+            mImages.addAll(resources.getResources());
+            onChangedStateDownloadImages(State.SUCCESS, Text.from(R.string.image_success_download));
+        }
     }
 
     @NonNull

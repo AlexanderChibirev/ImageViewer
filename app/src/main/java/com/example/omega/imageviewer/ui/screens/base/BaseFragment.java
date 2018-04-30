@@ -20,6 +20,7 @@ import com.example.omega.imageviewer.models.Text;
 import com.example.omega.imageviewer.ui.dialogs.attention.AttentionDialog;
 import com.example.omega.imageviewer.ui.dialogs.attention.AttentionDialogDelegate;
 import com.example.omega.imageviewer.ui.dialogs.attention.AttentionDialogDelegateImpl;
+import com.example.omega.imageviewer.ui.dialogs.waiting.WaitingDialog;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -95,7 +96,7 @@ public abstract class BaseFragment extends MvpAppCompatFragment implements BaseV
     }
 
     @Override
-    public void showErrorMessage(@StringRes int message, AttentionDialog.OnOkClickListener onOkClickListener) {
+    public void showMessage(@StringRes int message, AttentionDialog.OnOkClickListener onOkClickListener) {
         mAttentionDialog.showAttentionDialog(message, onOkClickListener);
     }
 }

@@ -14,12 +14,16 @@ import com.example.omega.imageviewer.models.Image;
 import com.example.omega.imageviewer.ui.dialogs.cloud_drive_options.OptionsDialog;
 import com.example.omega.imageviewer.ui.dialogs.cloud_drive_options.OptionsDialogDelegate;
 import com.example.omega.imageviewer.ui.dialogs.cloud_drive_options.OptionsDialogDelegateImpl;
+import com.example.omega.imageviewer.ui.dialogs.waiting.WaitingDialog;
 import com.example.omega.imageviewer.ui.screens.main.ScreenMenuBinderFragment;
 import com.example.omega.imageviewer.ui.screens.slider.ImageSliderActivity;
+import com.omega_r.libs.omegarecyclerview.OmegaRecyclerView;
 
 import java.util.List;
 
 import butterknife.BindView;
+
+import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
 
 /**
  * Created by Alexander Chibirev on 4/29/2018.
@@ -37,7 +41,7 @@ public class ImageViewerFragment extends ScreenMenuBinderFragment implements
     ImageViewerPresenter mImageViewerPresenter;
 
     @BindView(R.id.recyclerview)
-    RecyclerView mRecyclerView;
+    OmegaRecyclerView mRecyclerView;
 
     @BindView(R.id.swiperefreshlayout)
     SwipeRefreshLayout mSwipeRefreshLayout;
@@ -61,10 +65,21 @@ public class ImageViewerFragment extends ScreenMenuBinderFragment implements
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setRetainInstance(true);
         mImageViewerAdapter.setOnImageItemClickListener(this);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mRecyclerView.setAdapter(mImageViewerAdapter);
         mOptionsDialog = new OptionsDialogDelegateImpl(getContext());
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() { //TODO refactoring
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                boolean hasEnded = newState == SCROLL_STATE_IDLE;
+                if (hasEnded) {
+                    onRefresh(); //TODO added progress bar for end rv
+                }
+            }
+        });
     }
 
     @Override
@@ -134,7 +149,8 @@ public class ImageViewerFragment extends ScreenMenuBinderFragment implements
     }
 
     @Override
-    public void hideSwipeLoading() {
+    public void hideLoading() {
         if (mSwipeRefreshLayout.isRefreshing()) mSwipeRefreshLayout.setRefreshing(false);
     }
+
 }
