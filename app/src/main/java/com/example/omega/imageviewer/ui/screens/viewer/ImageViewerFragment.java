@@ -77,7 +77,7 @@ public class ImageViewerFragment extends ScreenMenuBinderFragment implements
     }
 
     @Override
-    public void onImageLongClick(long position) {
+    public void onImageLongClick(int position) {
         mImageViewerPresenter.onImageLongClick(position);
     }
 
@@ -99,5 +99,10 @@ public class ImageViewerFragment extends ScreenMenuBinderFragment implements
     @Override
     public void onDeleteClicked() {
         mImageViewerPresenter.onDeleteClicked();
+    }
+
+    @Override
+    public void deletedImage(int itemPositionDeleted) {
+        mImageViewerAdapter.deleteItem(itemPositionDeleted);
     }
 }

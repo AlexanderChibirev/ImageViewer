@@ -96,4 +96,9 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
     public void showCloudDriveOptionsScreen() {
         //nothing
     }
+
+    @Override
+    public void deletedImage(int itemPositionDeleted) {
+        //nothing
+    }
 }

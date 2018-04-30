@@ -89,6 +89,7 @@ public class RetrofitModule {
     @Singleton
     public Gson provideGson() {
         return new GsonBuilder()
+                .excludeFieldsWithoutExposeAnnotation()
                 .registerTypeAdapter(Text.class, new TextTypeAdapter())
                 .create();
     }

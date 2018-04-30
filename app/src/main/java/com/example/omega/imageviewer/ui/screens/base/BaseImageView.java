@@ -17,4 +17,6 @@ public interface BaseImageView extends BaseView {
 
     @StateStrategyType(OneExecutionStateStrategy.class)
     void showCloudDriveOptionsScreen();
+
+    void deletedImage(int itemPositionDeleted);
 }

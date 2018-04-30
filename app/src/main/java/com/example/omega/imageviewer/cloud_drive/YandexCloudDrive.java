@@ -31,19 +31,26 @@ public class YandexCloudDrive extends BaseYandexCloudDrive {
     public void requestImages(int limit, int offSet) {
         mCloudDriverApi.requestImages(limit, QUERY_MEDIA_TYPE, offSet)
                 .onResult(this::updateImages)
-                .onError(this::handleError)
-                .onFinish(() -> onChangedStateDownloadImages(DownloadState.FINISH,
+                .onError(e -> onChangedStateDownloadImages(State.ERROR, getErrorMessage(e)))
+                .onFinish(() -> onChangedStateDownloadImages(State.FINISH,
                         Text.from(R.string.request_finish)));
+    }
+
+    @Override
+    public void deleteImage(int itemPosition) {
+        Image image = mImages.get(itemPosition);
+        mCloudDriverApi.deleteImage(image.getPath(), true)
+                .onResult(r -> onChangedStateDeleteImage(State.SUCCESS,
+                        Text.from(R.string.image_success_deleted), itemPosition))
+                .onError(e -> onChangedStateDeleteImage(State.ERROR, getErrorMessage(e), itemPosition))
+                .onFinish(() -> onChangedStateDeleteImage(State.FINISH,
+                        Text.from(R.string.image_success_deleted), itemPosition));
     }
 
     private void updateImages(@NonNull ListResources<Image> resources) {
         mImages.clear();
         mImages.addAll(resources.getResources());
-        onChangedStateDownloadImages(DownloadState.SUCCESS, Text.from(R.string.image_success_download));
-    }
-
-    private void handleError(Exception error) {
-        onChangedStateDownloadImages(DownloadState.ERROR, getErrorMessage(error));
+        onChangedStateDownloadImages(State.SUCCESS, Text.from(R.string.image_success_download));
     }
 
     @NonNull

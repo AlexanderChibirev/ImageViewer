@@ -9,7 +9,7 @@ import java.util.List;
  * Created by Alexander Chibirev on 4/24/2018.
  */
 
-public interface CloudDrive {
+public interface CloudDrive { //now only pictures, in the future and files)
 
     void addCallback(Callback callback);
 
@@ -19,14 +19,17 @@ public interface CloudDrive {
 
     List<Image> getImages();
 
-    interface Callback { //TODO changed on callback error
-        void onChangedStateDownloadImages(DownloadState state, Text message);
+    void deleteImage(int itemPosition);
+
+    interface Callback {
+        void onChangedStateDownloadImages(State state, Text message);
+
+        void onChangedStateDeleteImage(State state, Text message, int itemPositionDeleted);
     }
 
-    enum DownloadState {
+    enum State {
         SUCCESS,
         ERROR,
         FINISH
     }
-
 }

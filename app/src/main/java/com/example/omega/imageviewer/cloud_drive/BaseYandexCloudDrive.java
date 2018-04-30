@@ -3,7 +3,6 @@ package com.example.omega.imageviewer.cloud_drive;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.backend.Error;
 import com.example.omega.imageviewer.backend.ErrorException;
 import com.example.omega.imageviewer.models.Text;
@@ -32,9 +31,15 @@ public abstract class BaseYandexCloudDrive implements CloudDrive {
         return mCallbackSet.isEmpty();
     }
 
-    protected void onChangedStateDownloadImages(DownloadState downloadState, Text message) {
+    protected void onChangedStateDownloadImages(State state, Text message) {
         for (Callback callback : mCallbackSet) {
-            callback.onChangedStateDownloadImages(downloadState, message);
+            callback.onChangedStateDownloadImages(state, message);
+        }
+    }
+
+    protected void onChangedStateDeleteImage(State state, Text message, int itemPositionDeleted) {
+        for (Callback callback : mCallbackSet) {
+            callback.onChangedStateDeleteImage(state, message, itemPositionDeleted);
         }
     }
 

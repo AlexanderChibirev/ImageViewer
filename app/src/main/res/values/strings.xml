@@ -32,4 +32,5 @@
     <string name="label_delete_image">Delete image</string>
     <string name="label_full_mode_image">Full mode image</string>
     <string name="ok">Ok</string>
+    <string name="image_success_deleted">image success deleted</string>
 </resources>

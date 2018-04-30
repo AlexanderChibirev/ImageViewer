@@ -12,11 +12,11 @@ import java.io.Serializable;
 public class Image implements Serializable {
 
     @Expose
-    @SerializedName("mName")
+    @SerializedName("name")
     private String mName;
 
     @Expose
-    @SerializedName("mPath")
+    @SerializedName("path")
     private String mPath;
 
     @Expose

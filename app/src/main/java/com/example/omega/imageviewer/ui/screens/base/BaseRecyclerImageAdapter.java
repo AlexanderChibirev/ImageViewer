@@ -36,6 +36,11 @@ public abstract class BaseRecyclerImageAdapter<VH extends BaseRecyclerImageAdapt
         return LayoutInflater.from(parent.getContext()).inflate(layout, parent, false);
     }
 
+    public void deleteItem(int itemPositionDeleted) {
+        mImages.remove(itemPositionDeleted);
+        notifyItemRemoved(itemPositionDeleted);
+    }
+
     public static abstract class BaseViewHolder extends OmegaRecyclerView.ViewHolder {
 
         protected BaseViewHolder(@NonNull final View itemView) {

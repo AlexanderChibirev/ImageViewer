@@ -21,7 +21,7 @@ public class ImageViewerPresenter extends BaseImagePresenter<ImageViewerView> {
         getViewState().showImageSliderScreen(position);
     }
 
-    public void onImageLongClick(long position) {
+    public void onImageLongClick(int position) {
         mItemPositionLongClicked = position;
         getViewState().showCloudDriveOptionsScreen();
     }
