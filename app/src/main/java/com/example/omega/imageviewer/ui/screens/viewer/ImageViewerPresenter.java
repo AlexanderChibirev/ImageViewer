@@ -12,12 +12,33 @@ import com.example.omega.imageviewer.ui.screens.base.BaseImagePresenter;
 @InjectViewState
 public class ImageViewerPresenter extends BaseImagePresenter<ImageViewerView> {
 
+
     public ImageViewerPresenter() {
         super(ImageSliderApp.getAppComponent().getCloudDrive());
     }
 
-    public void onSlideClick(long position) {
+    public void onImageClick(long position) {
         getViewState().showImageSliderScreen(position);
     }
 
+    public void onImageLongClick(long position) {
+        mItemPositionLongClicked = position;
+        getViewState().showCloudDriveOptionsScreen();
+    }
+
+    @Override
+    protected void onFullModeImageClicked() {
+        super.onFullModeImageClicked();
+        getViewState().showImageSliderScreen(mItemPositionLongClicked);
+    }
+
+    @Override
+    protected void onSaveImageClicked() {
+        super.onSaveImageClicked();
+    }
+
+    @Override
+    protected void onDeleteClicked() {
+        super.onDeleteClicked();
+    }
 }

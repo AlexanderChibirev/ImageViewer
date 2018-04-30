@@ -91,4 +91,9 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
         super.onConnectivityChanged(availableNow);
         mImageSliderPresenter.onConnectivityChanged(availableNow);
     }
+
+    @Override
+    public void showCloudDriveOptionsScreen() {
+        //nothing
+    }
 }

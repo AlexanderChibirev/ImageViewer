@@ -21,13 +21,13 @@
         <item name="colorControlActivated">@color/tomato</item>
     </style>
 
-    <style name="OrangeButtonTheme" parent="Widget.AppCompat.Button.Colored">
+    <style name="OrangeButtonTheme" parent="Widget.AppCompat.Button.Borderless">
         <item name="colorButtonNormal">@color/orange</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textAllCaps">false</item>
     </style>
 
-    <style name="GreenButtonTheme" parent="Widget.AppCompat.Button.Colored">
+    <style name="GreenButtonTheme" parent="Widget.AppCompat.Button.Borderless">
         <item name="colorButtonNormal">@color/greenish_teal</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textAllCaps">false</item>
@@ -36,15 +36,27 @@
     <style name="MenuItemStyle">
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_height">@dimen/menu_text_height</item>
         <item name="android:paddingStart">@dimen/menu_item_padding_start</item>
-        <item name="android:paddingEnd">32dp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:paddingEnd">@dimen/menu_item_padding</item>
+        <item name="android:textSize">@dimen/menu_text_size</item>
         <item name="android:stateListAnimator">@animator/menu_item</item>
         <item name="android:background">@drawable/bg_menu_item</item>
         <item name="android:foreground">?android:selectableItemBackground</item>
         <item name="android:clickable">true</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="TextViewItemOptions" parent="TextAppearance.AppCompat">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dialog_cloud_drive_options_height</item>
+        <item name="android:paddingLeft">@dimen/dialog_cloud_drive_options_padding_left</item>
+        <item name="android:drawablePadding">@dimen/dialog_cloud_drive_options_drawable_padding</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">@dimen/dialog_cloud_drive_options_text_size</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:background">@drawable/dialog_cloud_drive_options_drawable_selected</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+    </style>
+
 </resources>

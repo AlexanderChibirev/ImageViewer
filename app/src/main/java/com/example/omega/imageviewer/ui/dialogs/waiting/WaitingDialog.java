@@ -1,10 +1,11 @@
-package com.example.omega.imageviewer.ui.dialogs;
+package com.example.omega.imageviewer.ui.dialogs.waiting;
 
 import android.content.Context;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 
 import com.example.omega.imageviewer.R;
+import com.example.omega.imageviewer.ui.dialogs.base.BaseDialog;
 
 /**
  * Created by Alexander Chibirev on 4/25/2018.

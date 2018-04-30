@@ -1,6 +1,5 @@
 package com.example.omega.imageviewer.ui.screens.base;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -17,6 +16,9 @@ import android.widget.Toast;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.models.Text;
+import com.example.omega.imageviewer.ui.dialogs.cloud_drive_options.OptionsDialog;
+import com.example.omega.imageviewer.ui.dialogs.cloud_drive_options.OptionsDialogDelegate;
+import com.example.omega.imageviewer.ui.dialogs.cloud_drive_options.OptionsDialogDelegateImpl;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;

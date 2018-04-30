@@ -11,6 +11,7 @@
     <string name="font_family_medium" translatable="false">sans-serif-medium</string>
     <string name="font_family_regular" translatable="false">sans-serif</string>
     <string name="label_attention">Attention</string>
+    <string name="label_confirm">Hello world!</string>
     <string name="cancel">Cancel</string>
     <string name="logout">Logout</string>
     <string name="exit">Exit</string>
@@ -21,5 +22,14 @@
     <string name="request_finish">request finish</string>
     <string name="menu_main_page">Online mode</string>
     <string name="menu_offline_page">Offline mode</string>
+    <string name="scheme_cloud_drive">yandexdisk</string>
 
+    <string name="dialog_cloud_drive_options_title">Which mode would you \nlike to switch to?</string>
+    <string name="dialog_cloud_drive_options_save_image">@string/label_save_image</string>
+    <string name="dialog_cloud_drive_options_delete_image">@string/label_delete_image</string>
+    <string name="dialog_cloud_drive_options_full_mode_image">@string/label_full_mode_image</string>
+    <string name="label_save_image">Save image</string>
+    <string name="label_delete_image">Delete image</string>
+    <string name="label_full_mode_image">Full mode image</string>
+    <string name="ok">Ok</string>
 </resources>

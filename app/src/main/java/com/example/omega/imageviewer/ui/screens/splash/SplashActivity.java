@@ -14,7 +14,7 @@ import android.support.transition.TransitionManager;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.omega.imageviewer.R;
-import com.example.omega.imageviewer.ui.dialogs.AttentionDialog;
+import com.example.omega.imageviewer.ui.dialogs.confirm.ConfirmDialog;
 import com.example.omega.imageviewer.ui.screens.base.BaseActivity;
 import com.example.omega.imageviewer.ui.screens.main_container.MainActivity;
 
@@ -64,14 +64,14 @@ public class SplashActivity extends BaseActivity implements SplashView {
     public void showAuthorizationMessage(@StringRes int message,
                                          @StringRes int negativeLabel,
                                          @StringRes int positiveLabel,
-                                         AttentionDialog.OnCancelButtonListener onNegativeListener,
-                                         @Nullable AttentionDialog.OnOkButtonListener onPositiveListener) {
+                                         ConfirmDialog.OnCancelButtonListener onNegativeListener,
+                                         @Nullable ConfirmDialog.OnOkButtonListener onPositiveListener) {
         Intent intent = getIntent();
         if (intent != null && intent.getData() != null) {
             mSplashPresenter.onTokenUpdate(intent.getData());
             setIntent(null);
         } else {
-            mAttentionDialogDelegate.showConfirmDialog(message, negativeLabel,
+            mConfirmDialogDelegate.showConfirmDialog(message, negativeLabel,
                     positiveLabel, onNegativeListener, onPositiveListener, false);
         }
     }

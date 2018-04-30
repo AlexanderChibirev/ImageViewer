@@ -1,14 +1,14 @@
-package com.example.omega.imageviewer.ui.dialogs;
+package com.example.omega.imageviewer.ui.dialogs.confirm;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
-import android.support.annotation.StyleRes;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.omega.imageviewer.R;
+import com.example.omega.imageviewer.ui.dialogs.base.BaseDialog;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -16,7 +16,8 @@ import butterknife.OnClick;
 /**
  * Created by Alexander Chibirev on 4/25/2018.
  */
-public class AttentionDialog extends BaseDialog {
+
+public class ConfirmDialog extends BaseDialog {
 
     @BindView(R.id.textview_message)
     TextView mMessageTextView;
@@ -34,21 +35,21 @@ public class AttentionDialog extends BaseDialog {
     private OnOkButtonListener mOnOkButtonListener;
     private OnCancelButtonListener mOnCancelButtonListener;
 
-    public AttentionDialog(@NonNull Context context) {
+    public ConfirmDialog(@NonNull Context context) {
         super(context);
     }
 
-    public AttentionDialog(@NonNull Context context, int themeResId) {
+    public ConfirmDialog(@NonNull Context context, int themeResId) {
         super(context, themeResId);
     }
 
-    protected AttentionDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
+    protected ConfirmDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
         super(context, cancelable, cancelListener);
     }
 
     @Override
     protected int getContentView() {
-        return R.layout.dialog_offline_mode;
+        return R.layout.dialog_confirm;
     }
 
     @Override

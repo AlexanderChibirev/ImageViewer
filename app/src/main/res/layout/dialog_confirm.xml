@@ -17,19 +17,11 @@
         android:layout_height="wrap_content"
         android:clipToPadding="false"
         android:orientation="vertical"
-        android:paddingBottom="22dp"
-        android:paddingLeft="32dp"
-        android:paddingRight="32dp"
-        android:paddingTop="32dp">
+        android:paddingBottom="@dimen/dialog_attention_padding"
+        android:paddingLeft="@dimen/dialog_attention_padding"
+        android:paddingRight="@dimen/dialog_attention_padding"
+        android:paddingTop="@dimen/dialog_attention_padding">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@string/font_family_medium"
-            android:text="@string/label_attention"
-            android:textColor="@color/tomato"
-            android:textSize="22sp"/>
 
         <TextView
             android:id="@+id/textview_message"
@@ -38,8 +30,8 @@
             android:layout_marginTop="24dp"
             android:gravity="center"
             android:textColor="@color/brownish_grey"
-            android:textSize="14sp"
-            tools:text="No internet connection, go offline mode?"/>
+            android:textSize="16sp"
+            tools:text="Start browser to authorize?"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -52,18 +44,18 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/cancel"
                 android:textAllCaps="false"
-                android:theme="@style/OrangeButtonTheme"/>
+                android:theme="@style/OrangeButtonTheme"
+                tools:text="@string/exit"/>
 
             <Button
                 android:id="@+id/button_ok"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/yes"
                 android:textAllCaps="false"
-                android:theme="@style/GreenButtonTheme"/>
+                android:theme="@style/GreenButtonTheme"
+                tools:text="@string/yes"/>
 
         </LinearLayout>
 

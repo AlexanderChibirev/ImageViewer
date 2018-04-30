@@ -58,13 +58,25 @@ public class ImageViewerAdapter extends BaseRecyclerImageAdapter<BaseRecyclerIma
 
         @Override
         protected void onClick(int position) {
+            checkClick(false, position);
+        }
+
+        @Override
+        protected void onLongClick(int position) {
+            checkClick(true, position);
+        }
+
+        private void checkClick(boolean isLongClick, int position) {
             if (position >= 0 && mListener != null) {
-                mListener.onImageClick(position);
+                if (isLongClick) mListener.onImageLongClick(position);
+                else mListener.onImageClick(position);
             }
         }
     }
 
     public interface OnImageClickListener {
         void onImageClick(long position);
+
+        void onImageLongClick(long position);
     }
 }

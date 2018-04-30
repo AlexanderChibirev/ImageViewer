@@ -15,9 +15,9 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.models.Text;
 import com.example.omega.imageviewer.tools.NetworkChecker;
-import com.example.omega.imageviewer.ui.dialogs.WaitingDialog;
-import com.example.omega.imageviewer.ui.dialogs.delegates.AttentionDialogDelegate;
-import com.example.omega.imageviewer.ui.dialogs.delegates.AttentionDialogDelegateImpl;
+import com.example.omega.imageviewer.ui.dialogs.waiting.WaitingDialog;
+import com.example.omega.imageviewer.ui.dialogs.confirm.ConfirmDialogDelegate;
+import com.example.omega.imageviewer.ui.dialogs.confirm.ConfirmDialogDelegateImpl;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,7 +34,7 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
-    protected AttentionDialogDelegate mAttentionDialogDelegate;
+    protected ConfirmDialogDelegate mConfirmDialogDelegate;
 
     @Nullable
     private WaitingDialog mWaitingDialog;
@@ -45,7 +45,7 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mNetworkChecker = new NetworkChecker(this);
-        mAttentionDialogDelegate = new AttentionDialogDelegateImpl(this);
+        mConfirmDialogDelegate = new ConfirmDialogDelegateImpl(this);
     }
 
     @Override
@@ -127,12 +127,18 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements
     }
 
     @Override
+    protected void onDestroy() {
+        mConfirmDialogDelegate.onDestroy();
+        super.onDestroy();
+    }
+
+    @Override
     public void onConnectivityChanged(boolean availableNow) {
         //TODO go to offline mode if !availableNow and you not offline mode
     }
 
     /*@Override
-    public void showErrorMessage(Text error, AttentionDialogDelegate.OnAttentionCancelListener onCancelListener) {
+    public void showErrorMessage(Text error, ConfirmDialogDelegate.OnAttentionCancelListener onCancelListener) {
        //TODO rename attention dialog added two dialog with one button ok showInfoDialog
     }*/
 }

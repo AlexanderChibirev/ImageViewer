@@ -14,6 +14,7 @@ public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V
 
     @NonNull
     protected CloudDrive mCloudDrive;
+    protected long mItemPositionLongClicked;
 
     public BaseImagePresenter(@NonNull CloudDrive cloudDrive) {
         mCloudDrive = cloudDrive;
@@ -23,7 +24,7 @@ public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
-        mCloudDrive.requestImages(100, mCloudDrive.getImages().size());
+        mCloudDrive.requestImages(100, mCloudDrive.getImages().size());//TODO remove magic number
     }
 
     public void onConnectivityChanged(boolean availableNow) {
@@ -48,5 +49,17 @@ public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V
     public void onDestroy() {
         super.onDestroy();
         mCloudDrive.removeCallback(this::onChangedStateDownloadImages);
+    }
+
+    protected void onFullModeImageClicked() {
+        //TODO added logic
+    }
+
+    protected void onSaveImageClicked() {
+        //TODO added logic
+    }
+
+    protected void onDeleteClicked() {
+        //TODO added logic
     }
 }

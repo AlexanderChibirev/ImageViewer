@@ -26,7 +26,7 @@
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <category android:name="android.intent.category.DEFAULT"/>
 
-                <data android:scheme="yandexdisk"/>
+                <data android:scheme="@string/scheme_cloud_drive"/>
             </intent-filter>
         </activity>
 

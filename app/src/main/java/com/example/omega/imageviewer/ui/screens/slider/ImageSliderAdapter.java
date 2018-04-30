@@ -1,6 +1,5 @@
 package com.example.omega.imageviewer.ui.screens.slider;
 
-import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +52,11 @@ public class ImageSliderAdapter extends BaseRecyclerImageAdapter<BaseRecyclerIma
         @Override
         protected void onClick(int position) {
             //nothing
+        }
+
+        @Override
+        protected void onLongClick(int position) {
+            //nothing or added logic deleted and save maybe... or no... i don't know
         }
     }
 }

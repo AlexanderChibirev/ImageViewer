@@ -1,4 +1,4 @@
-package com.example.omega.imageviewer.ui.dialogs;
+package com.example.omega.imageviewer.ui.dialogs.base;
 
 import android.app.Dialog;
 import android.content.Context;

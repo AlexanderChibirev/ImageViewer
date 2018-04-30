@@ -8,9 +8,8 @@ import com.example.omega.imageviewer.ui.screens.base.BaseImageView;
  * Created by Alexander Chibirev on 4/15/2018.
  */
 
+@StateStrategyType(OneExecutionStateStrategy.class)
 public interface ImageViewerView extends BaseImageView {
 
-    @StateStrategyType(OneExecutionStateStrategy.class)
     void showImageSliderScreen(long position);
-
 }

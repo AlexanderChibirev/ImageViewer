@@ -6,7 +6,6 @@ import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 import com.example.omega.imageviewer.models.Text;
-import com.example.omega.imageviewer.ui.dialogs.delegates.AttentionDialogDelegate;
 
 /**
  * Created by Alexander Chibirev on 4/15/2018.
@@ -19,5 +18,5 @@ public interface BaseView extends MvpView {
 
     void showToast(@NonNull Text message);
 
-    //void showErrorMessage(Text error, AttentionDialogDelegate.OnAttentionCancelListener onCancelListener);
+    //void showErrorMessage(Text error, ConfirmDialogDelegate.OnAttentionCancelListener onCancelListener);
 }
