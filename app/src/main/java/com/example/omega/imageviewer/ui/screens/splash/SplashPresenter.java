@@ -1,7 +1,5 @@
 package com.example.omega.imageviewer.ui.screens.splash;
 
-import android.content.AsyncTaskLoader;
-import android.content.Context;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
@@ -54,8 +52,7 @@ public class SplashPresenter extends BasePresenter<SplashView> {
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
         if (mUserManager.isAuthorized()) {
-            mCloudDrive.requestImages(LIMIT_IMAGES_TO_UPLOAD, mCloudDrive.getImages().size());
-            startPostDelayedAnimate();
+            requestImages();
         } else {
             showAuthorizationMessage();
         }
@@ -104,6 +101,11 @@ public class SplashPresenter extends BasePresenter<SplashView> {
                 mPreferences.setToken(token);
             }
         }
+        requestImages();
+    }
+
+    private void requestImages() {
+        mCloudDrive.requestImages(LIMIT_IMAGES_TO_UPLOAD, mCloudDrive.getImages().size());
         startPostDelayedAnimate();
     }
 

@@ -14,7 +14,6 @@ import com.example.omega.imageviewer.models.Image;
 import com.example.omega.imageviewer.ui.dialogs.cloud_drive_options.OptionsDialog;
 import com.example.omega.imageviewer.ui.dialogs.cloud_drive_options.OptionsDialogDelegate;
 import com.example.omega.imageviewer.ui.dialogs.cloud_drive_options.OptionsDialogDelegateImpl;
-import com.example.omega.imageviewer.ui.dialogs.waiting.WaitingDialog;
 import com.example.omega.imageviewer.ui.screens.main.ScreenMenuBinderFragment;
 import com.example.omega.imageviewer.ui.screens.slider.ImageSliderActivity;
 import com.omega_r.libs.omegarecyclerview.OmegaRecyclerView;
