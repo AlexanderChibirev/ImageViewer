@@ -1,7 +1,5 @@
 package com.example.omega.imageviewer.backend.call;
 
-import android.support.annotation.NonNull;
-
 import com.example.omega.imageviewer.tools.task.Task;
 import com.example.omega.imageviewer.tools.task.TaskExecutor;
 

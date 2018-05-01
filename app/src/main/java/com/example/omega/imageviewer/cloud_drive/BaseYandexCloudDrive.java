@@ -31,15 +31,15 @@ public abstract class BaseYandexCloudDrive implements CloudDrive {
         return mCallbackSet.isEmpty();
     }
 
-    protected void onChangedStateDownloadImages(State state, Text message) {
+    protected void onDownloadImagesEvent(RequestEvent requestEvent, Text message) {
         for (Callback callback : mCallbackSet) {
-            callback.onChangedStateDownloadImages(state, message);
+            callback.onDownloadImagesEvent(requestEvent, message);
         }
     }
 
-    protected void onChangedStateDeleteImage(State state, Text message, int itemPositionDeleted) {
+    protected void onDeleteImageEvent(RequestEvent requestEvent, Text message, int itemPositionDeleted) {
         for (Callback callback : mCallbackSet) {
-            callback.onChangedStateDeleteImage(state, message, itemPositionDeleted);
+            callback.onDeleteImageEvent(requestEvent, message, itemPositionDeleted);
         }
     }
 

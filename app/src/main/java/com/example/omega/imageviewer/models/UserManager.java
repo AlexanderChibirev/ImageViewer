@@ -16,6 +16,7 @@ public class UserManager {
 
     public void logout() {
         mPreferences.setToken(null);
+        mPreferences.setFirstRun(true);
     }
 
     public boolean isAuthorized() {

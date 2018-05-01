@@ -2,7 +2,9 @@ package com.example.omega.imageviewer.ui.screens.viewer;
 
 
 import com.arellomobile.mvp.InjectViewState;
+import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.app.ImageSliderApp;
+import com.example.omega.imageviewer.models.Preferences;
 import com.example.omega.imageviewer.models.Text;
 import com.example.omega.imageviewer.ui.screens.base.BaseImagePresenter;
 
@@ -16,6 +18,11 @@ public class ImageViewerPresenter extends BaseImagePresenter<ImageViewerView> {
 
     public ImageViewerPresenter(boolean isOnlineMode) {
         super(ImageSliderApp.getAppComponent().getCloudDrive(), isOnlineMode);
+        Preferences preferences = ImageSliderApp.getAppComponent().getPreferences();
+        if (preferences.isFirstRun()) {
+            getViewState().showMessage(R.string.helper_for_online_feed, null);
+            preferences.setFirstRun(false);
+        }
     }
 
     public void onImageClick(int position) {

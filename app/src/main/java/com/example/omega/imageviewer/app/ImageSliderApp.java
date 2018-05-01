@@ -20,8 +20,7 @@ public class ImageSliderApp extends DaggerApplication {
 
     @Override
     protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
-        sAppComponent =
-                DaggerAppComponent
+        sAppComponent = DaggerAppComponent
                 .builder()
                 .application(this)
                 .build();

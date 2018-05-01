@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.models.Image;
 import com.example.omega.imageviewer.ui.screens.base.BaseRecyclerImageAdapter;
-import com.omega_r.libs.omegarecyclerview.pagination.PaginationAdapter;
 
 import java.util.List;
 
@@ -19,7 +18,7 @@ import butterknife.BindView;
  * Created by Alexander Chibirev on 4/16/2018.
  */
 
-public class ImageViewerAdapter extends BaseRecyclerImageAdapter<BaseRecyclerImageAdapter.BaseViewHolder>{
+public class ImageViewerAdapter extends BaseRecyclerImageAdapter<BaseRecyclerImageAdapter.BaseViewHolder> {
     @Nullable
     private OnImageClickListener mListener;
 

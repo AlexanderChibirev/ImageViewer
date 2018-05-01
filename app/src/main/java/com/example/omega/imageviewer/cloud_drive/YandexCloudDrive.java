@@ -31,8 +31,8 @@ public class YandexCloudDrive extends BaseYandexCloudDrive {
     public void requestImages(int limit, int offSet) {
         mCloudDriverApi.requestImages(limit, QUERY_MEDIA_TYPE, offSet)
                 .onResult(this::updateImages)
-                .onError(e -> onChangedStateDownloadImages(State.ERROR, getErrorMessage(e)))
-                .onFinish(() -> onChangedStateDownloadImages(State.FINISH,
+                .onError(e -> onDownloadImagesEvent(RequestEvent.ERROR, getErrorMessage(e)))
+                .onFinish(() -> onDownloadImagesEvent(RequestEvent.FINISH,
                         Text.from(R.string.request_finish)));
     }
 
@@ -40,10 +40,10 @@ public class YandexCloudDrive extends BaseYandexCloudDrive {
     public void deleteImage(int itemPosition) {
         Image image = mImages.get(itemPosition);
         mCloudDriverApi.deleteImage(image.getPath(), true)
-                .onResult(r -> onChangedStateDeleteImage(State.SUCCESS,
+                .onResult(r -> onDeleteImageEvent(RequestEvent.SUCCESS,
                         Text.from(R.string.image_success_deleted), itemPosition))
-                .onError(e -> onChangedStateDeleteImage(State.ERROR, getErrorMessage(e), itemPosition))
-                .onFinish(() -> onChangedStateDeleteImage(State.FINISH,
+                .onError(e -> onDeleteImageEvent(RequestEvent.ERROR, getErrorMessage(e), itemPosition))
+                .onFinish(() -> onDeleteImageEvent(RequestEvent.FINISH,
                         Text.from(R.string.image_success_deleted), itemPosition));
     }
 
@@ -51,7 +51,7 @@ public class YandexCloudDrive extends BaseYandexCloudDrive {
         if (!resources.getResources().equals(mImages)) {
             mImages.clear();
             mImages.addAll(resources.getResources());
-            onChangedStateDownloadImages(State.SUCCESS, Text.from(R.string.image_success_download));
+            onDownloadImagesEvent(RequestEvent.SUCCESS, Text.from(R.string.image_success_download));
         }
     }
 

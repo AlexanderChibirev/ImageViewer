@@ -7,7 +7,6 @@ import com.example.omega.imageviewer.models.Preferences;
 
 import java.io.IOException;
 
-import okhttp3.Headers;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;

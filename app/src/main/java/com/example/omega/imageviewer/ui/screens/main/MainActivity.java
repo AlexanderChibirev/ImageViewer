@@ -8,7 +8,6 @@ import android.view.View;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.omega.imageviewer.R;
-import com.example.omega.imageviewer.models.Text;
 import com.example.omega.imageviewer.ui.screens.base.BaseActivity;
 import com.example.omega.imageviewer.ui.screens.splash.SplashActivity;
 import com.example.omega.imageviewer.ui.screens.viewer.ImageViewerFragment;

@@ -46,12 +46,12 @@ public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V
     }
 
     public void onConnectivityChanged(boolean availableNow) {
-        if (!availableNow) showToast(R.string.error_connection);//changed on pop_up
+        if (!availableNow) showToast(R.string.error_connection);//TODO changed on pop_up
     }
 
     @Override
-    public void onChangedStateDownloadImages(CloudDrive.State state, Text message) {
-        switch (state) {
+    public void onDownloadImagesEvent(CloudDrive.RequestEvent requestEvent, Text message) {
+        switch (requestEvent) {
             case SUCCESS:
                 getViewState().updateImages(mCloudDrive.getImages());
                 break;
@@ -68,9 +68,9 @@ public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V
     }
 
     @Override
-    public void onChangedStateDeleteImage(CloudDrive.State state, Text message,
-                                          int itemPositionDeleted) {
-        switch (state) {
+    public void onDeleteImageEvent(CloudDrive.RequestEvent requestEvent, Text message,
+                                   int itemPositionDeleted) {
+        switch (requestEvent) {
             case SUCCESS:
                 getViewState().deletedImage(itemPositionDeleted);
                 break;

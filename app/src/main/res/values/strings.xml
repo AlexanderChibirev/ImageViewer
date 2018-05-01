@@ -39,4 +39,5 @@
     <string name="loading">loading</string>
     <string name="images_empty">there are no images on the cloud disk, download and pull them down</string>
     <string name="of" formatted="true">%1$d\u0020of\u0020%2$d</string>
+    <string name="helper_for_online_feed">To save or delete a image, hold it down</string>
 </resources>

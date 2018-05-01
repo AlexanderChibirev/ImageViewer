@@ -16,12 +16,16 @@ import java.util.List;
 public class ListResources<T> implements Serializable {
 
     @Expose
-    @SerializedName("items")
+    @SerializedName(Field.RESOURCES)
     @NonNull
     private List<T> mResources = new ArrayList<>();
 
     @NonNull
     public List<T> getResources() {
         return mResources;
+    }
+
+    private interface Field {
+        String RESOURCES = "items";
     }
 }

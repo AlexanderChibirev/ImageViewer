@@ -12,19 +12,19 @@ import java.io.Serializable;
 public class Image implements Serializable {
 
     @Expose
-    @SerializedName("name")
+    @SerializedName(Field.NAME)
     private String mName;
 
     @Expose
-    @SerializedName("path")
+    @SerializedName(Field.PATH)
     private String mPath;
 
     @Expose
-    @SerializedName("file")
+    @SerializedName(Field.PUBLIC_URL)
     private String mPublicUrl;
 
     @Expose
-    @SerializedName("created")
+    @SerializedName(Field.DATE)
     private String mDate;
 
     public Image(String name, String path,
@@ -59,4 +59,12 @@ public class Image implements Serializable {
         }
         return false;
     }
+
+    private interface Field {
+        String NAME = "name";
+        String PATH = "path";
+        String PUBLIC_URL = "file";
+        String DATE = "created";
+    }
+
 }
