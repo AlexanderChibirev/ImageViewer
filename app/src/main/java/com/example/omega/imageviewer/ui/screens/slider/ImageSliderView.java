@@ -9,5 +9,7 @@ import com.example.omega.imageviewer.ui.screens.base.BaseImageView;
 public interface ImageSliderView extends BaseImageView {
     void transformImages(final float maxScale, final float minScale);
 
-    void setSelection(long position);
+    void setSelection(final int position);
+
+    void setToolbarTitle(final int position, final int sizeData);
 }

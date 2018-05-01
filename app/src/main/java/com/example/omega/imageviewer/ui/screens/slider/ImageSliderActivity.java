@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.view.ViewPager;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -25,7 +26,7 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
 
     private static final String EXTRA_IMAGE_POSITION = "image_position";
     private static final String EXTRA_IS_ONLINE_MODE = "is_online_mode";
-    private static final long DEFAULT_VALUE = -1;
+    private static final int DEFAULT_VALUE = -1;
 
     @InjectPresenter
     ImageSliderPresenter mImageSliderPresenter;
@@ -46,7 +47,7 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
     @ProvidePresenter
     ImageSliderPresenter provideImageSliderPresenter() {
         Intent intent = getIntent();
-        long position = intent.getLongExtra(EXTRA_IMAGE_POSITION, DEFAULT_VALUE);
+        int position = intent.getIntExtra(EXTRA_IMAGE_POSITION, DEFAULT_VALUE);
         boolean isOnlineMode = intent.getBooleanExtra(EXTRA_IS_ONLINE_MODE, false);
         return new ImageSliderPresenter(position, isOnlineMode);
     }
@@ -56,6 +57,16 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_slider);
         mRecyclerView.setAdapter(mImageSliderAdapter);
+        mRecyclerView.setViewPagerOnPageChangeListener(createSimpleOnPageChangeListener());
+    }
+
+    private ViewPager.SimpleOnPageChangeListener createSimpleOnPageChangeListener() {
+        return new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                mImageSliderPresenter.onPageSelected(position);
+            }
+        };
     }
 
     @Override
@@ -73,8 +84,13 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
     }
 
     @Override
-    public void setSelection(long position) {
-        mRecyclerView.scrollToPosition((int) position);
+    public void setToolbarTitle(int position, int sizeData) {
+        super.setToolbarTitle(position, sizeData);
+    }
+
+    @Override
+    public void setSelection(final int position) {
+        mRecyclerView.scrollToPosition(position);
     }
 
     @Override

@@ -20,7 +20,6 @@ import com.example.omega.imageviewer.models.Text;
 import com.example.omega.imageviewer.ui.dialogs.attention.AttentionDialog;
 import com.example.omega.imageviewer.ui.dialogs.attention.AttentionDialogDelegate;
 import com.example.omega.imageviewer.ui.dialogs.attention.AttentionDialogDelegateImpl;
-import com.example.omega.imageviewer.ui.dialogs.waiting.WaitingDialog;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;

@@ -13,9 +13,14 @@ public class ImageSliderPresenter extends BaseImagePresenter<ImageSliderView> {
     private final static float MAX_SCALE_FOR_IMAGE = 1.0f;
     private final static float MIN_SCALE_FOR_IMAGE = 0.8f;
 
-    public ImageSliderPresenter(long position, boolean isOnlineMode) {
+    public ImageSliderPresenter(int position, boolean isOnlineMode) {
         super(ImageSliderApp.getAppComponent().getCloudDrive(), isOnlineMode);
         getViewState().setSelection(position);
+        onPageSelected(position);
         getViewState().transformImages(MAX_SCALE_FOR_IMAGE, MIN_SCALE_FOR_IMAGE);
+    }
+
+    protected void onPageSelected(int position) {
+        getViewState().setToolbarTitle(position, mCloudDrive.getImages().size());
     }
 }

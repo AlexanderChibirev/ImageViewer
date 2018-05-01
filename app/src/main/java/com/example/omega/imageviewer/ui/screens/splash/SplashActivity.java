@@ -35,6 +35,10 @@ public class SplashActivity extends BaseActivity implements SplashView {
     @BindView(R.id.layout_splash_start)
     ConstraintLayout mConstraintLayout;
 
+    public static Intent createIntent(Context context) {
+        return new Intent(context, SplashActivity.class);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,9 +97,5 @@ public class SplashActivity extends BaseActivity implements SplashView {
                     super.onActivityResult(resultCode, resultCode, intent);
             }
         }
-    }
-
-    public static Intent createIntent(Context context) {
-        return new Intent(context, SplashActivity.class);
     }
 }

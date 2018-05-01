@@ -21,7 +21,6 @@ import com.example.omega.imageviewer.ui.dialogs.attention.AttentionDialogDelegat
 import com.example.omega.imageviewer.ui.dialogs.attention.AttentionDialogDelegateImpl;
 import com.example.omega.imageviewer.ui.dialogs.confirm.ConfirmDialogDelegate;
 import com.example.omega.imageviewer.ui.dialogs.confirm.ConfirmDialogDelegateImpl;
-import com.example.omega.imageviewer.ui.dialogs.waiting.WaitingDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -98,6 +97,23 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements
     protected void initToolbar() {
         if (mToolbar != null) {
             setSupportActionBar(mToolbar);
+        }
+    }
+
+    protected void setToolbarTitle(final int position, final int dataSize) {
+        setToolbarTitle(Text.from(getString(
+                R.string.of,
+                position + 1,
+                dataSize)));
+    }
+
+    protected void setToolbarTitle(@StringRes int title) {
+        setToolbarTitle(Text.from(title));
+    }
+
+    private void setToolbarTitle(Text title) {
+        if (mToolbar != null) {
+            mToolbar.setTitle(title.getString(getResources()));
         }
     }
 
