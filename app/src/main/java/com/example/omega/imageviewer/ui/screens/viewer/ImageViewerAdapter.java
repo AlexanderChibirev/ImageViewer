@@ -76,7 +76,7 @@ public class ImageViewerAdapter extends BaseRecyclerImageAdapter<BaseRecyclerIma
     }
 
     public interface OnImageClickListener {
-        void onImageClick(long position);
+        void onImageClick(int position);
 
         void onImageLongClick(int position);
     }

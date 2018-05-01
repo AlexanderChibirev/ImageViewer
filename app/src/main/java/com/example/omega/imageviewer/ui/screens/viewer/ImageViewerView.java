@@ -11,7 +11,7 @@ import com.example.omega.imageviewer.ui.screens.base.BaseImageView;
 @StateStrategyType(OneExecutionStateStrategy.class)
 public interface ImageViewerView extends BaseImageView {
 
-    void showImageSliderScreen(long position, boolean isOnlineMode);
+    void showImageSliderScreen(int position, boolean isOnlineMode);
 
     void showCloudDriveOptionsScreen(); //maybe feature transfer to baseImageView
 

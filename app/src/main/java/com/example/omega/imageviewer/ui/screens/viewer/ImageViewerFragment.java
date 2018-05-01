@@ -93,7 +93,7 @@ public class ImageViewerFragment extends ScreenMenuBinderFragment implements
     }
 
     @Override
-    public void showImageSliderScreen(long position, boolean isOnlineMode) {
+    public void showImageSliderScreen(int position, boolean isOnlineMode) {
         startActivity(ImageSliderActivity.createIntent(getContext(), position, isOnlineMode));
     }
 
@@ -108,7 +108,7 @@ public class ImageViewerFragment extends ScreenMenuBinderFragment implements
     }
 
     @Override
-    public void onImageClick(long position) {
+    public void onImageClick(int position) {
         mImageViewerPresenter.onImageClick(position);
     }
 

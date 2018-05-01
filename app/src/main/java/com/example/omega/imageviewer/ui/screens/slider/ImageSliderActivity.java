@@ -37,7 +37,7 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
     @NonNull
     private ImageSliderAdapter mImageSliderAdapter = new ImageSliderAdapter();
 
-    public static Intent createIntent(Context context, long position, boolean isOnlineMode) {
+    public static Intent createIntent(Context context, int position, boolean isOnlineMode) {
         Intent intent = new Intent(context, ImageSliderActivity.class);
         intent.putExtra(EXTRA_IMAGE_POSITION, position);
         intent.putExtra(EXTRA_IS_ONLINE_MODE, isOnlineMode);

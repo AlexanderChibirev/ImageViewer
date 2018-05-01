@@ -18,7 +18,7 @@ public class ImageViewerPresenter extends BaseImagePresenter<ImageViewerView> {
         super(ImageSliderApp.getAppComponent().getCloudDrive(), isOnlineMode);
     }
 
-    public void onImageClick(long position) {
+    public void onImageClick(int position) {
         getViewState().showImageSliderScreen(position, mIsOnlineMode);
     }
 
