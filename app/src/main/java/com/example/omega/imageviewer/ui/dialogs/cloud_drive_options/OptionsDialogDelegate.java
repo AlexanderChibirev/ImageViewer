@@ -7,5 +7,7 @@ import com.example.omega.imageviewer.ui.dialogs.base.BaseDialogInterface;
  */
 
 public interface OptionsDialogDelegate extends BaseDialogInterface {
+
     void showOptionsDialog(OptionsDialog.OnClickListener onClickListener);
+
 }

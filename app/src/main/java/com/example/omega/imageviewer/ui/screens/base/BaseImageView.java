@@ -11,9 +11,11 @@ import java.util.List;
  */
 
 public interface BaseImageView extends BaseView {
+
     void updateImages(@NonNull List<Image> images);
 
     void deletedImage(int itemPositionDeleted);
 
     void hideLoading();
+
 }

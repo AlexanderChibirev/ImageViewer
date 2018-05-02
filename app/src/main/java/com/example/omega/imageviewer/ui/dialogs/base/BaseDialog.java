@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
  * Created by Alexander Chibirev on 4/25/2018.
  */
 
-public abstract class BaseDialog extends Dialog {
+public abstract class BaseDialog extends Dialog { //TODO changed on DialogFragment
 
 
     public BaseDialog(@NonNull Context context) {

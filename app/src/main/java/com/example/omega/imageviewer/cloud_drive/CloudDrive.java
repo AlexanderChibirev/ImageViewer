@@ -22,9 +22,9 @@ public interface CloudDrive { //now only pictures, in the future and files)
     void deleteImage(int itemPosition);
 
     interface Callback {
-        void onDownloadImagesEvent(RequestEvent requestEvent, Text message); //TODO changed named fun
+        void onDownloadImagesEvent(RequestEvent requestEvent, Text message);
 
-        void onDeleteImageEvent(RequestEvent requestEvent, Text message, int itemPositionDeleted); //TODO changed named fun
+        void onDeleteImageEvent(RequestEvent requestEvent, Text message, int itemPositionDeleted);
     }
 
     enum RequestEvent {

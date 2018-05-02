@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 /**
  * Created by Alexander Chibirev on 4/25/2018.
  */
+
 public class UserManager {
 
     @NonNull
@@ -22,4 +23,5 @@ public class UserManager {
     public boolean isAuthorized() {
         return mPreferences.isAuthorized();
     }
+
 }

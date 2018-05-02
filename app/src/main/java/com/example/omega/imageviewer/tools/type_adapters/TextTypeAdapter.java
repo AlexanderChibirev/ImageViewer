@@ -14,7 +14,7 @@ import java.lang.reflect.Type;
  * Created by Alexander Chibirev on 4/27/2018.
  */
 
-public class TextTypeAdapter implements JsonSerializer<Text>, JsonDeserializer<Text> {
+public class TextTypeAdapter implements JsonSerializer<Text>, JsonDeserializer<Text> { //or JsonAdapter<Text>
 
     @Override
     public Text deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {

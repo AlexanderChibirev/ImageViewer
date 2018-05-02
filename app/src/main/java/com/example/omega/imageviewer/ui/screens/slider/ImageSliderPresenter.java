@@ -17,6 +17,7 @@ import com.example.omega.imageviewer.ui.screens.base.BasePresenter;
 //TODO в будущем объеденить в общий класс слауд и базу данных
 
 public class ImageSliderPresenter extends BasePresenter<ImageSliderView> {
+
     private final static float MAX_SCALE_FOR_IMAGE = 1.0f;
     private final static float MIN_SCALE_FOR_IMAGE = 0.7f;
     private final static int TRANSITION_TIME = 70; //ms
@@ -41,4 +42,13 @@ public class ImageSliderPresenter extends BasePresenter<ImageSliderView> {
                 ? mCloudDrive.getImages().size()
                 : mDatabase.getImages().size());
     }
+
+    @Override
+    protected void onConnectivityChanged(boolean availableNow) {
+        if (mIsOnlineMode) {
+
+        }
+        //TODO added logic
+    }
+
 }

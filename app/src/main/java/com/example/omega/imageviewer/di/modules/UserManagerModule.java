@@ -16,9 +16,11 @@ import dagger.Provides;
 
 @Module(includes = {PreferencesModule.class})
 public class UserManagerModule {
+
     @Provides
     @Singleton
     UserManager provideUserManager(@NonNull Preferences preferences) {
         return new UserManager(preferences);
     }
+
 }

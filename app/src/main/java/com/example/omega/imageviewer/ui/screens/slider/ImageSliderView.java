@@ -7,6 +7,7 @@ import com.example.omega.imageviewer.ui.screens.base.BaseImageView;
  */
 
 public interface ImageSliderView extends BaseImageView {
+
     void transformImages(final float maxScale, final float minScale, final int time);
 
     void setSelection(final int position);
@@ -14,4 +15,5 @@ public interface ImageSliderView extends BaseImageView {
     void setToolbarTitle(final int position, final int sizeData);
 
     void setAdapter(boolean isOnlineMode);
+
 }

@@ -1,6 +1,9 @@
 package com.example.omega.imageviewer.ui.screens.viewer.online;
 
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 
 import com.arellomobile.mvp.InjectViewState;
@@ -57,7 +60,7 @@ public class ImageFeedOnlinePresenter extends BaseImageFeedPresenter<ImageFeedOn
                 }
                 getViewState().hideLoading();
                 break;
-            case ERROR:
+            case ERROR: //TODO check
                 getViewState().showMessage(R.string.download_image_failed, null);
                 break;
         }
@@ -100,7 +103,7 @@ public class ImageFeedOnlinePresenter extends BaseImageFeedPresenter<ImageFeedOn
     }
 
     protected void onSaveImageClicked() {
-        mDatabase.saveImage(mDatabase.getImages().get(mItemPositionLongClicked));
+        mDatabase.saveImage(mCloudDrive.getImages().get(mItemPositionLongClicked));
     }
 
     @Override
@@ -111,5 +114,10 @@ public class ImageFeedOnlinePresenter extends BaseImageFeedPresenter<ImageFeedOn
     @Override
     protected void onImageClick(int position) {
         super.onImageClick(position);
+    }
+
+    @Override
+    protected void onConnectivityChanged(boolean availableNow) {
+        if (!availableNow) getViewState().showMessage(R.string.error_connection, null);
     }
 }

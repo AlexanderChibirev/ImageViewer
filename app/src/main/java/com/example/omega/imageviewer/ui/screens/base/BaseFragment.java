@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.models.Text;
+import com.example.omega.imageviewer.tools.NetworkChecker;
 import com.example.omega.imageviewer.ui.dialogs.attention.AttentionDialog;
 import com.example.omega.imageviewer.ui.dialogs.attention.AttentionDialogDelegate;
 import com.example.omega.imageviewer.ui.dialogs.attention.AttentionDialogDelegateImpl;
@@ -28,13 +29,14 @@ import butterknife.Unbinder;
  * Created by Alexander Chibirev on 4/29/2018.
  */
 
-public abstract class BaseFragment extends MvpAppCompatFragment implements BaseView {
+public abstract class BaseFragment extends MvpAppCompatFragment implements BaseView, NetworkChecker.OnConnectivityChangedListener {
 
     @LayoutRes
     protected abstract int getLayoutRes();
 
     private Unbinder mUnbinder;
     protected AttentionDialogDelegate mAttentionDialog;
+    protected NetworkChecker mNetworkChecker;
 
     @Nullable
     @Override
@@ -48,6 +50,7 @@ public abstract class BaseFragment extends MvpAppCompatFragment implements BaseV
         super.onViewCreated(view, savedInstanceState);
         mUnbinder = ButterKnife.bind(this, view);
         mAttentionDialog = new AttentionDialogDelegateImpl(getContext());
+        mNetworkChecker = new NetworkChecker(getContext());
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (toolbar != null) {
@@ -58,6 +61,18 @@ public abstract class BaseFragment extends MvpAppCompatFragment implements BaseV
             }
             toolbar.setNavigationOnClickListener(v -> onHomePressed());
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mNetworkChecker.registerListener(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mNetworkChecker.unregisterListener(this);
     }
 
     @Override
@@ -98,4 +113,8 @@ public abstract class BaseFragment extends MvpAppCompatFragment implements BaseV
     public void showMessage(@StringRes int message, AttentionDialog.OnOkClickListener onOkClickListener) {
         mAttentionDialog.showAttentionDialog(message, onOkClickListener);
     }
+
+    @Override
+    public abstract void onConnectivityChanged(boolean availableNow);
+
 }

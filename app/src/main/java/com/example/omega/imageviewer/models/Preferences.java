@@ -40,4 +40,5 @@ public class Preferences {
     public boolean isFirstRun() {
         return mPreferences.getBoolean(KEY_IS_FIRST_RUN, true);
     }
+
 }

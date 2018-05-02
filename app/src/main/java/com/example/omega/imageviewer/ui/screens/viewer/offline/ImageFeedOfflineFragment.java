@@ -69,4 +69,9 @@ public class ImageFeedOfflineFragment extends BaseImageFeedFragment implements I
     public void onDeleteClicked() {
         mImageFeedOfflinePresenter.onDeleteClicked();
     }
+
+    @Override
+    public void onConnectivityChanged(boolean availableNow) {
+        mImageFeedOfflinePresenter.onConnectivityChanged(availableNow);
+    }
 }

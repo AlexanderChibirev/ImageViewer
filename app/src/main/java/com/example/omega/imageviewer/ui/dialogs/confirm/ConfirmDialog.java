@@ -104,4 +104,5 @@ public class ConfirmDialog extends BaseDialog {
     public interface OnCancelButtonListener {
         void onCancelButtonPressed();
     }
+
 }

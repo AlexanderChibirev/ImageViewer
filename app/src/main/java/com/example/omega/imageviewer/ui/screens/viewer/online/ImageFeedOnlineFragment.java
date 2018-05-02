@@ -89,4 +89,8 @@ public class ImageFeedOnlineFragment extends BaseImageFeedFragment implements Im
         mImageFeedOnlinePresenter.onRefresh();
     }
 
+    @Override
+    public void onConnectivityChanged(boolean availableNow) {
+        mImageFeedOnlinePresenter.onConnectivityChanged(availableNow);
+    }
 }

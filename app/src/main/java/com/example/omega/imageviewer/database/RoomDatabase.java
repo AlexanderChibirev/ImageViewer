@@ -3,7 +3,6 @@ package com.example.omega.imageviewer.database;
 import android.support.annotation.NonNull;
 
 import com.example.omega.imageviewer.models.Image;
-import com.example.omega.imageviewer.models.ImageDao;
 
 import java.util.List;
 

@@ -83,4 +83,5 @@ public class ImageFeedAdapter extends BaseRecyclerImageAdapter<BaseRecyclerImage
 
         void onImageLongClick(int position);
     }
+
 }

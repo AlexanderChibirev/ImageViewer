@@ -12,6 +12,7 @@ import com.example.omega.imageviewer.ui.screens.base.BasePresenter;
 
 @InjectViewState
 public class MainPresenter extends BasePresenter<MainView> {
+
     private final UserManager mUserManager;
 
     public MainPresenter() {
@@ -31,4 +32,5 @@ public class MainPresenter extends BasePresenter<MainView> {
         mUserManager.logout();
         getViewState().showSplashScreen();
     }
+
 }

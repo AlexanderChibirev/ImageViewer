@@ -10,5 +10,7 @@ import com.example.omega.imageviewer.ui.dialogs.base.BaseDialogInterface;
  */
 
 public interface AttentionDialogDelegate extends BaseDialogInterface {
+
     void showAttentionDialog(@StringRes int message, @Nullable AttentionDialog.OnOkClickListener listener);
+
 }

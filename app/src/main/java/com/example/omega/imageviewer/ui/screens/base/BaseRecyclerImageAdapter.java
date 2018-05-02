@@ -82,4 +82,5 @@ public abstract class BaseRecyclerImageAdapter<VH extends BaseRecyclerImageAdapt
                     images.get(position), !isOnlineMode);
         }
     }
+
 }

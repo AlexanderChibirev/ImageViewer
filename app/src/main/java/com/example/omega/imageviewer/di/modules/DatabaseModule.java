@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.example.omega.imageviewer.database.Database;
 import com.example.omega.imageviewer.database.RoomDatabase;
-import com.example.omega.imageviewer.models.ImageDao;
+import com.example.omega.imageviewer.database.ImageDao;
 
 import javax.inject.Singleton;
 

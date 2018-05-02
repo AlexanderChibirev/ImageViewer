@@ -125,4 +125,5 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
     public void hideLoading() {
         //nothing
     }
+
 }

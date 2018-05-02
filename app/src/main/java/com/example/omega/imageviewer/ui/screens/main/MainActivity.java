@@ -114,4 +114,5 @@ public class MainActivity extends BaseActivity implements MainView {
         startActivity(SplashActivity.createIntent(this));
         finish();
     }
+
 }

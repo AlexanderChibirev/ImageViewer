@@ -52,5 +52,6 @@ public class ConfirmDialogDelegateImpl implements ConfirmDialogDelegate {
             mConfirmDialog.dismiss();
         }
     }
+
 }
 

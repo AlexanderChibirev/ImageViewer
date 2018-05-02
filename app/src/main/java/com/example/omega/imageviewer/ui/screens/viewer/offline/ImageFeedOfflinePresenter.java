@@ -44,4 +44,9 @@ public class ImageFeedOfflinePresenter extends BaseImageFeedPresenter<ImageFeedO
     protected void onFullModeImageClicked() {
         super.onFullModeImageClicked();
     }
+
+    @Override
+    protected void onConnectivityChanged(boolean availableNow) {
+        //TODO added logic
+    }
 }

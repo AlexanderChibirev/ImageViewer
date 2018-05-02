@@ -4,13 +4,13 @@ import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.app.ImageSliderApp;
 import com.example.omega.imageviewer.models.Preferences;
 import com.example.omega.imageviewer.ui.screens.base.BasePresenter;
-import com.example.omega.imageviewer.ui.screens.viewer.base.BaseImageFeedView;
 
 /**
  * Created by Alexander Chibirev on 4/15/2018.
  */
 
 public abstract class BaseImageFeedPresenter<V extends BaseImageFeedView> extends BasePresenter<V> {
+
     protected static final int LIMIT_IMAGES_TO_UPLOAD = 50;
 
     protected int mItemPositionLongClicked;

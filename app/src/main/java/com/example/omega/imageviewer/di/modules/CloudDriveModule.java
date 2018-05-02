@@ -21,4 +21,5 @@ public class CloudDriveModule {
     public CloudDrive provideCloudDrive(CloudDriverApi cloudDriverApi) {
         return new YandexCloudDrive(cloudDriverApi);
     }
+
 }

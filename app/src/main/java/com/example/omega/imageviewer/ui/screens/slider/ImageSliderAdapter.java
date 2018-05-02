@@ -62,4 +62,5 @@ public class ImageSliderAdapter extends BaseRecyclerImageAdapter<BaseRecyclerIma
             //nothing or added logic deleted and save maybe... or no... i don't know
         }
     }
+
 }

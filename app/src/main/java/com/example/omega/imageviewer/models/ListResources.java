@@ -28,4 +28,5 @@ public class ListResources<T> implements Serializable {
     private interface Field {
         String RESOURCES = "items";
     }
+
 }

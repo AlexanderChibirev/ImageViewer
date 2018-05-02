@@ -8,6 +8,7 @@ import android.support.transition.Transition;
  */
 
 public abstract class DefaultTransitionListener implements Transition.TransitionListener {
+
     @Override
     public void onTransitionStart(@NonNull Transition transition) {
         //nothing
@@ -32,5 +33,6 @@ public abstract class DefaultTransitionListener implements Transition.Transition
     public void onTransitionResume(@NonNull Transition transition) {
         //nothing
     }
+
 }
 

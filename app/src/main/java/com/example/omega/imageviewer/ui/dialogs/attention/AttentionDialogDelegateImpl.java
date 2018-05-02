@@ -43,4 +43,5 @@ public class AttentionDialogDelegateImpl implements AttentionDialogDelegate {
             mAttentionDialog.dismiss();
         }
     }
+
 }

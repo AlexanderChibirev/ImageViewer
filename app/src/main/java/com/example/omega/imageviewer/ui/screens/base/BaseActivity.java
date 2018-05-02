@@ -145,4 +145,5 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements
     public void showMessage(@StringRes int message, AttentionDialog.OnOkClickListener onOkClickListener) {
         mAttentionDialog.showAttentionDialog(message, onOkClickListener);
     }
+
 }

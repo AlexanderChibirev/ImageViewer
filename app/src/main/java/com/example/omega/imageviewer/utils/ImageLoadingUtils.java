@@ -24,6 +24,7 @@ import java.io.IOException;
  */
 
 public class ImageLoadingUtils {
+
     private static final String IMAGE_DIR_NAME = "image_viewer.image_dir";
     @DrawableRes
     private static final int PLACEHOLDER = R.drawable.placeholder;
@@ -88,7 +89,7 @@ public class ImageLoadingUtils {
                     FileOutputStream fos = null;
                     try {
                         fos = new FileOutputStream(myImageFile);
-                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);//TODO deleted magic number and compare PNG with web
                     } catch (IOException e) {
                         e.printStackTrace();
                     } finally {
@@ -112,4 +113,5 @@ public class ImageLoadingUtils {
             }
         };
     }
+
 }

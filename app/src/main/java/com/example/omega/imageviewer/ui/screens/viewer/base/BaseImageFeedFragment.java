@@ -97,4 +97,5 @@ public abstract class BaseImageFeedFragment extends ScreenMenuBinderFragment imp
     public void deletedImage(int itemPositionDeleted) {
         mImageFeedAdapter.deleteItem(itemPositionDeleted);
     }
+
 }

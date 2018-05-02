@@ -16,4 +16,5 @@ public interface MainView extends BaseView {
     void showOfflinePage();
 
     void showSplashScreen();
+
 }

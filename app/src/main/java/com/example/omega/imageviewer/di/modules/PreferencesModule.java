@@ -21,4 +21,5 @@ public class PreferencesModule {
     public Preferences providePreferences(Context context) {
         return new Preferences(context);
     }
+
 }

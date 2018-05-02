@@ -1,7 +1,9 @@
-package com.example.omega.imageviewer.models;
+package com.example.omega.imageviewer.database;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Query;
+
+import com.example.omega.imageviewer.models.Image;
 
 import java.util.List;
 

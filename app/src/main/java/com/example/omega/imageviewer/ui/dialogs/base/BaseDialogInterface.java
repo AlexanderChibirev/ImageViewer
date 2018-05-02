@@ -5,6 +5,9 @@ package com.example.omega.imageviewer.ui.dialogs.base;
  */
 
 public interface BaseDialogInterface {
+
     void onDestroy();
+
     void hideDialog();
+
 }
