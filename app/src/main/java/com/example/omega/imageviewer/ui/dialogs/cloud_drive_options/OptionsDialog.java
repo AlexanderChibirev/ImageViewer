@@ -33,7 +33,7 @@ public class OptionsDialog extends BaseDialog {
 
     @Override
     protected int getContentView() {
-        return R.layout.dialog_cloud_drive_options;
+        return R.layout.dialog_options;
     }
 
     public void setOnClickListener(OnClickListener onClickListener) {

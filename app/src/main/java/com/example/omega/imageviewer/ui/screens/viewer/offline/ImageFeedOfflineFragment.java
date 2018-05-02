@@ -9,7 +9,6 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.ui.screens.viewer.base.BaseImageFeedFragment;
 import com.example.omega.imageviewer.ui.screens.viewer.base.ImageFeedAdapter;
-import com.example.omega.imageviewer.ui.screens.viewer.base.ImageFeedOfflineView;
 
 /**
  * Created by Alexander Chibirev on 5/2/2018.
@@ -49,5 +48,25 @@ public class ImageFeedOfflineFragment extends BaseImageFeedFragment implements I
     @Override
     public void onRefresh() {
         mImageFeedOfflinePresenter.onRefresh();
+    }
+
+    @Override
+    public void onImageClick(int position) {
+        mImageFeedOfflinePresenter.onImageClick(position);
+    }
+
+    @Override
+    public void onImageLongClick(int position) {
+        mImageFeedOfflinePresenter.onImageLongClick(position);
+    }
+
+    @Override
+    public void onFullModeImageClicked() {
+        mImageFeedOfflinePresenter.onFullModeImageClicked();
+    }
+
+    @Override
+    public void onDeleteClicked() {
+        mImageFeedOfflinePresenter.onDeleteClicked();
     }
 }

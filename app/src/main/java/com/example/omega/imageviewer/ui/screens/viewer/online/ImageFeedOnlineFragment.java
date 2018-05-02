@@ -10,7 +10,6 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.ui.screens.viewer.base.BaseImageFeedFragment;
 import com.example.omega.imageviewer.ui.screens.viewer.base.ImageFeedAdapter;
-import com.example.omega.imageviewer.ui.screens.viewer.base.ImageFeedOnlineView;
 
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
 
@@ -77,17 +76,12 @@ public class ImageFeedOnlineFragment extends BaseImageFeedFragment implements Im
 
     @Override
     public void onSaveImageClicked() {
-        //TODO added logic
+        mImageFeedOnlinePresenter.onSaveImageClicked();
     }
 
     @Override
     public void onDeleteClicked() {
         mImageFeedOnlinePresenter.onDeleteClicked();
-    }
-
-    @Override
-    public void deletedImage(int itemPositionDeleted) {
-        mImageFeedAdapter.deleteItem(itemPositionDeleted);
     }
 
     @Override

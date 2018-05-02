@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Image Feed</string>
+    <string name="app_name">Image Viewer</string>
     <string name="error_connection">It seems that the internet connection has been lost. Please try again.</string>
     <string name="error_unknown">Unknown error</string>
     <string name="label_image_slider">Image Slider</string>

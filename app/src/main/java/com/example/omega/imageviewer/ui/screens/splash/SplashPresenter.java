@@ -73,6 +73,7 @@ public class SplashPresenter extends BasePresenter<SplashView> {
     }
 
     private void onExitPressed() {
+        //TODO added transfer on offline mode remove finishScreen()
         getViewState().finishScreen();
     }
 

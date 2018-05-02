@@ -30,12 +30,12 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
     private static final int DEFAULT_VALUE = -1;
 
     @InjectPresenter
-    ImageSliderFeedPresenter mImageSliderPresenter;
+    ImageSliderPresenter mImageSliderPresenter;
 
     @BindView(R.id.recyclerview)
     OmegaPagerRecyclerView mRecyclerView;
 
-    @Nullable  //Nullable - для любопытных разработчиков
+    @Nullable
     private ImageSliderAdapter mImageSliderAdapter;
 
     public static Intent createIntent(Context context, int position, boolean isOnlineMode) {
@@ -46,11 +46,11 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
     }
 
     @ProvidePresenter
-    ImageSliderFeedPresenter provideImageSliderPresenter() {
+    ImageSliderPresenter provideImageSliderPresenter() {
         Intent intent = getIntent();
         int position = intent.getIntExtra(EXTRA_IMAGE_POSITION, DEFAULT_VALUE);
         boolean isOnlineMode = intent.getBooleanExtra(EXTRA_IS_ONLINE_MODE, false);
-        return new ImageSliderFeedPresenter(position, isOnlineMode);
+        return new ImageSliderPresenter(position, isOnlineMode);
     }
 
     @Override

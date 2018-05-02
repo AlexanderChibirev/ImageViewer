@@ -26,8 +26,8 @@ public class OptionsDialogDelegateImpl implements OptionsDialogDelegate {
     @Override
     public void showOptionsDialog(OptionsDialog.OnClickListener onClickListener) {
         if (mOptionsDialog != null && mOptionsDialog.isShowing()) return;
-
-        mOptionsDialog = new OptionsDialog(mContext);
+        //TODO скрыть кнопку сохранение картинки, если это режим офлайн
+        mOptionsDialog = new OptionsDialog(mContext/* добавить режим офлайн онлайн со скрытием кнопки сохранения*/);
         mOptionsDialog.setOnClickListener(onClickListener);
         mOptionsDialog.show();
     }

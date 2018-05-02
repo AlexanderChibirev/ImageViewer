@@ -13,6 +13,7 @@ import com.example.omega.imageviewer.ui.dialogs.cloud_drive_options.OptionsDialo
 import com.example.omega.imageviewer.ui.dialogs.cloud_drive_options.OptionsDialogDelegateImpl;
 import com.example.omega.imageviewer.ui.screens.main.ScreenMenuBinderFragment;
 import com.example.omega.imageviewer.ui.screens.slider.ImageSliderActivity;
+import com.example.omega.imageviewer.ui.screens.viewer.online.ImageFeedOnlineView;
 import com.omega_r.libs.omegarecyclerview.OmegaRecyclerView;
 
 import java.util.List;
@@ -22,6 +23,7 @@ import butterknife.BindView;
 /**
  * Created by Alexander Chibirev on 5/2/2018.
  */
+
 public abstract class BaseImageFeedFragment extends ScreenMenuBinderFragment implements
         ImageFeedOnlineView,
         ImageFeedAdapter.OnImageClickListener,
@@ -81,31 +83,18 @@ public abstract class BaseImageFeedFragment extends ScreenMenuBinderFragment imp
     }
 
     @Override
-    public void onImageClick(int position) {
-        //noting
-    }
-
-    @Override
-    public void onImageLongClick(int position) {
-        //noting
-    }
-    @Override
-    public void onFullModeImageClicked() {
-        //noting
-    }
+    public abstract void onFullModeImageClicked();
 
     @Override
     public void onSaveImageClicked() {
-        //noting
+        //nothing
     }
 
     @Override
-    public void onDeleteClicked() {
-        //noting
-    }
+    public abstract void onDeleteClicked();
 
     @Override
     public void deletedImage(int itemPositionDeleted) {
-        //noting
+        mImageFeedAdapter.deleteItem(itemPositionDeleted);
     }
 }

@@ -1,5 +1,8 @@
 package com.example.omega.imageviewer.models;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -9,7 +12,11 @@ import java.io.Serializable;
  * Created by Alexander Chibirev on 4/16/2018.
  */
 
+@Entity(tableName = "image")
 public class Image implements Serializable {
+
+    @PrimaryKey(autoGenerate = true)
+    private int mId;
 
     @Expose
     @SerializedName(Field.NAME)
@@ -51,6 +58,14 @@ public class Image implements Serializable {
         return mPath;
     }
 
+    public int getId() {
+        return mId;
+    }
+
+    public void setId(int id) {
+        mId = id;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Image) {
@@ -59,6 +74,7 @@ public class Image implements Serializable {
         }
         return false;
     }
+
 
     private interface Field {
         String NAME = "name";

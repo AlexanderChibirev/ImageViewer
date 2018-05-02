@@ -24,7 +24,7 @@ import butterknife.OnClick;
 public class MainActivity extends BaseActivity implements MainView {
 
     private final ImageFeedOnlineFragment mImageFeedOnlineFragment = ImageFeedOnlineFragment.newInstance();
-    private final ImageFeedOfflineFragment mImageViewerOfflineFragment = ImageFeedOfflineFragment.newInstance();
+    private final ImageFeedOfflineFragment mImageFeedOfflineFragment = ImageFeedOfflineFragment.newInstance();
 
     @InjectPresenter
     MainPresenter mMainPresenter;
@@ -106,7 +106,7 @@ public class MainActivity extends BaseActivity implements MainView {
 
     @Override
     public void showOfflinePage() {
-        showPage(mImageViewerOfflineFragment);
+        showPage(mImageFeedOfflineFragment);
     }
 
     @Override

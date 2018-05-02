@@ -10,7 +10,7 @@ import com.example.omega.imageviewer.ui.screens.viewer.base.BaseImageFeedView;
  * Created by Alexander Chibirev on 4/15/2018.
  */
 
-public class BaseImageFeedPresenter<V extends BaseImageFeedView> extends BasePresenter<V> {
+public abstract class BaseImageFeedPresenter<V extends BaseImageFeedView> extends BasePresenter<V> {
     protected static final int LIMIT_IMAGES_TO_UPLOAD = 50;
 
     protected int mItemPositionLongClicked;
@@ -23,12 +23,22 @@ public class BaseImageFeedPresenter<V extends BaseImageFeedView> extends BasePre
         }
     }
 
+    protected abstract void onDeleteClicked();
+
     protected void onRefresh() {
         //TODO added logic
     }
 
     protected void onImageLongClick(int position) {
         mItemPositionLongClicked = position;
+        getViewState().showOptionsScreen();
     }
 
+    protected void onImageClick(int position) {
+        getViewState().showImageSliderScreen(position, true);
+    }
+
+    protected void onFullModeImageClicked() {
+        getViewState().showImageSliderScreen(mItemPositionLongClicked, true);
+    }
 }

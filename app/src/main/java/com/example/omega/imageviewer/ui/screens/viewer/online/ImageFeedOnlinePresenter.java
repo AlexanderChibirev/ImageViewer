@@ -7,9 +7,9 @@ import com.arellomobile.mvp.InjectViewState;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.app.ImageSliderApp;
 import com.example.omega.imageviewer.cloud_drive.CloudDrive;
+import com.example.omega.imageviewer.database.Database;
 import com.example.omega.imageviewer.models.Text;
 import com.example.omega.imageviewer.ui.screens.viewer.base.BaseImageFeedPresenter;
-import com.example.omega.imageviewer.ui.screens.viewer.base.ImageFeedOnlineView;
 
 /**
  * Created by Alexander Chibirev on 4/15/2018.
@@ -20,9 +20,13 @@ public class ImageFeedOnlinePresenter extends BaseImageFeedPresenter<ImageFeedOn
 
     @NonNull
     private CloudDrive mCloudDrive;
+    @NonNull
+    private Database mDatabase;
+
 
     public ImageFeedOnlinePresenter() {
         mCloudDrive = ImageSliderApp.getAppComponent().getCloudDrive();
+        mDatabase = ImageSliderApp.getAppComponent().getDatabase();
         mCloudDrive.addCallback(this);
     }
 
@@ -81,10 +85,10 @@ public class ImageFeedOnlinePresenter extends BaseImageFeedPresenter<ImageFeedOn
     @Override
     public void onImageLongClick(int position) {
         super.onImageLongClick(position);
-        getViewState().showOptionsScreen();
     }
 
-    protected void onDeleteClicked() {
+    @Override
+    public void onDeleteClicked() {
         mCloudDrive.deleteImage(mItemPositionLongClicked);
     }
 
@@ -95,16 +99,17 @@ public class ImageFeedOnlinePresenter extends BaseImageFeedPresenter<ImageFeedOn
                 0);
     }
 
-    protected void onFullModeImageClicked() {
-        getViewState().showImageSliderScreen(mItemPositionLongClicked, true);
-    }
-
-
     protected void onSaveImageClicked() {
-        //TODO added logic
+        mDatabase.saveImage(mDatabase.getImages().get(mItemPositionLongClicked));
     }
 
+    @Override
+    protected void onFullModeImageClicked() {
+        super.onFullModeImageClicked();
+    }
+
+    @Override
     protected void onImageClick(int position) {
-        getViewState().showImageSliderScreen(position, true);
+        super.onImageClick(position);
     }
 }
