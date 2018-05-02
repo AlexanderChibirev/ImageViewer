@@ -1,6 +1,5 @@
 package com.example.omega.imageviewer.ui.screens.base;
 
-import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -26,6 +25,11 @@ public abstract class BaseRecyclerImageAdapter<VH extends BaseRecyclerImageAdapt
 
     @NonNull
     protected List<Image> mImages = new ArrayList<>();
+    protected boolean mIsOnlineMode;
+
+    public BaseRecyclerImageAdapter(boolean isOnlineMode) {
+        mIsOnlineMode = isOnlineMode;
+    }
 
     protected void update(List<Image> images) {
         mImages = images;
@@ -72,12 +76,10 @@ public abstract class BaseRecyclerImageAdapter<VH extends BaseRecyclerImageAdapt
         }
 
         public void updateImageView(@NonNull ImageView imageView, @NonNull List<Image> images,
-                                    @DrawableRes int placeholder, @DrawableRes int errorPlaceholder,
-                                    int position) {
-            ImageLoadingUtils.loadImageFromUrl(
+                                    int position, boolean isOnlineMode) {
+            ImageLoadingUtils.loadImage(
                     imageView,
-                    images.get(position).getPublicUrl(),
-                    placeholder, errorPlaceholder);
+                    images.get(position), !isOnlineMode);
         }
     }
 }

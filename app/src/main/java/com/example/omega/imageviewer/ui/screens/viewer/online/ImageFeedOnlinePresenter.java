@@ -1,52 +1,44 @@
-package com.example.omega.imageviewer.ui.screens.base;
+package com.example.omega.imageviewer.ui.screens.viewer.online;
+
 
 import android.support.annotation.NonNull;
 
+import com.arellomobile.mvp.InjectViewState;
 import com.example.omega.imageviewer.R;
+import com.example.omega.imageviewer.app.ImageSliderApp;
 import com.example.omega.imageviewer.cloud_drive.CloudDrive;
 import com.example.omega.imageviewer.models.Text;
+import com.example.omega.imageviewer.ui.screens.viewer.base.BaseImageFeedPresenter;
+import com.example.omega.imageviewer.ui.screens.viewer.base.ImageFeedOnlineView;
 
 /**
  * Created by Alexander Chibirev on 4/15/2018.
  */
 
-public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V>  //TODO changed "if else" on pattern strategy "base interface two classes"
-        implements CloudDrive.Callback {
-
-    private static final int LIMIT_IMAGES_TO_UPLOAD = 50;
-    protected final boolean mIsOnlineMode;
+@InjectViewState
+public class ImageFeedOnlinePresenter extends BaseImageFeedPresenter<ImageFeedOnlineView> implements CloudDrive.Callback {
 
     @NonNull
-    protected CloudDrive mCloudDrive;
-    protected int mItemPositionLongClicked;
+    private CloudDrive mCloudDrive;
 
-    public BaseImagePresenter(@NonNull CloudDrive cloudDrive, boolean isOnlineMode) {
-        mIsOnlineMode = isOnlineMode;
-        mCloudDrive = cloudDrive;
+    public ImageFeedOnlinePresenter() {
+        mCloudDrive = ImageSliderApp.getAppComponent().getCloudDrive();
         mCloudDrive.addCallback(this);
     }
 
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
-        if (mIsOnlineMode) {
-            int size = mCloudDrive.getImages().size();
-            if (size >= LIMIT_IMAGES_TO_UPLOAD) {
-                requestImagesFromCloudDrive(LIMIT_IMAGES_TO_UPLOAD, size);
-            } else {
-                getViewState().updateImages(mCloudDrive.getImages());
-            }
+        int size = mCloudDrive.getImages().size();
+        if (size >= LIMIT_IMAGES_TO_UPLOAD) {
+            requestImagesFromCloudDrive(LIMIT_IMAGES_TO_UPLOAD, size);
         } else {
-            //TODO added logic loading from data base
+            getViewState().updateImages(mCloudDrive.getImages());
         }
     }
 
     private void requestImagesFromCloudDrive(final int limit, final int offSet) {
         mCloudDrive.requestImages(limit, offSet);
-    }
-
-    public void onConnectivityChanged(boolean availableNow) {
-        if (!availableNow) showToast(R.string.error_connection);//TODO changed on pop_up
     }
 
     @Override
@@ -86,25 +78,33 @@ public class BaseImagePresenter<V extends BaseImageView> extends BasePresenter<V
         mCloudDrive.removeCallback(this);
     }
 
-    protected void onSaveImageClicked() {
-        //TODO added logic save on sd
+    @Override
+    public void onImageLongClick(int position) {
+        super.onImageLongClick(position);
+        getViewState().showOptionsScreen();
     }
 
     protected void onDeleteClicked() {
-        if (mIsOnlineMode) {
-            mCloudDrive.deleteImage(mItemPositionLongClicked);
-        } else {
-            //TODO added logic delete from data base
-        }
+        mCloudDrive.deleteImage(mItemPositionLongClicked);
     }
 
     protected void onRefresh() {
-        if (mIsOnlineMode) {
-            int size = mCloudDrive.getImages().size();
-            requestImagesFromCloudDrive(size + LIMIT_IMAGES_TO_UPLOAD,
-                    0);
-        } else {
-            //TODO added logic delete from data base
-        }
+        super.onRefresh();
+        int size = mCloudDrive.getImages().size();
+        requestImagesFromCloudDrive(size + LIMIT_IMAGES_TO_UPLOAD,
+                0);
+    }
+
+    protected void onFullModeImageClicked() {
+        getViewState().showImageSliderScreen(mItemPositionLongClicked, true);
+    }
+
+
+    protected void onSaveImageClicked() {
+        //TODO added logic
+    }
+
+    protected void onImageClick(int position) {
+        getViewState().showImageSliderScreen(position, true);
     }
 }

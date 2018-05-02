@@ -1,4 +1,4 @@
-package com.example.omega.imageviewer.ui.screens.viewer;
+package com.example.omega.imageviewer.ui.screens.viewer.base;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,9 +18,14 @@ import butterknife.BindView;
  * Created by Alexander Chibirev on 4/16/2018.
  */
 
-public class ImageViewerAdapter extends BaseRecyclerImageAdapter<BaseRecyclerImageAdapter.BaseViewHolder> {
+public class ImageFeedAdapter extends BaseRecyclerImageAdapter<BaseRecyclerImageAdapter.BaseViewHolder> {
+
     @Nullable
     private OnImageClickListener mListener;
+
+    public ImageFeedAdapter(boolean isOnlineMode) {
+        super(isOnlineMode);
+    }
 
     @NonNull
     @Override
@@ -30,8 +35,7 @@ public class ImageViewerAdapter extends BaseRecyclerImageAdapter<BaseRecyclerIma
 
     @Override
     public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
-        holder.updateImageView(((ViewHolder) holder).imageView, mImages,
-                R.drawable.placeholder, R.drawable.error_placeholder, position);
+        holder.updateImageView(((ViewHolder) holder).imageView, mImages, position, mIsOnlineMode);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.example.omega.imageviewer.ui.screens.viewer;
+package com.example.omega.imageviewer.ui.screens.viewer.base;
 
 import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
@@ -9,10 +9,8 @@ import com.example.omega.imageviewer.ui.screens.base.BaseImageView;
  */
 
 @StateStrategyType(OneExecutionStateStrategy.class)
-public interface ImageViewerView extends BaseImageView {
+public interface ImageFeedOnlineView extends BaseImageFeedView {
 
-    void showImageSliderScreen(int position, boolean isOnlineMode);
-
-    void showCloudDriveOptionsScreen(); //maybe feature transfer to baseImageView
+    void showOptionsScreen(); //maybe feature transfer to baseImageView
 
 }

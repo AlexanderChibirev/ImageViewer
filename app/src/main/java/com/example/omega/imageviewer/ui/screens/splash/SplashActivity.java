@@ -55,7 +55,7 @@ public class SplashActivity extends BaseActivity implements SplashView {
     }
 
     @Override
-    public void showViewerScreen() {
+    public void showFeedScreen() {
         startActivity(MainActivity.createIntent(this));
         finishScreen();
     }

@@ -10,7 +10,8 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.ui.screens.base.BaseActivity;
 import com.example.omega.imageviewer.ui.screens.splash.SplashActivity;
-import com.example.omega.imageviewer.ui.screens.viewer.ImageViewerFragment;
+import com.example.omega.imageviewer.ui.screens.viewer.offline.ImageFeedOfflineFragment;
+import com.example.omega.imageviewer.ui.screens.viewer.online.ImageFeedOnlineFragment;
 import com.omega_r.libs.navigationmenu.ContentMenuLayout;
 
 import butterknife.BindView;
@@ -22,8 +23,8 @@ import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity implements MainView {
 
-    private final ImageViewerFragment mImageViewerOfflineFragment = ImageViewerFragment.newInstance(false);
-    private final ImageViewerFragment mImageViewerOnlineFragment = ImageViewerFragment.newInstance(true);
+    private final ImageFeedOnlineFragment mImageFeedOnlineFragment = ImageFeedOnlineFragment.newInstance();
+    private final ImageFeedOfflineFragment mImageViewerOfflineFragment = ImageFeedOfflineFragment.newInstance();
 
     @InjectPresenter
     MainPresenter mMainPresenter;
@@ -38,7 +39,7 @@ public class MainActivity extends BaseActivity implements MainView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (savedInstanceState == null) showPage(mImageViewerOnlineFragment);
+        if (savedInstanceState == null) showPage(mImageFeedOnlineFragment);
         mContainerView.setOnProgressMenuChangedListener(this::onProgressMenuChanged);
     }
 
@@ -100,7 +101,7 @@ public class MainActivity extends BaseActivity implements MainView {
 
     @Override
     public void showMainPage() {
-        showPage(mImageViewerOnlineFragment);
+        showPage(mImageFeedOnlineFragment);
     }
 
     @Override

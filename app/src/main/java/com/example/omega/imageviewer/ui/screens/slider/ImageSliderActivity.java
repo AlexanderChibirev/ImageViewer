@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -29,13 +30,13 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
     private static final int DEFAULT_VALUE = -1;
 
     @InjectPresenter
-    ImageSliderPresenter mImageSliderPresenter;
+    ImageSliderFeedPresenter mImageSliderPresenter;
 
     @BindView(R.id.recyclerview)
     OmegaPagerRecyclerView mRecyclerView;
 
-    @NonNull
-    private ImageSliderAdapter mImageSliderAdapter = new ImageSliderAdapter();
+    @Nullable  //Nullable - для любопытных разработчиков
+    private ImageSliderAdapter mImageSliderAdapter;
 
     public static Intent createIntent(Context context, int position, boolean isOnlineMode) {
         Intent intent = new Intent(context, ImageSliderActivity.class);
@@ -45,17 +46,23 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
     }
 
     @ProvidePresenter
-    ImageSliderPresenter provideImageSliderPresenter() {
+    ImageSliderFeedPresenter provideImageSliderPresenter() {
         Intent intent = getIntent();
         int position = intent.getIntExtra(EXTRA_IMAGE_POSITION, DEFAULT_VALUE);
         boolean isOnlineMode = intent.getBooleanExtra(EXTRA_IS_ONLINE_MODE, false);
-        return new ImageSliderPresenter(position, isOnlineMode);
+        return new ImageSliderFeedPresenter(position, isOnlineMode);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_slider);
+
+    }
+
+    @Override
+    public void setAdapter(boolean isOnlineMode) {
+        mImageSliderAdapter = new ImageSliderAdapter(isOnlineMode);
         mRecyclerView.setAdapter(mImageSliderAdapter);
         mRecyclerView.setViewPagerOnPageChangeListener(createSimpleOnPageChangeListener());
     }
@@ -76,7 +83,8 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
     }
 
     @Override
-    public void transformImages(final float maxScale, final float minScale) {
+    public void transformImages(final float maxScale, final float minScale, final int time) {
+        mRecyclerView.setItemTransitionTimeMillis(time);
         mRecyclerView.setItemTransformer(new ScaleTransformer.Builder()
                 .setMaxScale(maxScale)
                 .setMinScale(minScale)
@@ -95,7 +103,9 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
 
     @Override
     public void updateImages(@NonNull List<Image> images) {
-        mImageSliderAdapter.update(images);
+        if (mImageSliderAdapter != null) {
+            mImageSliderAdapter.update(images);
+        }
     }
 
     @Override
@@ -106,7 +116,9 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
 
     @Override
     public void deletedImage(int itemPositionDeleted) {
-        mImageSliderAdapter.deleteItem(itemPositionDeleted);
+        if (mImageSliderAdapter != null) {
+            mImageSliderAdapter.deleteItem(itemPositionDeleted);
+        }
     }
 
     @Override

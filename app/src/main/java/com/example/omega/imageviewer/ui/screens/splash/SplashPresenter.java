@@ -87,7 +87,7 @@ public class SplashPresenter extends BasePresenter<SplashView> {
         return new DefaultTransitionListener() {
             @Override
             public void onTransitionEnd(@NonNull Transition transition) {
-                getViewState().showViewerScreen();
+                getViewState().showFeedScreen();
             }
         };
     }

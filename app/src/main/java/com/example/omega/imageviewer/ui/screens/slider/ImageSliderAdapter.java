@@ -19,6 +19,10 @@ import butterknife.BindView;
 
 public class ImageSliderAdapter extends BaseRecyclerImageAdapter<BaseRecyclerImageAdapter.BaseViewHolder> {
 
+    public ImageSliderAdapter(boolean isOnlineMode) {
+        super(isOnlineMode);
+    }
+
     @NonNull
     @Override
     public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -27,8 +31,7 @@ public class ImageSliderAdapter extends BaseRecyclerImageAdapter<BaseRecyclerIma
 
     @Override
     public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
-        holder.updateImageView(((ViewHolder) holder).imageView, mImages,
-                R.drawable.placeholder, R.drawable.error_placeholder, position);
+        holder.updateImageView(((ViewHolder) holder).imageView, mImages, position, mIsOnlineMode);
     }
 
     @Override

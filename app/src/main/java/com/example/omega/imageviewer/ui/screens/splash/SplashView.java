@@ -21,7 +21,7 @@ public interface SplashView extends BaseView {
     void startAnimate(@NonNull Transition transition);
 
     @StateStrategyType(OneExecutionStateStrategy.class)
-    void showViewerScreen();
+    void showFeedScreen();
 
     @StateStrategyType(AddToEndSingleStrategy.class)
     void showAuthorizationMessage(@StringRes int message,
