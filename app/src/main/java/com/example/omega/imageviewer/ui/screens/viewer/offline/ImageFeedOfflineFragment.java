@@ -7,14 +7,18 @@ import android.view.View;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.omega.imageviewer.R;
+import com.example.omega.imageviewer.ui.dialogs.confirm.ConfirmDialogFragment;
 import com.example.omega.imageviewer.ui.screens.viewer.base.BaseImageFeedFragment;
 import com.example.omega.imageviewer.ui.screens.viewer.base.ImageFeedAdapter;
+import com.example.omega.imageviewer.ui.utils.DialogUtils;
 
 /**
  * Created by Alexander Chibirev on 5/2/2018.
  */
 
-public class ImageFeedOfflineFragment extends BaseImageFeedFragment implements ImageFeedOfflineView {
+public class ImageFeedOfflineFragment extends BaseImageFeedFragment implements
+        ImageFeedOfflineView,
+        ConfirmDialogFragment.ConfirmDialogListener {
 
     @InjectPresenter
     ImageFeedOfflinePresenter mImageFeedOfflinePresenter;
@@ -72,5 +76,15 @@ public class ImageFeedOfflineFragment extends BaseImageFeedFragment implements I
     @Override
     public void onConnectivityChanged(boolean availableNow) {
         mImageFeedOfflinePresenter.onConnectivityChanged(availableNow);
+    }
+
+    @Override
+    public void onOkButtonPressed() {
+        mImageFeedOfflinePresenter.onOkButtonPressed(); //TODO  added logic
+    }
+
+    @Override
+    public void onCancelButtonPressed() {
+        //nothing
     }
 }

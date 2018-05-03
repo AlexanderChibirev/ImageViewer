@@ -25,7 +25,6 @@ public class MainPresenter extends BasePresenter<MainView> {
 
     public void onMenuItemOfflineClicked() {
         getViewState().showOfflinePage();
-        getViewState().showToast(Text.from("в разработке")); //TODO deleted and change on normal logic
     }
 
     public void onMenuItemLogoutClicked() {

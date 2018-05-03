@@ -18,4 +18,5 @@ public interface Database {
 
     void deleteImage(@NonNull Image image);
 
+    Image getImageByName(@NonNull String name, @NonNull String path);
 }

@@ -36,10 +36,10 @@ public class ConfirmDialogFragment extends BaseDialogFragment {
     @OmegaExtra(Field.SET_MESSAGE)
     String mMessage;
 
-    @OmegaExtra(Field.SET_NEGATIVE_LABEL)
+    @OmegaExtra(Field.SET_POSITIVE_LABEL)
     String mOkButtonLabel;
 
-    @OmegaExtra(Field.SET_POSITIVE_LABEL)
+    @OmegaExtra(Field.SET_NEGATIVE_LABEL)
     String mCancelButtonLabel;
 
     private ConfirmDialogListener mListener;
@@ -64,19 +64,13 @@ public class ConfirmDialogFragment extends BaseDialogFragment {
     }
 
     @Override
-    public void onAttach(Context context) { //TODO refactoring
+    public void onAttach(Context context) {
         super.onAttach(context);
-        try {
+        if (context instanceof ConfirmDialogListener) {
             mListener = (ConfirmDialogListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() + " must implement ConfirmDialogListener");
         }
-        if (mListener == null) {
-            try {
-                mListener = (ConfirmDialogListener) getTargetFragment();
-            } catch (ClassCastException e) {
-                throw new ClassCastException("Caller fragment must implement ConfirmDialogListener");
-            }
+        if (getTargetFragment() instanceof ConfirmDialogListener) {
+            mListener = (ConfirmDialogListener) getTargetFragment();
         }
     }
 

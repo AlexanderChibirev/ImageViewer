@@ -34,7 +34,6 @@ public class NetworkChecker {
 
     public void registerListener(OnConnectivityChangedListener listener) {
         listeners.add(listener);
-        listener.onConnectivityChanged(isConnected());
         mContext.registerReceiver(mNetworkStateBroadcastReceiver, mIntentFilter);
     }
 

@@ -8,11 +8,10 @@ import android.view.View;
 
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.models.Image;
-import com.example.omega.imageviewer.ui.base_ui_messages.DialogUtils;
 import com.example.omega.imageviewer.ui.dialogs.cloud_drive_options.OptionsDialogFragment;
 import com.example.omega.imageviewer.ui.screens.main.ScreenMenuBinderFragment;
 import com.example.omega.imageviewer.ui.screens.slider.ImageSliderActivity;
-import com.example.omega.imageviewer.ui.screens.viewer.online.ImageFeedOnlineView;
+import com.example.omega.imageviewer.ui.utils.DialogUtils;
 import com.omega_r.libs.omegarecyclerview.OmegaRecyclerView;
 
 import java.util.List;
@@ -24,7 +23,7 @@ import butterknife.BindView;
  */
 
 public abstract class BaseImageFeedFragment extends ScreenMenuBinderFragment implements
-        ImageFeedOnlineView,
+        BaseImageFeedView,
         ImageFeedAdapter.OnImageClickListener,
         OptionsDialogFragment.OnClickListener,
         SwipeRefreshLayout.OnRefreshListener {
@@ -34,7 +33,7 @@ public abstract class BaseImageFeedFragment extends ScreenMenuBinderFragment imp
     }
 
     @BindView(R.id.recyclerview)
-    protected OmegaRecyclerView mRecyclerView; //TODo check on correct work when recycler protected
+    protected OmegaRecyclerView mRecyclerView;
 
     @BindView(R.id.swiperefreshlayout)
     protected SwipeRefreshLayout mSwipeRefreshLayout;
@@ -45,7 +44,7 @@ public abstract class BaseImageFeedFragment extends ScreenMenuBinderFragment imp
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setRetainInstance(true);//TODO testing
+        setRetainInstance(true);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mRecyclerView.setAdapter(mImageFeedAdapter);
         mImageFeedAdapter.setOnImageItemClickListener(this);
@@ -62,8 +61,8 @@ public abstract class BaseImageFeedFragment extends ScreenMenuBinderFragment imp
     }
 
     @Override
-    public void showOptionsScreen() {
-        DialogUtils.showOptionsScreen(this, getFragmentManager());
+    public void showOptionsScreen(boolean isOnlineMode) {
+        DialogUtils.showOptionsScreen(this, getFragmentManager(), isOnlineMode);
     }
 
     @Override
@@ -77,11 +76,6 @@ public abstract class BaseImageFeedFragment extends ScreenMenuBinderFragment imp
     @Override
     public void onSaveImageClicked() {
         //nothing
-    }
-
-    @Override
-    public void showConfirmScreen(int message, int negativeLabel, int positiveLabel) {
-        //TODO added logic
     }
 
     @Override

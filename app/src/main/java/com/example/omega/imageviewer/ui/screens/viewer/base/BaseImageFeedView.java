@@ -13,6 +13,6 @@ public interface BaseImageFeedView extends BaseImageView {
 
     void showImageSliderScreen(int position, boolean isOnlineMode);
 
-    void showOptionsScreen();
+    void showOptionsScreen(boolean isOnlineMode);
 
 }

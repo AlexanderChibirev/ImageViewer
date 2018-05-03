@@ -34,4 +34,9 @@ public class RoomDatabase implements Database {
     public void deleteImage(@NonNull Image image) {
         mImageDao.delete(image);
     }
+
+    @Override
+    public Image getImageByName(@NonNull String name, @NonNull String path) {
+        return mImageDao.findImageByName(name, path);
+    }
 }

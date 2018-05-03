@@ -18,9 +18,8 @@ import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.models.Text;
 import com.example.omega.imageviewer.tools.NetworkChecker;
-import com.example.omega.imageviewer.ui.base_ui_messages.DialogUtils;
+import com.example.omega.imageviewer.ui.utils.DialogUtils;
 import com.example.omega.imageviewer.ui.dialogs.attention.AttentionDialogFragment;
-import com.omega_r.libs.omegafragmentbuilder.AppOmegaFragmentBuilder;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;

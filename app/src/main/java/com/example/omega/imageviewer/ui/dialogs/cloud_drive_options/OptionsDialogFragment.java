@@ -2,14 +2,18 @@ package com.example.omega.imageviewer.ui.dialogs.cloud_drive_options;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.ui.dialogs.base.BaseDialogFragment;
 import com.omega_r.libs.omegafragmentbuilder.AppOmegaFragmentBuilder;
 
+import butterknife.BindView;
 import butterknife.OnClick;
+import omega.com.annotations.OmegaExtra;
 import omega.com.annotations.OmegaFragment;
 
 /**
@@ -18,6 +22,12 @@ import omega.com.annotations.OmegaFragment;
 
 @OmegaFragment
 public class OptionsDialogFragment extends BaseDialogFragment {
+
+    @OmegaExtra(Field.SET_MODE)
+    boolean mIsOnlineMode;
+
+    @BindView(R.id.textview_save_image)
+    TextView mSaveImageTextView;
 
     private OnClickListener mOnClickListener;
 
@@ -30,6 +40,12 @@ public class OptionsDialogFragment extends BaseDialogFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppOmegaFragmentBuilder.inject(this);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mSaveImageTextView.setVisibility(mIsOnlineMode ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -71,4 +87,7 @@ public class OptionsDialogFragment extends BaseDialogFragment {
 
     }
 
+    private interface Field {
+        String SET_MODE = "setMode";
+    }
 }

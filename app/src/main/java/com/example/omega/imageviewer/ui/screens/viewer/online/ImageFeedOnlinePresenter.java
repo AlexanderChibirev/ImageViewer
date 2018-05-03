@@ -1,9 +1,6 @@
 package com.example.omega.imageviewer.ui.screens.viewer.online;
 
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 
 import com.arellomobile.mvp.InjectViewState;
@@ -11,6 +8,7 @@ import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.app.ImageSliderApp;
 import com.example.omega.imageviewer.cloud_drive.CloudDrive;
 import com.example.omega.imageviewer.database.Database;
+import com.example.omega.imageviewer.models.Image;
 import com.example.omega.imageviewer.models.Text;
 import com.example.omega.imageviewer.ui.screens.viewer.base.BaseImageFeedPresenter;
 
@@ -36,10 +34,9 @@ public class ImageFeedOnlinePresenter extends BaseImageFeedPresenter<ImageFeedOn
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
         int size = mCloudDrive.getImages().size();
-        if (size >= LIMIT_IMAGES_TO_UPLOAD) {
+        getViewState().updateImages(mCloudDrive.getImages());
+        if (size >= LIMIT_IMAGES_TO_UPLOAD || size == 0) {
             requestImagesFromCloudDrive(LIMIT_IMAGES_TO_UPLOAD, size);
-        } else {
-            getViewState().updateImages(mCloudDrive.getImages());
         }
     }
 
@@ -52,14 +49,14 @@ public class ImageFeedOnlinePresenter extends BaseImageFeedPresenter<ImageFeedOn
         switch (requestEvent) {
             case SUCCESS:
                 getViewState().updateImages(mCloudDrive.getImages());
-                break;
-            case FINISH:
                 if (mCloudDrive.getImages().isEmpty()) {
                     getViewState().showAttentionScreen(R.string.images_empty);
                 }
+                break;
+            case FINISH:
                 getViewState().hideLoading();
                 break;
-            case ERROR: //TODO check
+            case ERROR:
                 getViewState().showAttentionScreen(R.string.download_image_failed);
                 break;
         }
@@ -85,34 +82,41 @@ public class ImageFeedOnlinePresenter extends BaseImageFeedPresenter<ImageFeedOn
     }
 
     @Override
-    public void onImageLongClick(int position) {
-        super.onImageLongClick(position);
-    }
-
-    @Override
     public void onDeleteClicked() {
         mCloudDrive.deleteImage(mItemPositionLongClicked);
     }
 
     protected void onRefresh() {
-        super.onRefresh();
         int size = mCloudDrive.getImages().size();
         requestImagesFromCloudDrive(size + LIMIT_IMAGES_TO_UPLOAD,
                 0);
     }
 
     protected void onSaveImageClicked() {
-        mDatabase.saveImage(mCloudDrive.getImages().get(mItemPositionLongClicked));
+        Image image = mCloudDrive.getImages().get(mItemPositionLongClicked);
+        Image imageDao = mDatabase.getImageByName(image.getName(), image.getPath());
+        if (imageDao == null) { //TODO transfer logic in dao
+            mDatabase.saveImage(image);
+            getViewState().saveImageOnDisk(image);
+        } else {
+            getViewState().showAttentionScreen(R.string.image_already_exists);
+        }
     }
 
     @Override
-    protected void onFullModeImageClicked() {
-        super.onFullModeImageClicked();
+    protected void onImageLongClick(int position) {
+        super.onImageLongClick(position);
+        getViewState().showOptionsScreen(true);
     }
 
     @Override
     protected void onImageClick(int position) {
-        super.onImageClick(position);
+        getViewState().showImageSliderScreen(position, true);
+    }
+
+    @Override
+    protected void onFullModeImageClicked() {
+        getViewState().showImageSliderScreen(mItemPositionLongClicked, true);
     }
 
     @Override

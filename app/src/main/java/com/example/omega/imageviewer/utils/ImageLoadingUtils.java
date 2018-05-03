@@ -89,7 +89,7 @@ public class ImageLoadingUtils {
                     FileOutputStream fos = null;
                     try {
                         fos = new FileOutputStream(myImageFile);
-                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);//TODO deleted magic number and compare PNG with web
+                        bitmap.compress(Bitmap.CompressFormat.WEBP, 100, fos);
                     } catch (IOException e) {
                         e.printStackTrace();
                     } finally {

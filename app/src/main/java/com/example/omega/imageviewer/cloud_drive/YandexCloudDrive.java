@@ -48,7 +48,7 @@ public class YandexCloudDrive extends BaseYandexCloudDrive {
     }
 
     private void updateImages(@NonNull ListResources<Image> resources) {
-        if (!resources.getResources().equals(mImages)) {
+        if (!resources.getResources().equals(mImages) || resources.getResources().isEmpty()) {
             mImages.clear();
             mImages.addAll(resources.getResources());
             onDownloadImagesEvent(RequestEvent.SUCCESS, Text.from(R.string.image_success_download));

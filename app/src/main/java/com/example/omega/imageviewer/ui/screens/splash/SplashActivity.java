@@ -1,6 +1,5 @@
 package com.example.omega.imageviewer.ui.screens.splash;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +13,7 @@ import android.support.transition.TransitionManager;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.omega.imageviewer.R;
+import com.example.omega.imageviewer.ui.dialogs.confirm.ConfirmDialogFragment;
 import com.example.omega.imageviewer.ui.screens.base.BaseActivity;
 import com.example.omega.imageviewer.ui.screens.main.MainActivity;
 
@@ -23,7 +23,9 @@ import butterknife.BindView;
  * Created by Alexander Chibirev on 4/20/2018.
  */
 
-public class SplashActivity extends BaseActivity implements SplashView {
+public class SplashActivity extends BaseActivity implements
+        SplashView,
+        ConfirmDialogFragment.ConfirmDialogListener {
 
     private static final int REQUEST_CODE_AUTH = 101;
 
@@ -74,13 +76,11 @@ public class SplashActivity extends BaseActivity implements SplashView {
 
     @Override
     public void onOkButtonPressed() {
-        super.onOkButtonPressed();
         mSplashPresenter.onOkPressed();
     }
 
     @Override
     public void onCancelButtonPressed() {
-        super.onCancelButtonPressed();
         mSplashPresenter.onCancelPressed();
     }
 

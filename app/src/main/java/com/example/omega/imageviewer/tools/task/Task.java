@@ -36,11 +36,6 @@ public class Task<O> {
         return this;
     }
 
-    public Task<O> changeResult(PostHandler<O> postHandler) {
-        mPostHandler = postHandler;
-        return this;
-    }
-
     public void onFinish(OnFinishRequestListener listener) {
         mFinishRequestListener = listener;
     }

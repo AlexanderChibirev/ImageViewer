@@ -73,7 +73,7 @@
             android:id="@+id/button_cancel"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dialog_options_height"
-            android:layout_marginTop="@dimen/dialog_options_margin"
+            android:layout_margin="@dimen/dialog_options_margin"
             android:gravity="center"
             android:text="@string/cancel"
             android:textColor="@color/black"

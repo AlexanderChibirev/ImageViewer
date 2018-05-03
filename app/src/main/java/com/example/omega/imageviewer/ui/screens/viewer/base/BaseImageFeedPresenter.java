@@ -25,20 +25,13 @@ public abstract class BaseImageFeedPresenter<V extends BaseImageFeedView> extend
 
     protected abstract void onDeleteClicked();
 
-    protected void onRefresh() {
-        //TODO added logic
-    }
+    protected abstract void onImageClick(int position);
+
+    protected abstract void onFullModeImageClicked();
+
+    protected abstract void onRefresh();
 
     protected void onImageLongClick(int position) {
         mItemPositionLongClicked = position;
-        getViewState().showOptionsScreen();
-    }
-
-    protected void onImageClick(int position) {
-        getViewState().showImageSliderScreen(position, true);
-    }
-
-    protected void onFullModeImageClicked() {
-        getViewState().showImageSliderScreen(mItemPositionLongClicked, true);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.omega.imageviewer.ui.base_ui_messages;
+package com.example.omega.imageviewer.ui.utils;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,13 +11,14 @@ import com.omega_r.libs.omegafragmentbuilder.AppOmegaFragmentBuilder;
 /**
  * Created by Alexander Chibirev on 5/3/2018.
  */
+
 public class DialogUtils {
 
     private static final String DIALOG_TAG = "dialog";
     private static final int REQUEST_CODE_TARGET_FRAGMENT = 101;
 
-    public static void showOptionsScreen(Fragment fragment, FragmentManager fragmentManager) {
-        OptionsDialogFragment attentionDialogFragment = createOptionsDialogFragment();
+    public static void showOptionsScreen(Fragment fragment, FragmentManager fragmentManager, boolean isOnlineMode) {
+        OptionsDialogFragment attentionDialogFragment = createOptionsDialogFragment(isOnlineMode);
         attentionDialogFragment.setTargetFragment(fragment, REQUEST_CODE_TARGET_FRAGMENT);
         attentionDialogFragment.show(fragmentManager, DIALOG_TAG);
     }
@@ -39,8 +40,8 @@ public class DialogUtils {
         fragment.show(supportFragmentManager, DIALOG_TAG);
     }
 
-    private static OptionsDialogFragment createOptionsDialogFragment() {
-        return AppOmegaFragmentBuilder.optionsDialogFragment().createFragment();
+    private static OptionsDialogFragment createOptionsDialogFragment(boolean isOnlineMode) {
+        return AppOmegaFragmentBuilder.optionsDialogFragment().setMode(isOnlineMode).createFragment();
     }
 
     private static ConfirmDialogFragment createConfirmDialogFragment(String message,

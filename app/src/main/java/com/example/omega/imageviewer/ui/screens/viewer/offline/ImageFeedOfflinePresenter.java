@@ -1,6 +1,7 @@
 package com.example.omega.imageviewer.ui.screens.viewer.offline;
 
 import com.arellomobile.mvp.InjectViewState;
+import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.app.ImageSliderApp;
 import com.example.omega.imageviewer.database.Database;
 import com.example.omega.imageviewer.ui.screens.viewer.base.BaseImageFeedPresenter;
@@ -16,7 +17,11 @@ public class ImageFeedOfflinePresenter extends BaseImageFeedPresenter<ImageFeedO
 
     public ImageFeedOfflinePresenter() {
         mDatabase = ImageSliderApp.getAppComponent().getDatabase();
-        getViewState().updateImages(mDatabase.getImages());
+        if (mDatabase.getImages().isEmpty()) {
+            getViewState().showConfirmScreen(R.string.go_to_online_mode, R.string.cancel, R.string.yes);
+        } else {
+            getViewState().updateImages(mDatabase.getImages());
+        }
     }
 
     @Override
@@ -27,27 +32,31 @@ public class ImageFeedOfflinePresenter extends BaseImageFeedPresenter<ImageFeedO
 
     @Override
     protected void onRefresh() {
-        super.onRefresh();
         getViewState().hideLoading();
-    }
-
-    @Override
-    protected void onImageClick(int position) {
-        super.onImageClick(position);
     }
 
     @Override
     protected void onImageLongClick(int position) {
         super.onImageLongClick(position);
+        getViewState().showOptionsScreen(false);
+    }
+
+    @Override
+    protected void onImageClick(int position) {
+        getViewState().showImageSliderScreen(position, false);
     }
 
     @Override
     protected void onFullModeImageClicked() {
-        super.onFullModeImageClicked();
+        getViewState().showImageSliderScreen(mItemPositionLongClicked, false);
     }
 
     @Override
     protected void onConnectivityChanged(boolean availableNow) {
         //TODO added logic
+    }
+
+    protected void onOkButtonPressed() {
+
     }
 }

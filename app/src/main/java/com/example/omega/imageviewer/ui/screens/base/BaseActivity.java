@@ -16,8 +16,8 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.models.Text;
 import com.example.omega.imageviewer.tools.NetworkChecker;
-import com.example.omega.imageviewer.ui.base_ui_messages.DialogUtils;
 import com.example.omega.imageviewer.ui.dialogs.confirm.ConfirmDialogFragment;
+import com.example.omega.imageviewer.ui.utils.DialogUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,8 +28,7 @@ import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends MvpAppCompatActivity implements
         BaseView,
-        NetworkChecker.OnConnectivityChangedListener,
-        ConfirmDialogFragment.ConfirmDialogListener {
+        NetworkChecker.OnConnectivityChangedListener{
 
     @Nullable
     @BindView(R.id.toolbar)
@@ -125,16 +124,6 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements
 
     @Override
     public void onConnectivityChanged(boolean availableNow) {
-        //TODO go to offline mode if !availableNow and you not offline mode
-    }
-
-    @Override
-    public void onOkButtonPressed() {
-        //nothing
-    }
-
-    @Override
-    public void onCancelButtonPressed() {
         //nothing
     }
 
