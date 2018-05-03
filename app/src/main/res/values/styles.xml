@@ -49,11 +49,11 @@
 
     <style name="TextViewItemOptions" parent="TextAppearance.AppCompat">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/dialog_cloud_drive_options_height</item>
-        <item name="android:paddingLeft">@dimen/dialog_cloud_drive_options_padding_left</item>
-        <item name="android:drawablePadding">@dimen/dialog_cloud_drive_options_drawable_padding</item>
+        <item name="android:layout_height">@dimen/dialog_options_height</item>
+        <item name="android:paddingLeft">@dimen/dialog_options_padding_left</item>
+        <item name="android:drawablePadding">@dimen/dialog_options_drawable_padding</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:textSize">@dimen/dialog_cloud_drive_options_text_size</item>
+        <item name="android:textSize">@dimen/dialog_options_text_size</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:background">@drawable/dialog_cloud_drive_options_drawable_selected</item>
         <item name="android:foreground">?attr/selectableItemBackground</item>

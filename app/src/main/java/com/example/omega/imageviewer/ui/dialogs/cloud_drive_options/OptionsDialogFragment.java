@@ -2,7 +2,6 @@ package com.example.omega.imageviewer.ui.dialogs.cloud_drive_options;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
 
@@ -44,7 +43,7 @@ public class OptionsDialogFragment extends BaseDialogFragment {
     }
 
     @OnClick({R.id.textview_delete_image, R.id.textview_save_image,
-            R.id.textview_full_mode_image, R.id.cardview_cancel})
+            R.id.textview_full_mode_image, R.id.button_cancel})
     protected void onOkClick(View view) {
         if (mOnClickListener != null) {
             switch (view.getId()) {
