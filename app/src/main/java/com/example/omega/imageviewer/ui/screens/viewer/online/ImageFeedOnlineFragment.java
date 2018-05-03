@@ -93,4 +93,5 @@ public class ImageFeedOnlineFragment extends BaseImageFeedFragment implements Im
     public void onConnectivityChanged(boolean availableNow) {
         mImageFeedOnlinePresenter.onConnectivityChanged(availableNow);
     }
+
 }

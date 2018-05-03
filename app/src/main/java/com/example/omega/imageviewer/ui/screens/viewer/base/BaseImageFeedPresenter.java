@@ -18,7 +18,7 @@ public abstract class BaseImageFeedPresenter<V extends BaseImageFeedView> extend
     public BaseImageFeedPresenter() {
         Preferences preferences = ImageSliderApp.getAppComponent().getPreferences();
         if (preferences.isFirstRun()) {
-            getViewState().showMessage(R.string.helper_for_online_feed, null);
+            getViewState().showAttentionScreen(R.string.helper_for_online_feed);
             preferences.setFirstRun(false);
         }
     }

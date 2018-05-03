@@ -26,7 +26,6 @@ public class ImageFeedOnlinePresenter extends BaseImageFeedPresenter<ImageFeedOn
     @NonNull
     private Database mDatabase;
 
-
     public ImageFeedOnlinePresenter() {
         mCloudDrive = ImageSliderApp.getAppComponent().getCloudDrive();
         mDatabase = ImageSliderApp.getAppComponent().getDatabase();
@@ -56,12 +55,12 @@ public class ImageFeedOnlinePresenter extends BaseImageFeedPresenter<ImageFeedOn
                 break;
             case FINISH:
                 if (mCloudDrive.getImages().isEmpty()) {
-                    getViewState().showMessage(R.string.images_empty, null);
+                    getViewState().showAttentionScreen(R.string.images_empty);
                 }
                 getViewState().hideLoading();
                 break;
             case ERROR: //TODO check
-                getViewState().showMessage(R.string.download_image_failed, null);
+                getViewState().showAttentionScreen(R.string.download_image_failed);
                 break;
         }
     }
@@ -74,7 +73,7 @@ public class ImageFeedOnlinePresenter extends BaseImageFeedPresenter<ImageFeedOn
                 getViewState().deletedImage(itemPositionDeleted);
                 break;
             case ERROR:
-                getViewState().showMessage(R.string.delete_image_failed, null);
+                getViewState().showAttentionScreen(R.string.delete_image_failed);
                 break;
         }
     }
@@ -118,6 +117,7 @@ public class ImageFeedOnlinePresenter extends BaseImageFeedPresenter<ImageFeedOn
 
     @Override
     protected void onConnectivityChanged(boolean availableNow) {
-        if (!availableNow) getViewState().showMessage(R.string.error_connection, null);
+        if (!availableNow) getViewState().showAttentionScreen(R.string.error_connection);
     }
+
 }

@@ -1,52 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="24dp"
     android:layout_marginLeft="24dp"
     android:layout_marginRight="24dp"
-    android:orientation="horizontal"
-    app:cardCornerRadius="16dp"
-    app:cardUseCompatPadding="true">
+    android:layout_marginTop="24dp"
+    android:clipToPadding="false"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="22dp"
-        android:paddingLeft="32dp"
-        android:paddingRight="32dp"
-        android:paddingTop="32dp"
-        android:clipToPadding="false">
+    <TextView
+        style="@style/DialogAttention"
+        android:layout_marginTop="@dimen/dialog_attention_margin"
+        android:text="@string/label_attention"
+        android:textColor="@color/tomato"
+        android:textSize="22sp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/label_attention"
-            android:textColor="@color/tomato"
-            android:textSize="22sp"/>
+    <TextView
+        android:id="@+id/textview_message"
+        style="@style/DialogAttention"
+        android:layout_marginTop="@dimen/dialog_attention_margin"
+        android:textColor="@color/brownish_grey"
+        android:textSize="14sp"
+        tools:text="Unknown error"/>
 
-        <TextView
-            android:id="@+id/textview_message"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:gravity="center"
-            android:textColor="@color/brownish_grey"
-            android:textSize="14sp"
-            tools:text="Unknown error"/>
+    <Button
+        android:id="@+id/button_ok"
+        style="@style/DialogAttention"
+        android:layout_marginBottom="@dimen/dialog_attention_margin"
+        android:layout_marginTop="@dimen/dialog_attention_margin_top"
+        android:text="@string/ok"
+        android:textAllCaps="true"
+        android:theme="@style/GreenButtonTheme"/>
 
-        <Button
-            android:id="@+id/button_ok"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="42dp"
-            android:theme="@style/GreenButtonTheme"
-            android:text="@string/ok"
-            android:textAllCaps="true"/>
-    </LinearLayout>
-
-</android.support.v7.widget.CardView>
+</LinearLayout>

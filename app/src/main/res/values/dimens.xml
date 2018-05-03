@@ -28,6 +28,11 @@
     <dimen name="dialog_cloud_drive_options_text_size">14sp</dimen>
     <dimen name="dialog_cloud_drive_options_margin">16dp</dimen>
 
-    <dimen name="dialog_attention_margin">10dp</dimen>
-    <dimen name="dialog_attention_padding">32dp</dimen>
+    <dimen name="dialog_attention_margin">24dp</dimen>
+    <dimen name="dialog_attention_margin_top">32dp</dimen>
+
+    <dimen name="dialog_confirm_padding">24dp</dimen>
+    <dimen name="dialog_confirm_margin">24dp</dimen>
+    <dimen name="dialog_confirm_margin_top">46dp</dimen>
+
 </resources>

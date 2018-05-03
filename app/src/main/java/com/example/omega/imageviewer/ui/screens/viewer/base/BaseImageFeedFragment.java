@@ -8,9 +8,8 @@ import android.view.View;
 
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.models.Image;
-import com.example.omega.imageviewer.ui.dialogs.cloud_drive_options.OptionsDialog;
-import com.example.omega.imageviewer.ui.dialogs.cloud_drive_options.OptionsDialogDelegate;
-import com.example.omega.imageviewer.ui.dialogs.cloud_drive_options.OptionsDialogDelegateImpl;
+import com.example.omega.imageviewer.ui.base_ui_messages.DialogUtils;
+import com.example.omega.imageviewer.ui.dialogs.cloud_drive_options.OptionsDialogFragment;
 import com.example.omega.imageviewer.ui.screens.main.ScreenMenuBinderFragment;
 import com.example.omega.imageviewer.ui.screens.slider.ImageSliderActivity;
 import com.example.omega.imageviewer.ui.screens.viewer.online.ImageFeedOnlineView;
@@ -27,7 +26,7 @@ import butterknife.BindView;
 public abstract class BaseImageFeedFragment extends ScreenMenuBinderFragment implements
         ImageFeedOnlineView,
         ImageFeedAdapter.OnImageClickListener,
-        OptionsDialog.OnClickListener,
+        OptionsDialogFragment.OnClickListener,
         SwipeRefreshLayout.OnRefreshListener {
 
     public BaseImageFeedFragment(@NonNull ImageFeedAdapter imageFeedAdapter) {
@@ -43,14 +42,10 @@ public abstract class BaseImageFeedFragment extends ScreenMenuBinderFragment imp
     @NonNull
     protected ImageFeedAdapter mImageFeedAdapter;
 
-    @NonNull
-    protected OptionsDialogDelegate mOptionsDialog;
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setRetainInstance(true);
-        mOptionsDialog = new OptionsDialogDelegateImpl(getContext());
+        setRetainInstance(true);//TODO testing
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mRecyclerView.setAdapter(mImageFeedAdapter);
         mImageFeedAdapter.setOnImageItemClickListener(this);
@@ -62,19 +57,13 @@ public abstract class BaseImageFeedFragment extends ScreenMenuBinderFragment imp
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        mOptionsDialog.onDestroy();
-    }
-
-    @Override
     public void hideLoading() {
         if (mSwipeRefreshLayout.isRefreshing()) mSwipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
     public void showOptionsScreen() {
-        mOptionsDialog.showOptionsDialog(this);
+        DialogUtils.showOptionsScreen(this, getFragmentManager());
     }
 
     @Override
@@ -88,6 +77,11 @@ public abstract class BaseImageFeedFragment extends ScreenMenuBinderFragment imp
     @Override
     public void onSaveImageClicked() {
         //nothing
+    }
+
+    @Override
+    public void showConfirmScreen(int message, int negativeLabel, int positiveLabel) {
+        //TODO added logic
     }
 
     @Override

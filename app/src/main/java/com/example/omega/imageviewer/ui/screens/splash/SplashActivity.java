@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.annotation.UiThread;
 import android.support.constraint.ConstraintLayout;
@@ -15,7 +14,6 @@ import android.support.transition.TransitionManager;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.omega.imageviewer.R;
-import com.example.omega.imageviewer.ui.dialogs.confirm.ConfirmDialog;
 import com.example.omega.imageviewer.ui.screens.base.BaseActivity;
 import com.example.omega.imageviewer.ui.screens.main.MainActivity;
 
@@ -34,10 +32,6 @@ public class SplashActivity extends BaseActivity implements SplashView {
 
     @BindView(R.id.layout_splash_start)
     ConstraintLayout mConstraintLayout;
-
-    public static Intent createIntent(Context context) {
-        return new Intent(context, SplashActivity.class);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,17 +62,26 @@ public class SplashActivity extends BaseActivity implements SplashView {
     @Override
     public void showAuthorizationMessage(@StringRes int message,
                                          @StringRes int negativeLabel,
-                                         @StringRes int positiveLabel,
-                                         ConfirmDialog.OnCancelButtonListener onNegativeListener,
-                                         @Nullable ConfirmDialog.OnOkButtonListener onPositiveListener) {
+                                         @StringRes int positiveLabel) {
         Intent intent = getIntent();
         if (intent != null && intent.getData() != null) {
             mSplashPresenter.onTokenUpdate(intent.getData());
             setIntent(null);
         } else {
-            mConfirmDialogDelegate.showConfirmDialog(message, negativeLabel,
-                    positiveLabel, onNegativeListener, onPositiveListener, false);
+            showConfirmScreen(message, negativeLabel, positiveLabel);
         }
+    }
+
+    @Override
+    public void onOkButtonPressed() {
+        super.onOkButtonPressed();
+        mSplashPresenter.onOkPressed();
+    }
+
+    @Override
+    public void onCancelButtonPressed() {
+        super.onCancelButtonPressed();
+        mSplashPresenter.onCancelPressed();
     }
 
     @Override

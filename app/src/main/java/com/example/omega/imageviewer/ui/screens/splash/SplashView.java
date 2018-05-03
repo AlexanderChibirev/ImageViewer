@@ -8,7 +8,7 @@ import android.support.transition.Transition;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
 import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
-import com.example.omega.imageviewer.ui.dialogs.confirm.ConfirmDialog;
+import com.example.omega.imageviewer.ui.dialogs.confirm.ConfirmDialogFragment;
 import com.example.omega.imageviewer.ui.screens.base.BaseView;
 
 /**
@@ -26,9 +26,7 @@ public interface SplashView extends BaseView {
     @StateStrategyType(AddToEndSingleStrategy.class)
     void showAuthorizationMessage(@StringRes int message,
                                   @StringRes int negativeLabel,
-                                  @StringRes int positiveLabel,
-                                  ConfirmDialog.OnCancelButtonListener onNegativeListener,
-                                  @Nullable ConfirmDialog.OnOkButtonListener onPositiveListener);
+                                  @StringRes int positiveLabel);
 
     @StateStrategyType(OneExecutionStateStrategy.class)
     void showWebScreen(@NonNull String url);

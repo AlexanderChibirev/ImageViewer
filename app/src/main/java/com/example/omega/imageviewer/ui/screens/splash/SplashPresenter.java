@@ -64,15 +64,14 @@ public class SplashPresenter extends BasePresenter<SplashView> {
     }
 
     private void showAuthorizationMessage() {
-        getViewState().showAuthorizationMessage(R.string.auth_message, R.string.exit, R.string.yes,
-                this::onExitPressed, this::onYesPressed);
+        getViewState().showAuthorizationMessage(R.string.auth_message, R.string.exit, R.string.yes);
     }
 
-    private void onYesPressed() {
+    protected void onOkPressed() {//TODO
         getViewState().showWebScreen(BuildConfig.AUTH_URL + BuildConfig.CLIENT_ID);
     }
 
-    private void onExitPressed() {
+    protected void onCancelPressed() {//TODO
         //TODO added transfer on offline mode remove finishScreen()
         getViewState().finishScreen();
     }

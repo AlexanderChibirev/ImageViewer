@@ -18,9 +18,9 @@ import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.models.Text;
 import com.example.omega.imageviewer.tools.NetworkChecker;
-import com.example.omega.imageviewer.ui.dialogs.attention.AttentionDialog;
-import com.example.omega.imageviewer.ui.dialogs.attention.AttentionDialogDelegate;
-import com.example.omega.imageviewer.ui.dialogs.attention.AttentionDialogDelegateImpl;
+import com.example.omega.imageviewer.ui.base_ui_messages.DialogUtils;
+import com.example.omega.imageviewer.ui.dialogs.attention.AttentionDialogFragment;
+import com.omega_r.libs.omegafragmentbuilder.AppOmegaFragmentBuilder;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -29,13 +29,15 @@ import butterknife.Unbinder;
  * Created by Alexander Chibirev on 4/29/2018.
  */
 
-public abstract class BaseFragment extends MvpAppCompatFragment implements BaseView, NetworkChecker.OnConnectivityChangedListener {
+public abstract class BaseFragment extends MvpAppCompatFragment implements
+        BaseView,
+        NetworkChecker.OnConnectivityChangedListener,
+        AttentionDialogFragment.OnOkClickListener {
 
     @LayoutRes
     protected abstract int getLayoutRes();
 
     private Unbinder mUnbinder;
-    protected AttentionDialogDelegate mAttentionDialog;
     protected NetworkChecker mNetworkChecker;
 
     @Nullable
@@ -49,7 +51,6 @@ public abstract class BaseFragment extends MvpAppCompatFragment implements BaseV
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mUnbinder = ButterKnife.bind(this, view);
-        mAttentionDialog = new AttentionDialogDelegateImpl(getContext());
         mNetworkChecker = new NetworkChecker(getContext());
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -110,8 +111,24 @@ public abstract class BaseFragment extends MvpAppCompatFragment implements BaseV
     }
 
     @Override
-    public void showMessage(@StringRes int message, AttentionDialog.OnOkClickListener onOkClickListener) {
-        mAttentionDialog.showAttentionDialog(message, onOkClickListener);
+    public void onOkClick() {
+        //nothing
+    }
+
+    @Override
+    public void showAttentionScreen(@StringRes int message) {
+        DialogUtils.showAttentionScreen(this,
+                getFragmentManager(),
+                getString(message));
+    }
+
+    @Override
+    public void showConfirmScreen(int message, int negativeLabel, int positiveLabel) {
+        DialogUtils.showConfirmScreen(this,
+                getFragmentManager(),
+                getString(message),
+                getString(negativeLabel),
+                getString(positiveLabel));
     }
 
     @Override

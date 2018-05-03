@@ -22,6 +22,7 @@ public class ImageFeedOfflinePresenter extends BaseImageFeedPresenter<ImageFeedO
     @Override
     public void onDeleteClicked() {
         mDatabase.deleteImage(mDatabase.getImages().get(mItemPositionLongClicked));
+        getViewState().updateImages(mDatabase.getImages()); //TODO deleted after testing
     }
 
     @Override

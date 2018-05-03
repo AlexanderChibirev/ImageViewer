@@ -107,7 +107,9 @@ dependencies {
 
     implementation 'com.github.Omega-R:OmegaRecyclerView:1.6.11@aar'
     implementation 'com.github.Omega-R:OmegaNavigationMenu:1.0.1'
-    //TODO added OmegaIntentBuilder for save image on cloud api
+    implementation 'com.github.Omega-R.OmegaIntentBuilder:core:1.1.1'
+    implementation 'com.github.Omega-R.OmegaIntentBuilder:annotations:1.1.1'
+    annotationProcessor 'com.github.Omega-R.OmegaIntentBuilder:processor:1.1.1'
 
     implementation "android.arch.persistence.room:runtime:$roomDbVersion"
     annotationProcessor "android.arch.persistence.room:compiler:$roomDbVersion"

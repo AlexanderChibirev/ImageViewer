@@ -39,7 +39,6 @@ public class ImageFeedOfflineFragment extends BaseImageFeedFragment implements I
         return getString(R.string.menu_offline_page);
     }
 
-
     @Override
     protected int getLayoutRes() {
         return R.layout.fragment_image_viewer;

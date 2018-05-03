@@ -13,6 +13,7 @@ import com.example.omega.imageviewer.ui.screens.splash.SplashActivity;
 import com.example.omega.imageviewer.ui.screens.viewer.offline.ImageFeedOfflineFragment;
 import com.example.omega.imageviewer.ui.screens.viewer.online.ImageFeedOnlineFragment;
 import com.omega_r.libs.navigationmenu.ContentMenuLayout;
+import com.omega_r.libs.omegaintentbuilder.OmegaIntentBuilder;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -111,7 +112,9 @@ public class MainActivity extends BaseActivity implements MainView {
 
     @Override
     public void showSplashScreen() {
-        startActivity(SplashActivity.createIntent(this));
+        OmegaIntentBuilder.from(this)
+                .activity(SplashActivity.class)
+                .startActivity();
         finish();
     }
 

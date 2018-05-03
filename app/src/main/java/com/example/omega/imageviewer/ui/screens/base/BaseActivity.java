@@ -16,11 +16,8 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.models.Text;
 import com.example.omega.imageviewer.tools.NetworkChecker;
-import com.example.omega.imageviewer.ui.dialogs.attention.AttentionDialog;
-import com.example.omega.imageviewer.ui.dialogs.attention.AttentionDialogDelegate;
-import com.example.omega.imageviewer.ui.dialogs.attention.AttentionDialogDelegateImpl;
-import com.example.omega.imageviewer.ui.dialogs.confirm.ConfirmDialogDelegate;
-import com.example.omega.imageviewer.ui.dialogs.confirm.ConfirmDialogDelegateImpl;
+import com.example.omega.imageviewer.ui.base_ui_messages.DialogUtils;
+import com.example.omega.imageviewer.ui.dialogs.confirm.ConfirmDialogFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,22 +28,19 @@ import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends MvpAppCompatActivity implements
         BaseView,
-        NetworkChecker.OnConnectivityChangedListener {
+        NetworkChecker.OnConnectivityChangedListener,
+        ConfirmDialogFragment.ConfirmDialogListener {
 
     @Nullable
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
-    protected ConfirmDialogDelegate mConfirmDialogDelegate;
-    protected AttentionDialogDelegate mAttentionDialog;
     private NetworkChecker mNetworkChecker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mNetworkChecker = new NetworkChecker(this);
-        mConfirmDialogDelegate = new ConfirmDialogDelegateImpl(this);
-        mAttentionDialog = new AttentionDialogDelegateImpl(this);
     }
 
     @Override
@@ -130,20 +124,33 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements
     }
 
     @Override
-    protected void onDestroy() {
-        mConfirmDialogDelegate.onDestroy();
-        mAttentionDialog.onDestroy();
-        super.onDestroy();
-    }
-
-    @Override
     public void onConnectivityChanged(boolean availableNow) {
         //TODO go to offline mode if !availableNow and you not offline mode
     }
 
     @Override
-    public void showMessage(@StringRes int message, AttentionDialog.OnOkClickListener onOkClickListener) {
-        mAttentionDialog.showAttentionDialog(message, onOkClickListener);
+    public void onOkButtonPressed() {
+        //nothing
+    }
+
+    @Override
+    public void onCancelButtonPressed() {
+        //nothing
+    }
+
+    @Override
+    public void showAttentionScreen(int message) {
+        DialogUtils.showAttentionScreen(getSupportFragmentManager(), getString(message));
+    }
+
+    @Override
+    public void showConfirmScreen(@StringRes int message,
+                                  @StringRes int negativeLabel,
+                                  @StringRes int positiveLabel) {
+        DialogUtils.showConfirmScreen(getSupportFragmentManager(),
+                getString(message),
+                getString(negativeLabel),
+                getString(positiveLabel));
     }
 
 }
