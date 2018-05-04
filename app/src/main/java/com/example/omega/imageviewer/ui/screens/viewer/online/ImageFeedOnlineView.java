@@ -12,6 +12,4 @@ import com.example.omega.imageviewer.ui.screens.viewer.base.BaseImageFeedView;
 
 public interface ImageFeedOnlineView extends BaseImageFeedView {
 
-    void saveImageOnDisk(Image image);
-
 }

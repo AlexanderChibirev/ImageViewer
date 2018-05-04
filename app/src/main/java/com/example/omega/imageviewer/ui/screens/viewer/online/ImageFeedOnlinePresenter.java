@@ -6,18 +6,21 @@ import android.support.annotation.NonNull;
 import com.arellomobile.mvp.InjectViewState;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.app.ImageSliderApp;
-import com.example.omega.imageviewer.cloud_drive.CloudDrive;
-import com.example.omega.imageviewer.database.Database;
 import com.example.omega.imageviewer.models.Image;
-import com.example.omega.imageviewer.models.Text;
+import com.example.omega.imageviewer.storage.base.Storage;
+import com.example.omega.imageviewer.storage.cloud_drive.CloudDrive;
+import com.example.omega.imageviewer.storage.database.Database;
 import com.example.omega.imageviewer.ui.screens.viewer.base.BaseImageFeedPresenter;
+
+import java.util.List;
 
 /**
  * Created by Alexander Chibirev on 4/15/2018.
  */
 
 @InjectViewState
-public class ImageFeedOnlinePresenter extends BaseImageFeedPresenter<ImageFeedOnlineView> implements CloudDrive.Callback {
+public class ImageFeedOnlinePresenter extends BaseImageFeedPresenter<ImageFeedOnlineView>
+        implements CloudDrive.Callback {
 
     @NonNull
     private CloudDrive mCloudDrive;
@@ -26,6 +29,7 @@ public class ImageFeedOnlinePresenter extends BaseImageFeedPresenter<ImageFeedOn
 
     public ImageFeedOnlinePresenter() {
         mCloudDrive = ImageSliderApp.getAppComponent().getCloudDrive();
+        setImages(mCloudDrive.getImages());
         mDatabase = ImageSliderApp.getAppComponent().getDatabase();
         mCloudDrive.addCallback(this);
     }
@@ -45,37 +49,6 @@ public class ImageFeedOnlinePresenter extends BaseImageFeedPresenter<ImageFeedOn
     }
 
     @Override
-    public void onDownloadImagesEvent(CloudDrive.RequestEvent requestEvent, Text message) {
-        switch (requestEvent) {
-            case SUCCESS:
-                getViewState().updateImages(mCloudDrive.getImages());
-                if (mCloudDrive.getImages().isEmpty()) {
-                    getViewState().showAttentionScreen(R.string.images_empty);
-                }
-                break;
-            case FINISH:
-                getViewState().hideLoading();
-                break;
-            case ERROR:
-                getViewState().showAttentionScreen(R.string.download_image_failed);
-                break;
-        }
-    }
-
-    @Override
-    public void onDeleteImageEvent(CloudDrive.RequestEvent requestEvent, Text message,
-                                   int itemPositionDeleted) {
-        switch (requestEvent) {
-            case SUCCESS:
-                getViewState().deletedImage(itemPositionDeleted);
-                break;
-            case ERROR:
-                getViewState().showAttentionScreen(R.string.delete_image_failed);
-                break;
-        }
-    }
-
-    @Override
     public void onDestroy() {
         super.onDestroy();
         mCloudDrive.removeCallback(this);
@@ -83,7 +56,8 @@ public class ImageFeedOnlinePresenter extends BaseImageFeedPresenter<ImageFeedOn
 
     @Override
     public void onDeleteClicked() {
-        mCloudDrive.deleteImage(mItemPositionLongClicked);
+        mCloudDrive.deleteImage(mCloudDrive.getImages().get(mItemPositionLongClicked),
+                mItemPositionLongClicked);
     }
 
     protected void onRefresh() {
@@ -94,13 +68,7 @@ public class ImageFeedOnlinePresenter extends BaseImageFeedPresenter<ImageFeedOn
 
     protected void onSaveImageClicked() {
         Image image = mCloudDrive.getImages().get(mItemPositionLongClicked);
-        Image imageDao = mDatabase.getImageByName(image.getName(), image.getPath());
-        if (imageDao == null) { //TODO transfer logic in dao
-            mDatabase.saveImage(image);
-            getViewState().saveImageOnDisk(image);
-        } else {
-            getViewState().showAttentionScreen(R.string.image_already_exists);
-        }
+        mDatabase.saveImage(image);
     }
 
     @Override
@@ -122,6 +90,42 @@ public class ImageFeedOnlinePresenter extends BaseImageFeedPresenter<ImageFeedOn
     @Override
     protected void onConnectivityChanged(boolean availableNow) {
         if (!availableNow) getViewState().showAttentionScreen(R.string.error_connection);
+    }
+
+    @Override
+    public void onRequestImagesEvent(Storage.RequestEvent requestEvent, List<Image> images) {//todo maybe in base class???
+        switch (requestEvent) {
+            case SUCCESS:
+                getViewState().updateImages(images);
+                if (images.isEmpty()) {
+                    getViewState().showAttentionScreen(R.string.images_empty);
+                }
+                break;
+            case FINISH:
+                getViewState().hideLoading();
+                break;
+            case ERROR:
+                getViewState().showAttentionScreen(R.string.download_image_failed);
+                break;
+        }
+    }
+
+    @Override
+    public void onDeleteImageEvent(Storage.RequestEvent requestEvent, int itemPositionDeleted) {
+        switch (requestEvent) {
+            case SUCCESS:
+                mCloudDrive.getImages().remove(itemPositionDeleted);
+                getViewState().deletedImage(itemPositionDeleted);
+                break;
+            case ERROR:
+                getViewState().showAttentionScreen(R.string.delete_image_failed);
+                break;
+        }
+    }
+
+    @Override
+    public void onSaveImageEvent(Storage.RequestEvent requestEvent, Image image, boolean isAlreadyExists) {
+
     }
 
 }

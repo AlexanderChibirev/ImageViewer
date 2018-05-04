@@ -1,8 +1,8 @@
 package com.example.omega.imageviewer.di.modules;
 
 import com.example.omega.imageviewer.backend.api.CloudDriverApi;
-import com.example.omega.imageviewer.cloud_drive.CloudDrive;
-import com.example.omega.imageviewer.cloud_drive.YandexCloudDrive;
+import com.example.omega.imageviewer.storage.cloud_drive.CloudDrive;
+import com.example.omega.imageviewer.storage.cloud_drive.YandexCloudDrive;
 
 import javax.inject.Singleton;
 

@@ -1,12 +1,15 @@
-package com.example.omega.imageviewer.cloud_drive;
+package com.example.omega.imageviewer.storage.base;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.example.omega.imageviewer.backend.Error;
 import com.example.omega.imageviewer.backend.ErrorException;
+import com.example.omega.imageviewer.models.Image;
 import com.example.omega.imageviewer.models.Text;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
@@ -14,8 +17,10 @@ import java.util.concurrent.CopyOnWriteArraySet;
  * Created by Alexander Chibirev on 4/24/2018.
  */
 
-public abstract class BaseYandexCloudDrive implements CloudDrive {
+public abstract class BaseStorage implements Storage {
     private Set<Callback> mCallbackSet = new CopyOnWriteArraySet<>();
+    @NonNull
+    protected List<Image> mImages = new ArrayList<>();
 
     @Override
     public void addCallback(Callback callback) {
@@ -31,15 +36,21 @@ public abstract class BaseYandexCloudDrive implements CloudDrive {
         return mCallbackSet.isEmpty();
     }
 
-    protected void onDownloadImagesEvent(RequestEvent requestEvent, Text message) {
+    protected void onRequestImagesEvent(RequestEvent requestEvent, List<Image> images) {
         for (Callback callback : mCallbackSet) {
-            callback.onDownloadImagesEvent(requestEvent, message);
+            callback.onRequestImagesEvent(requestEvent, images);
         }
     }
 
-    protected void onDeleteImageEvent(RequestEvent requestEvent, Text message, int itemPositionDeleted) {
+    protected void onSaveImageEvent(RequestEvent requestEvent, Image image, boolean isAlreadyExists) {
         for (Callback callback : mCallbackSet) {
-            callback.onDeleteImageEvent(requestEvent, message, itemPositionDeleted);
+            callback.onSaveImageEvent(requestEvent, image, isAlreadyExists);
+        }
+    }
+
+    protected void onDeleteImageEvent(RequestEvent requestEvent, int itemPositionDeleted) {
+        for (Callback callback : mCallbackSet) {
+            callback.onDeleteImageEvent(requestEvent, itemPositionDeleted);
         }
     }
 
@@ -57,5 +68,11 @@ public abstract class BaseYandexCloudDrive implements CloudDrive {
             return error.getMessage();
         }
         return Error.UNKNOWN;
+    }
+
+    @NonNull
+    @Override
+    public List<Image> getImages() {
+        return mImages;
     }
 }

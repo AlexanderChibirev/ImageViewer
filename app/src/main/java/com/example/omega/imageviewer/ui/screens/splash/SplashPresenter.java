@@ -13,9 +13,9 @@ import com.arellomobile.mvp.InjectViewState;
 import com.example.omega.imageviewer.BuildConfig;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.app.ImageSliderApp;
-import com.example.omega.imageviewer.cloud_drive.CloudDrive;
 import com.example.omega.imageviewer.models.Preferences;
 import com.example.omega.imageviewer.models.UserManager;
+import com.example.omega.imageviewer.storage.cloud_drive.CloudDrive;
 import com.example.omega.imageviewer.tools.DefaultTransitionListener;
 import com.example.omega.imageviewer.ui.screens.base.BasePresenter;
 
@@ -105,7 +105,7 @@ public class SplashPresenter extends BasePresenter<SplashView> {
     }
 
     private void requestImages() {
-        mCloudDrive.requestImages(LIMIT_IMAGES_TO_UPLOAD, mCloudDrive.getImages().size());
+        mCloudDrive.requestImages(LIMIT_IMAGES_TO_UPLOAD, 0);
         startPostDelayedAnimate();
     }
 

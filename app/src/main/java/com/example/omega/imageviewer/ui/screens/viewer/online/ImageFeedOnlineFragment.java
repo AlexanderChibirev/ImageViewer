@@ -97,11 +97,4 @@ public class ImageFeedOnlineFragment extends BaseImageFeedFragment implements Im
         mImageFeedOnlinePresenter.onConnectivityChanged(availableNow);
     }
 
-    @Override
-    public void saveImageOnDisk(Image image) {
-        Context context = getContext();
-        if (context != null) {
-            ImageLoadingUtils.saveImageOnDisk(context, image);
-        }
-    }
 }

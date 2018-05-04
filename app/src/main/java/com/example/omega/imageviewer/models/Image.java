@@ -1,22 +1,21 @@
 package com.example.omega.imageviewer.models;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
 /**
  * Created by Alexander Chibirev on 4/16/2018.
  */
 
-@Entity(tableName = "image")
-public class Image implements Serializable {
+public class Image extends RealmObject implements Serializable {
 
-    @PrimaryKey(autoGenerate = true)
-    private int mId;
+    @PrimaryKey
+    private long mId;
 
     @Expose
     @SerializedName(Field.NAME)
@@ -34,8 +33,13 @@ public class Image implements Serializable {
     @SerializedName(Field.DATE)
     private String mDate;
 
+    public Image() {
+        super();
+    }
+
     public Image(String name, String path,
                  String publicUrl, String date) {
+        super();
         mName = name;
         mPath = path;
         mPublicUrl = publicUrl;
@@ -58,11 +62,11 @@ public class Image implements Serializable {
         return mPath;
     }
 
-    public int getId() {
+    public long getId() {
         return mId;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         mId = id;
     }
 

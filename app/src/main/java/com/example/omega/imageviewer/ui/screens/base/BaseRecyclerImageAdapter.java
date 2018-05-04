@@ -42,7 +42,6 @@ public abstract class BaseRecyclerImageAdapter<VH extends BaseRecyclerImageAdapt
     }
 
     public void deleteItem(int itemPositionDeleted) {
-        mImages.remove(itemPositionDeleted);
         notifyItemRemoved(itemPositionDeleted);
     }
 

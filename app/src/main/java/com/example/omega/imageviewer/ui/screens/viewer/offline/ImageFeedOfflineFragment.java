@@ -10,7 +10,6 @@ import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.ui.dialogs.confirm.ConfirmDialogFragment;
 import com.example.omega.imageviewer.ui.screens.viewer.base.BaseImageFeedFragment;
 import com.example.omega.imageviewer.ui.screens.viewer.base.ImageFeedAdapter;
-import com.example.omega.imageviewer.ui.utils.DialogUtils;
 
 /**
  * Created by Alexander Chibirev on 5/2/2018.
@@ -87,4 +86,5 @@ public class ImageFeedOfflineFragment extends BaseImageFeedFragment implements
     public void onCancelButtonPressed() {
         //nothing
     }
+
 }

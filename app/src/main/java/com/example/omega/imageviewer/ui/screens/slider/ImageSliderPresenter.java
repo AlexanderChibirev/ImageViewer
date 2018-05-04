@@ -2,8 +2,8 @@ package com.example.omega.imageviewer.ui.screens.slider;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.example.omega.imageviewer.app.ImageSliderApp;
-import com.example.omega.imageviewer.cloud_drive.CloudDrive;
-import com.example.omega.imageviewer.database.Database;
+import com.example.omega.imageviewer.storage.cloud_drive.CloudDrive;
+import com.example.omega.imageviewer.storage.database.Database;
 import com.example.omega.imageviewer.ui.screens.base.BasePresenter;
 
 /**
@@ -32,7 +32,7 @@ public class ImageSliderPresenter extends BasePresenter<ImageSliderView> {
         getViewState().setAdapter(mIsOnlineMode);
         mCloudDrive = ImageSliderApp.getAppComponent().getCloudDrive();
         mDatabase = ImageSliderApp.getAppComponent().getDatabase();
-        getViewState().updateImages(mIsOnlineMode ? mCloudDrive.getImages() : mDatabase.getImages());
+        getViewState().updateImages(mIsOnlineMode ? mCloudDrive.getImages() : mDatabase.getImages()); //TODO after add database
         getViewState().setSelection(position);
         getViewState().transformImages(MAX_SCALE_FOR_IMAGE, MIN_SCALE_FOR_IMAGE, TRANSITION_TIME);
     }
@@ -40,7 +40,7 @@ public class ImageSliderPresenter extends BasePresenter<ImageSliderView> {
     public void onPageSelected(int position) {
         getViewState().setToolbarTitle(position, mIsOnlineMode
                 ? mCloudDrive.getImages().size()
-                : mDatabase.getImages().size());
+                : mDatabase.getImages().size()); //TODO after add database
     }
 
     @Override
