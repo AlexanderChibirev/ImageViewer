@@ -1,4 +1,4 @@
-package com.example.omega.imageviewer.database;
+package com.example.omega.imageviewer.storage.database;
 
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;

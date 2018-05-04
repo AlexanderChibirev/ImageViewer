@@ -1,11 +1,11 @@
 package com.example.omega.imageviewer.di.modules;
 
 import android.app.Application;
-import android.arch.persistence.room.Room;
 
+import android.arch.persistence.room.Room;
 import com.example.omega.imageviewer.BuildConfig;
-import com.example.omega.imageviewer.database.AppDatabase;
-import com.example.omega.imageviewer.database.ImageDao;
+import com.example.omega.imageviewer.storage.database.AppDatabase;
+import com.example.omega.imageviewer.storage.database.ImageDao;
 
 import javax.inject.Singleton;
 

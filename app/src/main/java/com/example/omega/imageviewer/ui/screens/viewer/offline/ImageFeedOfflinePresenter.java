@@ -3,7 +3,7 @@ package com.example.omega.imageviewer.ui.screens.viewer.offline;
 import com.arellomobile.mvp.InjectViewState;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.app.ImageSliderApp;
-import com.example.omega.imageviewer.database.Database;
+import com.example.omega.imageviewer.storage.database.Database;
 import com.example.omega.imageviewer.ui.screens.viewer.base.BaseImageFeedPresenter;
 
 /**
@@ -26,7 +26,7 @@ public class ImageFeedOfflinePresenter extends BaseImageFeedPresenter<ImageFeedO
 
     @Override
     public void onDeleteClicked() {
-        mDatabase.deleteImage(mDatabase.getImages().get(mItemPositionLongClicked));
+        mDatabase.deleteImage(mDatabase.getImages().get(mItemPositionLongClicked), mItemPositionLongClicked);
         getViewState().updateImages(mDatabase.getImages()); //TODO deleted after testing
     }
 
@@ -59,4 +59,5 @@ public class ImageFeedOfflinePresenter extends BaseImageFeedPresenter<ImageFeedO
     protected void onOkButtonPressed() {
 
     }
+
 }

@@ -1,10 +1,12 @@
 package com.example.omega.imageviewer.di.modules;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.example.omega.imageviewer.database.Database;
-import com.example.omega.imageviewer.database.RoomDatabase;
-import com.example.omega.imageviewer.database.ImageDao;
+
+import com.example.omega.imageviewer.storage.database.Database;
+import com.example.omega.imageviewer.storage.database.ImageDao;
+import com.example.omega.imageviewer.storage.database.RoomDatabase;
 
 import javax.inject.Singleton;
 
@@ -20,8 +22,8 @@ public class DatabaseModule {
 
     @Singleton
     @Provides
-    Database provideDatabase(@NonNull final ImageDao imageDao) {
-        return new RoomDatabase(imageDao);
+    Database provideDatabase(Context context, @NonNull final ImageDao imageDao) {
+        return new RoomDatabase(context, imageDao);
     }
 
 }

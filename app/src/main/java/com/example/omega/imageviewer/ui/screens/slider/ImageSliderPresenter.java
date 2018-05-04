@@ -2,8 +2,8 @@ package com.example.omega.imageviewer.ui.screens.slider;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.example.omega.imageviewer.app.ImageSliderApp;
-import com.example.omega.imageviewer.cloud_drive.CloudDrive;
-import com.example.omega.imageviewer.database.Database;
+import com.example.omega.imageviewer.storage.cloud_drive.CloudDrive;
+import com.example.omega.imageviewer.storage.database.Database;
 import com.example.omega.imageviewer.ui.screens.base.BasePresenter;
 
 /**

@@ -6,11 +6,13 @@ import android.support.annotation.NonNull;
 import com.arellomobile.mvp.InjectViewState;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.app.ImageSliderApp;
-import com.example.omega.imageviewer.cloud_drive.CloudDrive;
-import com.example.omega.imageviewer.database.Database;
 import com.example.omega.imageviewer.models.Image;
-import com.example.omega.imageviewer.models.Text;
+import com.example.omega.imageviewer.storage.base.Storage;
+import com.example.omega.imageviewer.storage.cloud_drive.CloudDrive;
+import com.example.omega.imageviewer.storage.database.Database;
 import com.example.omega.imageviewer.ui.screens.viewer.base.BaseImageFeedPresenter;
+
+import java.util.List;
 
 /**
  * Created by Alexander Chibirev on 4/15/2018.
@@ -44,8 +46,9 @@ public class ImageFeedOnlinePresenter extends BaseImageFeedPresenter<ImageFeedOn
         mCloudDrive.requestImages(limit, offSet);
     }
 
+
     @Override
-    public void onDownloadImagesEvent(CloudDrive.RequestEvent requestEvent, Text message) {
+    public void onRequestImagesEvent(Storage.RequestEvent requestEvent, List<Image> images) {
         switch (requestEvent) {
             case SUCCESS:
                 getViewState().updateImages(mCloudDrive.getImages());
@@ -63,8 +66,7 @@ public class ImageFeedOnlinePresenter extends BaseImageFeedPresenter<ImageFeedOn
     }
 
     @Override
-    public void onDeleteImageEvent(CloudDrive.RequestEvent requestEvent, Text message,
-                                   int itemPositionDeleted) {
+    public void onDeleteImageEvent(Storage.RequestEvent requestEvent, int itemPositionDeleted) {
         switch (requestEvent) {
             case SUCCESS:
                 getViewState().deletedImage(itemPositionDeleted);
@@ -76,6 +78,11 @@ public class ImageFeedOnlinePresenter extends BaseImageFeedPresenter<ImageFeedOn
     }
 
     @Override
+    public void onSaveImageEvent(Storage.RequestEvent requestEvent, Image image, boolean isAlreadyExists) {
+
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         mCloudDrive.removeCallback(this);
@@ -83,7 +90,7 @@ public class ImageFeedOnlinePresenter extends BaseImageFeedPresenter<ImageFeedOn
 
     @Override
     public void onDeleteClicked() {
-        mCloudDrive.deleteImage(mItemPositionLongClicked);
+        mCloudDrive.deleteImage(mCloudDrive.getImages().get(mItemPositionLongClicked), mItemPositionLongClicked);
     }
 
     protected void onRefresh() {
