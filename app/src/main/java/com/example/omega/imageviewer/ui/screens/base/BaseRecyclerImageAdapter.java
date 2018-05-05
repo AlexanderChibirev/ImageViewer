@@ -26,11 +26,6 @@ public abstract class BaseRecyclerImageAdapter<VH extends BaseRecyclerImageAdapt
 
     @NonNull
     protected List<Image> mImages = new ArrayList<>();
-    protected boolean mIsOnlineMode;
-
-    public BaseRecyclerImageAdapter(boolean isOnlineMode) {
-        mIsOnlineMode = isOnlineMode;
-    }
 
     protected void update(List<Image> images) {
         mImages = images;
@@ -76,10 +71,9 @@ public abstract class BaseRecyclerImageAdapter<VH extends BaseRecyclerImageAdapt
         }
 
         public void updateImageView(@NonNull ImageView imageView, @NonNull List<Image> images,
-                                    int position, boolean isOnlineMode) {
-            ImageLoadingUtils.loadImage(
-                    imageView,
-                    images.get(position), !isOnlineMode);
+                                    int position) {
+            ImageLoadingUtils.loadWithGlideFromUrl(imageView,
+                    images.get(position).getPublicUrl());
         }
     }
 

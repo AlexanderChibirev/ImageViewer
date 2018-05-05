@@ -30,7 +30,7 @@ public class ImageFeedOfflineFragment extends BaseImageFeedFragment implements
     }
 
     public ImageFeedOfflineFragment() {
-        super(new ImageFeedAdapter(false));
+        super(new ImageFeedAdapter());
     }
 
     @Override
@@ -89,7 +89,8 @@ public class ImageFeedOfflineFragment extends BaseImageFeedFragment implements
     public void deleteImageFromDisk(Image image) {
         Context context = getContext();
         if (context != null) {
-            ImageLoadingUtils.deleteImageFromDisk(context, image);
+            boolean x = ImageLoadingUtils.deleteImageFromDisk(context, image);
+            int t = 10;
         }
     }
 

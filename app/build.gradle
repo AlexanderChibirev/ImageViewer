@@ -68,6 +68,7 @@ def automaticTestVersion = '1.0.2'
 def okHttp3Version = '3.10.0'
 def roomDbVersion = '1.0.0'
 def roomLifecycleDbVersion = '1.1.1'
+def glideVersion = '4.6.1'
 
 
 dependencies {
@@ -103,7 +104,6 @@ dependencies {
 
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
     implementation "com.squareup.okhttp3:okhttp:$okHttp3Version"
-    implementation 'com.squareup.picasso:picasso:2.71828'// TODO compare with glide lib
 
     implementation 'com.github.Omega-R:OmegaRecyclerView:1.6.11@aar'
     implementation 'com.github.Omega-R:OmegaNavigationMenu:1.0.1'
@@ -115,4 +115,7 @@ dependencies {
     annotationProcessor "android.arch.persistence.room:compiler:$roomDbVersion"
     implementation "android.arch.lifecycle:common-java8:$roomLifecycleDbVersion"
 
+
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
 }

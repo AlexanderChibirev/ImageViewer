@@ -18,7 +18,7 @@ public class ImageSliderPresenter extends BasePresenter<ImageSliderView> {
 
     private final static float MAX_SCALE_FOR_IMAGE = 1.0f;
     private final static float MIN_SCALE_FOR_IMAGE = 0.7f;
-    private final static int TRANSITION_TIME = 70; //ms
+    private final static int TRANSITION_TIME = 60; //ms
 
     @NonNull
     private CloudDrive mCloudDrive;
@@ -28,7 +28,7 @@ public class ImageSliderPresenter extends BasePresenter<ImageSliderView> {
 
 
     public ImageSliderPresenter(int position, boolean isOnlineMode) {
-        getViewState().setAdapter(isOnlineMode);
+        getViewState().setAdapter();
         mIsOnlineMode = isOnlineMode;
         mCloudDrive = ImageSliderApp.getAppComponent().getCloudDrive();
         mDatabase = ImageSliderApp.getAppComponent().getDatabase();

@@ -35,10 +35,10 @@ public class YandexCloudDrive extends BaseStorage implements CloudDrive {
         mCloudDriverApi.deleteImage(image.getPath(), true)
                 .onResult(r -> {
                     mCurrentImages.remove(image);
-                    onDeleteImageEvent(RequestEvent.SUCCESS, itemPosition);
+                    onDeleteImageEvent(RequestEvent.SUCCESS, image, itemPosition);
                 })
-                .onError(e -> onDeleteImageEvent(RequestEvent.ERROR, itemPosition))
-                .onFinish(() -> onDeleteImageEvent(RequestEvent.FINISH, itemPosition));
+                .onError(e -> onDeleteImageEvent(RequestEvent.ERROR, image, itemPosition))
+                .onFinish(() -> onDeleteImageEvent(RequestEvent.FINISH, image, itemPosition));
     }
 
     private void updateImages(@NonNull ListResources<Image> resources) {

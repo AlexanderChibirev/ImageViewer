@@ -61,8 +61,8 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
     }
 
     @Override
-    public void setAdapter(boolean isOnlineMode) {
-        mImageSliderAdapter = new ImageSliderAdapter(isOnlineMode);
+    public void setAdapter() {
+        mImageSliderAdapter = new ImageSliderAdapter();
         mRecyclerView.setAdapter(mImageSliderAdapter);
         mRecyclerView.setViewPagerOnPageChangeListener(createSimpleOnPageChangeListener());
     }

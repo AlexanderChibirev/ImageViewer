@@ -73,6 +73,16 @@ public class ImageFeedOfflinePresenter extends BaseImageFeedPresenter<ImageFeedO
     }
 
     @Override
+    public void onDeleteImageEvent(@NonNull Storage.RequestEvent requestEvent, Image image, int itemPositionDeleted) {
+        super.onDeleteImageEvent(requestEvent, image, itemPositionDeleted);
+        switch (requestEvent) {
+            case SUCCESS:
+                getViewState().deleteImageFromDisk(image);
+                break;
+        }
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         mDatabase.removeCallback(this);

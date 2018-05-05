@@ -14,6 +14,6 @@ public interface ImageSliderView extends BaseImageView {
 
     void setToolbarTitle(final int position, final int sizeData);
 
-    void setAdapter(boolean isOnlineMode);
+    void setAdapter();
 
 }

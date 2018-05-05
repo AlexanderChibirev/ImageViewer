@@ -64,7 +64,7 @@ public abstract class BaseImageFeedPresenter<V extends BaseImageFeedView> extend
     }
 
     @Override
-    public void onDeleteImageEvent(@NonNull Storage.RequestEvent requestEvent, int itemPositionDeleted) {
+    public void onDeleteImageEvent(@NonNull Storage.RequestEvent requestEvent,Image image, int itemPositionDeleted) {
         switch (requestEvent) {
             case SUCCESS:
                 getViewState().notifyItemImage(itemPositionDeleted);

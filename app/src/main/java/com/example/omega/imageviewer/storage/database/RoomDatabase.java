@@ -28,10 +28,10 @@ public class RoomDatabase extends BaseStorage implements Database { //TODO maybe
     @Override
     public void deleteImage(@NonNull Image image, final int position) {
         mTaskExecutor.runTask(createDeleteWorker(image)).onResult(input -> {
-            onDeleteImageEvent(input, position);
+            onDeleteImageEvent(input, image, position);
         }).onError(e -> {
-            onDeleteImageEvent(RequestEvent.ERROR, position);
-        }).onFinish(() -> onDeleteImageEvent(RequestEvent.FINISH, position));
+            onDeleteImageEvent(RequestEvent.ERROR, image, position);
+        }).onFinish(() -> onDeleteImageEvent(RequestEvent.FINISH, image, position));
     }
 
     private Task.Worker<RequestEvent> createDeleteWorker(@NonNull Image image) {
@@ -77,14 +77,11 @@ public class RoomDatabase extends BaseStorage implements Database { //TODO maybe
     public void requestAllImages() {
         Task.Worker<List<Image>> taskWorker = mImageDao::getImages;
         mTaskExecutor.runTask(taskWorker).onResult(result -> {
-            if (!result.equals(mCurrentImages) || result.isEmpty()) {
-                mCurrentImages.clear();
-                mCurrentImages.addAll(result);
-                onRequestImagesEvent(RequestEvent.SUCCESS, result);
-            }
+            mCurrentImages = result;
+            onRequestImagesEvent(RequestEvent.SUCCESS, result);
         }).onError(e -> {
             onRequestImagesEvent(RequestEvent.ERROR, null);
-        }).onFinish(() -> onRequestImagesEvent(RequestEvent.FINISH, null));
+        }).onFinish(() -> onRequestImagesEvent(RequestEvent.FINISH, mCurrentImages));
     }
 
     @Override

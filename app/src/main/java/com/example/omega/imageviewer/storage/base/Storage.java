@@ -30,7 +30,7 @@ public interface Storage {
     interface Callback {
         void onRequestImagesEvent(@NonNull RequestEvent requestEvent, @Nullable List<Image> images);
 
-        void onDeleteImageEvent(@NonNull RequestEvent requestEvent, int itemPositionDeleted);
+        void onDeleteImageEvent(@NonNull RequestEvent requestEvent, Image image, int itemPositionDeleted);
 
         void onSaveImageInDatabaseEvent(@NonNull RequestSaveEvent requestSaveEvent, Image image);
 

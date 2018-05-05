@@ -23,10 +23,6 @@ public class ImageFeedAdapter extends BaseRecyclerImageAdapter<BaseRecyclerImage
     @Nullable
     private OnImageClickListener mListener;
 
-    public ImageFeedAdapter(boolean isOnlineMode) {
-        super(isOnlineMode);
-    }
-
     @NonNull
     @Override
     public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -35,7 +31,7 @@ public class ImageFeedAdapter extends BaseRecyclerImageAdapter<BaseRecyclerImage
 
     @Override
     public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
-        holder.updateImageView(((ViewHolder) holder).imageView, mImages, position, mIsOnlineMode);
+        holder.updateImageView(((ViewHolder) holder).imageView, mImages, position);
     }
 
     @Override

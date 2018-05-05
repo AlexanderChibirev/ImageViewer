@@ -3,17 +3,18 @@ package com.example.omega.imageviewer.utils;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.models.Image;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.RequestCreator;
-import com.squareup.picasso.Target;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -30,88 +31,66 @@ public class ImageLoadingUtils {
     private static final int PLACEHOLDER = R.drawable.placeholder;
     @DrawableRes
     private static final int ERROR_PLACEHOLDER = R.drawable.error_placeholder;
-
-
-    public static void loadImage(@NonNull final ImageView imageView,
-                                 @NonNull final Image image, boolean fromDisk) {
-        RequestCreator creator = createRequestCreator(imageView, image, fromDisk);
-        if (creator != null) {
-            creator.fit()
-                    .centerInside()
-                    .noFade()
-                    .placeholder(PLACEHOLDER)
-                    .error(ERROR_PLACEHOLDER)
-                    .into(imageView);
-        } else {
-            loadErrorPlaceHolder(imageView);
-        }
-    }
-
-    public static void saveImageOnDisk(Context context, @NonNull final Image image) {
-        Picasso.get()
-                .load(image.getPublicUrl())
-                .into(picassoImageTarget(context.getApplicationContext(), image.getName()));
-    }
+    private static final RequestOptions sRequestOptions = new RequestOptions();
+    private static final int QUALITY_COMPRESS = 100;
 
     public static boolean deleteImageFromDisk(Context context, @NonNull final Image image) {
-        File myImageFile = createFile(context, image.getName());
-        return myImageFile.exists() && myImageFile.delete();
+        File file = createFile(context, image.getName());
+        return file.exists() && file.delete();
     }
 
-    @Nullable
-    private static RequestCreator createRequestCreator(@NonNull final ImageView imageView,
-                                                       @NonNull final Image image, boolean fromDisk) {
-        if (fromDisk) {
-            Context context = imageView.getContext().getApplicationContext();
-            File myImageFile = createFile(context, image.getName());
-            if (myImageFile.exists()) return Picasso.get().load(myImageFile);
-        } else {
-            return Picasso.get().load(image.getPublicUrl());
+    public static void loadWithGlideFromUrl(@NonNull ImageView imageView, @NonNull String PublicUrl) {
+        setRequestOptions();
+        Glide.with(imageView.getContext())
+                .load(PublicUrl)
+                .apply(sRequestOptions)
+                .into(imageView);
+    }
+
+    private static void setRequestOptions() {
+        //sRequestOptions.diskCacheStrategy(DiskCacheStrategy.NONE); TODO in feature add?
+        sRequestOptions.placeholder(PLACEHOLDER);
+        sRequestOptions.error(ERROR_PLACEHOLDER);
+        sRequestOptions.fallback(ERROR_PLACEHOLDER);
+    }
+
+    public static void downLoadAndSaveImageOnPhone(Context context, Image image) {
+        Glide.with(context)
+                .asBitmap()
+                .load(image.getPublicUrl())
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                        downLoadAndSaveImageOnPhone(context, resource, image.getName());
+                    }
+                });
+    }
+
+    private static void downLoadAndSaveImageOnPhone(Context context, Bitmap bitmap, String fileName) {
+        File file = createFile(context, fileName);
+        if (!file.exists()) {
+            FileOutputStream fos = null;
+            try {
+                fos = new FileOutputStream(file);
+                bitmap.compress(Bitmap.CompressFormat.WEBP, QUALITY_COMPRESS, fos);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (fos != null) {
+                        fos.flush();
+                        fos.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
-        return null;
     }
 
     private static File createFile(Context context, @NonNull String fileName) {
         ContextWrapper cw = new ContextWrapper(context);
         return new File(cw.getDir(IMAGE_DIR_NAME, Context.MODE_PRIVATE), fileName);
-    }
-
-    private static void loadErrorPlaceHolder(@NonNull final ImageView imageView) {
-        imageView.setImageResource(ERROR_PLACEHOLDER);
-    }
-
-    private static Target picassoImageTarget(Context context, @NonNull final String imageName) {
-        return new Target() {
-            @Override
-            public void onBitmapLoaded(final Bitmap bitmap, Picasso.LoadedFrom from) {
-                new Thread(() -> {
-                    final File myImageFile = createFile(context, imageName);
-                    FileOutputStream fos = null;
-                    try {
-                        fos = new FileOutputStream(myImageFile);
-                        bitmap.compress(Bitmap.CompressFormat.WEBP, 100, fos);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } finally {
-                        try {
-                            if (fos != null) fos.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }).start();
-            }
-
-            @Override
-            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
-                //nothing
-            }
-
-            @Override
-            public void onPrepareLoad(Drawable placeHolderDrawable) {
-                //nothing
-            }
-        };
     }
 
 }

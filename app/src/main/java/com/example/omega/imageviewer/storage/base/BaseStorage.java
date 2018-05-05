@@ -49,9 +49,9 @@ public abstract class BaseStorage implements Storage {
         }
     }
 
-    protected void onDeleteImageEvent(RequestEvent requestEvent, int itemPositionDeleted) {
+    protected void onDeleteImageEvent(RequestEvent requestEvent,Image image, int itemPositionDeleted) {
         for (Callback callback : mCallbackSet) {
-            callback.onDeleteImageEvent(requestEvent, itemPositionDeleted);
+            callback.onDeleteImageEvent(requestEvent,  image, itemPositionDeleted);
         }
     }
 

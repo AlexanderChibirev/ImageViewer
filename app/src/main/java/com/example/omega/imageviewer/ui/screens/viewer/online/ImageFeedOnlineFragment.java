@@ -30,7 +30,7 @@ public class ImageFeedOnlineFragment extends BaseImageFeedFragment implements Im
     }
 
     public ImageFeedOnlineFragment() {
-        super(new ImageFeedAdapter(true));
+        super(new ImageFeedAdapter());
     }
 
     @Override
@@ -96,7 +96,8 @@ public class ImageFeedOnlineFragment extends BaseImageFeedFragment implements Im
     public void saveImageOnDisk(Image image) {
         Context context = getContext();
         if (context != null) {
-            ImageLoadingUtils.saveImageOnDisk(context, image);
+            ImageLoadingUtils.downLoadAndSaveImageOnPhone(context, image);
+            //ImageLoadingUtils.saveImageOnDisk(context, image);
         }
     }
 
