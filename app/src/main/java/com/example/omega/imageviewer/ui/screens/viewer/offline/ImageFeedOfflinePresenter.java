@@ -55,7 +55,7 @@ public class ImageFeedOfflinePresenter extends BaseImageFeedPresenter<ImageFeedO
     }
 
     protected void onOkButtonPressed() {
-        //TODO added logic in feature
+        getViewState().showOnlineScreen();
     }
 
     @Override

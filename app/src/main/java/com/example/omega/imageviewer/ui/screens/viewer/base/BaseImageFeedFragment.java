@@ -1,5 +1,6 @@
 package com.example.omega.imageviewer.ui.screens.viewer.base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.view.View;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.models.Image;
 import com.example.omega.imageviewer.ui.dialogs.cloud_drive_options.OptionsDialogFragment;
+import com.example.omega.imageviewer.ui.dialogs.confirm.ConfirmDialogFragment;
 import com.example.omega.imageviewer.ui.screens.main.ScreenMenuBinderFragment;
 import com.example.omega.imageviewer.ui.screens.slider.ImageSliderActivity;
 import com.example.omega.imageviewer.ui.utils.DialogUtils;
@@ -26,7 +28,11 @@ public abstract class BaseImageFeedFragment extends ScreenMenuBinderFragment imp
         BaseImageFeedView,
         ImageFeedAdapter.OnImageClickListener,
         OptionsDialogFragment.OnClickListener,
-        SwipeRefreshLayout.OnRefreshListener {
+        SwipeRefreshLayout.OnRefreshListener,
+        ConfirmDialogFragment.ConfirmDialogListener {
+
+    protected onChangePageListener mCallback;
+
 
     public BaseImageFeedFragment(@NonNull ImageFeedAdapter imageFeedAdapter) {
         mImageFeedAdapter = imageFeedAdapter;
@@ -84,6 +90,28 @@ public abstract class BaseImageFeedFragment extends ScreenMenuBinderFragment imp
     @Override
     public void notifyItemImage(int itemPositionDeleted) {
         mImageFeedAdapter.notifyItemItem(itemPositionDeleted);
+    }
+
+    @Override
+    public void onCancelButtonPressed() {
+        //nothing
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mCallback = (onChangePageListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement onOkClickListener");
+        }
+    }
+
+    public interface onChangePageListener {
+        void onChangeOnlinePageClicked();
+
+        void onChangeOfflinePageClicked();
     }
 
 }

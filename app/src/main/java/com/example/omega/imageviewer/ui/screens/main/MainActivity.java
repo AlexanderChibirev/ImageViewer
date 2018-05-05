@@ -10,6 +10,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.ui.screens.base.BaseActivity;
 import com.example.omega.imageviewer.ui.screens.splash.SplashActivity;
+import com.example.omega.imageviewer.ui.screens.viewer.base.BaseImageFeedFragment;
 import com.example.omega.imageviewer.ui.screens.viewer.offline.ImageFeedOfflineFragment;
 import com.example.omega.imageviewer.ui.screens.viewer.online.ImageFeedOnlineFragment;
 import com.omega_r.libs.navigationmenu.ContentMenuLayout;
@@ -22,7 +23,9 @@ import butterknife.OnClick;
  * Created by Alexander Chibirev on 4/29/2018.
  */
 
-public class MainActivity extends BaseActivity implements MainView {
+public class MainActivity extends BaseActivity
+        implements MainView,
+        BaseImageFeedFragment.onChangePageListener {
 
     private final ImageFeedOnlineFragment mImageFeedOnlineFragment = ImageFeedOnlineFragment.newInstance();
     private final ImageFeedOfflineFragment mImageFeedOfflineFragment = ImageFeedOfflineFragment.newInstance();
@@ -40,7 +43,6 @@ public class MainActivity extends BaseActivity implements MainView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (savedInstanceState == null) showPage(mImageFeedOnlineFragment);
         mContainerView.setOnProgressMenuChangedListener(this::onProgressMenuChanged);
     }
 
@@ -75,7 +77,6 @@ public class MainActivity extends BaseActivity implements MainView {
 
     private void showPage(Fragment fragment, boolean hideMenu) {
         Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.framelayout_fragment_container);
-
         if (currentFragment == null || !fragment.getClass().getCanonicalName()
                 .equals(currentFragment.getClass().getCanonicalName())) {
             updatePage(fragment, hideMenu);
@@ -101,13 +102,23 @@ public class MainActivity extends BaseActivity implements MainView {
     }
 
     @Override
-    public void showMainPage() {
+    public void showOnlinePage() {
         showPage(mImageFeedOnlineFragment);
     }
 
     @Override
     public void showOfflinePage() {
         showPage(mImageFeedOfflineFragment);
+    }
+
+    @Override
+    public void onChangeOnlinePageClicked() {
+        showOnlinePage();
+    }
+
+    @Override
+    public void onChangeOfflinePageClicked() {
+        showOfflinePage();
     }
 
     @Override

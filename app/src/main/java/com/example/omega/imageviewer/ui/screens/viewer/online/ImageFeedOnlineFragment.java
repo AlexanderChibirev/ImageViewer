@@ -10,6 +10,7 @@ import android.view.View;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.models.Image;
+import com.example.omega.imageviewer.ui.dialogs.confirm.ConfirmDialogFragment;
 import com.example.omega.imageviewer.ui.screens.viewer.base.BaseImageFeedFragment;
 import com.example.omega.imageviewer.ui.screens.viewer.base.ImageFeedAdapter;
 import com.example.omega.imageviewer.utils.ImageLoadingUtils;
@@ -20,7 +21,9 @@ import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
  * Created by Alexander Chibirev on 4/29/2018.
  */
 
-public class ImageFeedOnlineFragment extends BaseImageFeedFragment implements ImageFeedOnlineView {
+public class ImageFeedOnlineFragment extends BaseImageFeedFragment
+        implements ImageFeedOnlineView,
+        ConfirmDialogFragment.ConfirmDialogListener {
 
     @InjectPresenter
     ImageFeedOnlinePresenter mImageFeedOnlinePresenter;
@@ -93,11 +96,20 @@ public class ImageFeedOnlineFragment extends BaseImageFeedFragment implements Im
     }
 
     @Override
+    public void onOkButtonPressed() {
+        mImageFeedOnlinePresenter.onOkButtonPressed();
+    }
+
+    @Override
+    public void showOfflineScreen() {
+        mCallback.onChangeOfflinePageClicked();
+    }
+
+    @Override
     public void saveImageOnDisk(Image image) {
         Context context = getContext();
         if (context != null) {
             ImageLoadingUtils.downLoadAndSaveImageOnPhone(context, image);
-            //ImageLoadingUtils.saveImageOnDisk(context, image);
         }
     }
 

@@ -19,8 +19,7 @@ import com.example.omega.imageviewer.utils.ImageLoadingUtils;
  */
 
 public class ImageFeedOfflineFragment extends BaseImageFeedFragment implements
-        ImageFeedOfflineView,
-        ConfirmDialogFragment.ConfirmDialogListener {
+        ImageFeedOfflineView{
 
     @InjectPresenter
     ImageFeedOfflinePresenter mImageFeedOfflinePresenter;
@@ -81,16 +80,15 @@ public class ImageFeedOfflineFragment extends BaseImageFeedFragment implements
     }
 
     @Override
-    public void onCancelButtonPressed() {
-        //nothing
+    public void showOnlineScreen() {
+        mCallback.onChangeOnlinePageClicked();
     }
 
     @Override
     public void deleteImageFromDisk(Image image) {
         Context context = getContext();
         if (context != null) {
-            boolean x = ImageLoadingUtils.deleteImageFromDisk(context, image);
-            int t = 10;
+            ImageLoadingUtils.deleteImageFromDisk(context, image);
         }
     }
 

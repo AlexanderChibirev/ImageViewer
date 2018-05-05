@@ -11,7 +11,7 @@ import com.example.omega.imageviewer.ui.screens.base.BaseView;
 @StateStrategyType(OneExecutionStateStrategy.class)
 public interface MainView extends BaseView {
 
-    void showMainPage();
+    void showOnlinePage();
 
     void showOfflinePage();
 

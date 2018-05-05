@@ -59,7 +59,11 @@ public class ImageFeedOnlinePresenter extends BaseImageFeedPresenter<ImageFeedOn
                 }
                 break;
             case ERROR:
-                getViewState().showAttentionScreen(R.string.download_image_failed);
+                if (mDatabase.getCurrentImages().isEmpty()) {
+                    getViewState().showAttentionScreen(R.string.download_image_failed);
+                } else {
+                    getViewState().showConfirmScreen(R.string.go_to_offline_mode, R.string.cancel, R.string.yes);
+                }
                 break;
         }
     }
@@ -111,6 +115,10 @@ public class ImageFeedOnlinePresenter extends BaseImageFeedPresenter<ImageFeedOn
     public void onDestroy() {
         super.onDestroy();
         mCloudDrive.removeCallback(this);
+    }
+
+    protected void onOkButtonPressed() {
+        getViewState().showOfflineScreen();
     }
 
 }
