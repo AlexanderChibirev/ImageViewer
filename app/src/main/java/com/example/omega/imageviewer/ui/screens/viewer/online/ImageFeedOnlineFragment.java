@@ -46,7 +46,7 @@ public class ImageFeedOnlineFragment extends BaseImageFeedFragment implements Im
                 super.onScrollStateChanged(recyclerView, newState);
                 boolean hasEnded = newState == SCROLL_STATE_IDLE;
                 if (hasEnded) {
-                    onRefresh(); //TODO added progress bar for end rv
+                    onRefresh();
                 }
             }
         };
@@ -90,11 +90,6 @@ public class ImageFeedOnlineFragment extends BaseImageFeedFragment implements Im
     @Override
     public void onRefresh() {
         mImageFeedOnlinePresenter.onRefresh();
-    }
-
-    @Override
-    public void onConnectivityChanged(boolean availableNow) {
-        mImageFeedOnlinePresenter.onConnectivityChanged(availableNow);
     }
 
     @Override

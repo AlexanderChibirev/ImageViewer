@@ -13,7 +13,6 @@ import com.example.omega.imageviewer.di.modules.PreferencesModule;
 import com.example.omega.imageviewer.di.modules.UserManagerModule;
 import com.example.omega.imageviewer.models.Preferences;
 import com.example.omega.imageviewer.models.UserManager;
-import com.example.omega.imageviewer.storage.base.StorageManager;
 import com.example.omega.imageviewer.storage.cloud_drive.CloudDrive;
 import com.example.omega.imageviewer.storage.database.Database;
 

@@ -7,7 +7,6 @@ import com.example.omega.imageviewer.backend.Error;
 import com.example.omega.imageviewer.backend.ErrorException;
 import com.example.omega.imageviewer.models.Image;
 import com.example.omega.imageviewer.models.Text;
-import com.example.omega.imageviewer.storage.database.Database;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,13 +37,13 @@ public abstract class BaseStorage implements Storage {
         return mCallbackSet.isEmpty();
     }
 
-    protected void onRequestImagesEvent(RequestEvent requestEvent, List<Image> images) {
+    protected void onRequestImagesEvent(RequestEvent requestEvent, @Nullable List<Image> images) {
         for (Callback callback : mCallbackSet) {
             callback.onRequestImagesEvent(requestEvent, images);
         }
     }
 
-    protected void onSaveImageInDatabaseEvent(Database.RequestSaveEvent requestSaveEvent, Image image) {
+    protected void onSaveImageInDatabaseEvent(RequestSaveEvent requestSaveEvent, Image image) {
         for (Callback callback : mCallbackSet) {
             callback.onSaveImageInDatabaseEvent(requestSaveEvent, image);
         }

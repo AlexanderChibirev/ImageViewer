@@ -8,7 +8,6 @@ import com.example.omega.imageviewer.app.ImageSliderApp;
 import com.example.omega.imageviewer.models.Image;
 import com.example.omega.imageviewer.models.Preferences;
 import com.example.omega.imageviewer.storage.base.Storage;
-import com.example.omega.imageviewer.storage.base.StorageManager;
 import com.example.omega.imageviewer.ui.screens.base.BasePresenter;
 
 import java.util.List;
@@ -17,7 +16,8 @@ import java.util.List;
  * Created by Alexander Chibirev on 4/15/2018.
  */
 
-public abstract class BaseImageFeedPresenter<V extends BaseImageFeedView> extends BasePresenter<V> {
+public abstract class BaseImageFeedPresenter<V extends BaseImageFeedView> extends BasePresenter<V>
+        implements Storage.Callback {
 
     protected static final int LIMIT_IMAGES_TO_UPLOAD = 50;
     protected int mItemPositionLongClicked;
@@ -40,6 +40,44 @@ public abstract class BaseImageFeedPresenter<V extends BaseImageFeedView> extend
 
     protected void onImageLongClick(int position) {
         mItemPositionLongClicked = position;
+    }
+
+    @Override
+    public void onRequestImagesEvent(@NonNull Storage.RequestEvent requestEvent, List<Image> images) {
+        switch (requestEvent) {
+            case SUCCESS:
+                getViewState().updateImages(images);
+                break;
+            case FINISH:
+                getViewState().hideLoading();
+                break;
+        }
+    }
+
+    @Override
+    public void onSaveImageInDatabaseEvent(@NonNull Storage.RequestSaveEvent requestSaveEvent, Image image) {
+        switch (requestSaveEvent) {
+            case REQUIRED:
+                getViewState().showAttentionScreen(R.string.image_already_exists);
+                break;
+        }
+    }
+
+    @Override
+    public void onDeleteImageEvent(@NonNull Storage.RequestEvent requestEvent, int itemPositionDeleted) {
+        switch (requestEvent) {
+            case SUCCESS:
+                getViewState().notifyItemImage(itemPositionDeleted);
+                break;
+            case ERROR:
+                getViewState().showAttentionScreen(R.string.delete_image_failed);
+                break;
+        }
+    }
+
+    @Override
+    public void onRequestImageEvent(@NonNull Storage.RequestEvent requestEvent, @Nullable Image image) {
+        //nothing
     }
 
 }

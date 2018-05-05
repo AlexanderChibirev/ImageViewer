@@ -111,8 +111,8 @@ dependencies {
     implementation 'com.github.Omega-R.OmegaIntentBuilder:annotations:1.1.1'
     annotationProcessor 'com.github.Omega-R.OmegaIntentBuilder:processor:1.1.1'
 
-
     implementation "android.arch.persistence.room:runtime:$roomDbVersion"
     annotationProcessor "android.arch.persistence.room:compiler:$roomDbVersion"
     implementation "android.arch.lifecycle:common-java8:$roomLifecycleDbVersion"
+
 }

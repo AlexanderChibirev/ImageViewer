@@ -10,6 +10,7 @@ import java.util.List;
 /**
  * Created by Alexander Chibirev on 5/4/2018.
  */
+
 public interface Storage {
 
     void addCallback(Callback callback);

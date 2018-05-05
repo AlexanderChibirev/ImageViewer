@@ -1,6 +1,5 @@
 package com.example.omega.imageviewer.ui.screens.base;
 
-import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,8 +14,6 @@ import android.widget.Toast;
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.models.Text;
-import com.example.omega.imageviewer.tools.NetworkChecker;
-import com.example.omega.imageviewer.ui.dialogs.confirm.ConfirmDialogFragment;
 import com.example.omega.imageviewer.ui.utils.DialogUtils;
 
 import butterknife.BindView;
@@ -27,20 +24,11 @@ import butterknife.ButterKnife;
  */
 
 public abstract class BaseActivity extends MvpAppCompatActivity implements
-        BaseView,
-        NetworkChecker.OnConnectivityChangedListener{
+        BaseView {
 
     @Nullable
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-
-    private NetworkChecker mNetworkChecker;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mNetworkChecker = new NetworkChecker(this);
-    }
 
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
@@ -68,18 +56,6 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements
                 return true;
         }
         return false;
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mNetworkChecker.registerListener(this);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mNetworkChecker.unregisterListener(this);
     }
 
     protected void afterSetContentView() {
@@ -120,11 +96,6 @@ public abstract class BaseActivity extends MvpAppCompatActivity implements
     @Override
     public void showToast(@NonNull Text message) {
         Toast.makeText(this, message.getString(getResources()), Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onConnectivityChanged(boolean availableNow) {
-        //nothing
     }
 
     @Override

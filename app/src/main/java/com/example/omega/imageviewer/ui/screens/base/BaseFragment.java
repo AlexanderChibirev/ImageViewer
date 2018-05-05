@@ -17,9 +17,8 @@ import android.widget.Toast;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.models.Text;
-import com.example.omega.imageviewer.tools.NetworkChecker;
-import com.example.omega.imageviewer.ui.utils.DialogUtils;
 import com.example.omega.imageviewer.ui.dialogs.attention.AttentionDialogFragment;
+import com.example.omega.imageviewer.ui.utils.DialogUtils;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -30,14 +29,12 @@ import butterknife.Unbinder;
 
 public abstract class BaseFragment extends MvpAppCompatFragment implements
         BaseView,
-        NetworkChecker.OnConnectivityChangedListener,
         AttentionDialogFragment.OnOkClickListener {
 
     @LayoutRes
     protected abstract int getLayoutRes();
 
     private Unbinder mUnbinder;
-    protected NetworkChecker mNetworkChecker;
 
     @Nullable
     @Override
@@ -50,7 +47,6 @@ public abstract class BaseFragment extends MvpAppCompatFragment implements
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mUnbinder = ButterKnife.bind(this, view);
-        mNetworkChecker = new NetworkChecker(getContext());
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (toolbar != null) {
@@ -61,18 +57,6 @@ public abstract class BaseFragment extends MvpAppCompatFragment implements
             }
             toolbar.setNavigationOnClickListener(v -> onHomePressed());
         }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mNetworkChecker.registerListener(this);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mNetworkChecker.unregisterListener(this);
     }
 
     @Override
@@ -129,8 +113,5 @@ public abstract class BaseFragment extends MvpAppCompatFragment implements
                 getString(negativeLabel),
                 getString(positiveLabel));
     }
-
-    @Override
-    public abstract void onConnectivityChanged(boolean availableNow);
 
 }

@@ -76,13 +76,8 @@ public class ImageFeedOfflineFragment extends BaseImageFeedFragment implements
     }
 
     @Override
-    public void onConnectivityChanged(boolean availableNow) {
-        mImageFeedOfflinePresenter.onConnectivityChanged(availableNow);
-    }
-
-    @Override
     public void onOkButtonPressed() {
-        mImageFeedOfflinePresenter.onOkButtonPressed(); //TODO  added logic
+        mImageFeedOfflinePresenter.onOkButtonPressed();
     }
 
     @Override

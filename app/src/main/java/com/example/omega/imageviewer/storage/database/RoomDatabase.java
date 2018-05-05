@@ -14,6 +14,7 @@ import java.util.concurrent.Executors;
 /**
  * Created by Alexander Chibirev on 5/4/2018.
  */
+
 public class RoomDatabase extends BaseStorage implements Database { //TODO maybe RX java?
 
     private final ImageDao mImageDao;
@@ -30,12 +31,13 @@ public class RoomDatabase extends BaseStorage implements Database { //TODO maybe
             onDeleteImageEvent(input, position);
         }).onError(e -> {
             onDeleteImageEvent(RequestEvent.ERROR, position);
-        });
+        }).onFinish(() -> onDeleteImageEvent(RequestEvent.FINISH, position));
     }
 
     private Task.Worker<RequestEvent> createDeleteWorker(@NonNull Image image) {
         return () -> {
             mImageDao.delete(image);
+            mCurrentImages.remove(image);
             return RequestEvent.SUCCESS;
         };
     }
@@ -46,7 +48,7 @@ public class RoomDatabase extends BaseStorage implements Database { //TODO maybe
             onSaveImageInDatabaseEvent(input, image);
         }).onError(e -> {
             onSaveImageInDatabaseEvent(RequestSaveEvent.ERROR, image);
-        });
+        }).onFinish(() -> onSaveImageInDatabaseEvent(RequestSaveEvent.FINISH, image));
     }
 
     private Task.Worker<RequestSaveEvent> createSaveWorker(@NonNull Image image) {
@@ -68,28 +70,26 @@ public class RoomDatabase extends BaseStorage implements Database { //TODO maybe
             onRequestImageEvent(RequestEvent.SUCCESS, input);
         }).onError(e -> {
             onRequestImageEvent(RequestEvent.ERROR, null);
-        });
+        }).onFinish(() -> onRequestImageEvent(RequestEvent.FINISH, null));
     }
 
     @Override
     public void requestAllImages() {
         Task.Worker<List<Image>> taskWorker = mImageDao::getImages;
         mTaskExecutor.runTask(taskWorker).onResult(result -> {
-            onRequestImagesEvent(RequestEvent.SUCCESS, result);
+            if (!result.equals(mCurrentImages) || result.isEmpty()) {
+                mCurrentImages.clear();
+                mCurrentImages.addAll(result);
+                onRequestImagesEvent(RequestEvent.SUCCESS, result);
+            }
         }).onError(e -> {
             onRequestImagesEvent(RequestEvent.ERROR, null);
-        });
+        }).onFinish(() -> onRequestImagesEvent(RequestEvent.FINISH, null));
     }
 
     @Override
     public void requestImages(int limit, int offSet) {
-        //TODO added logic
+        //TODO added logic in feature
     }
 
-   @Override
-    public void addCallback(Callback callback) {
-        if (isEmptyCallbacks()) {
-            super.addCallback(callback);
-        }
-    }
 }

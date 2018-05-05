@@ -107,10 +107,4 @@ public class SplashPresenter extends BasePresenter<SplashView> {
     public void onScreenClosed() {
         showAuthorizationMessage();
     }
-
-    @Override
-    protected void onConnectivityChanged(boolean availableNow) {
-        //TODO added logic
-    }
-
 }

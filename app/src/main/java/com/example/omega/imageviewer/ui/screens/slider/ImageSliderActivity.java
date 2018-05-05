@@ -109,12 +109,6 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
     }
 
     @Override
-    public void onConnectivityChanged(boolean availableNow) {
-        super.onConnectivityChanged(availableNow);
-        mImageSliderPresenter.onConnectivityChanged(availableNow);
-    }
-
-    @Override
     public void notifyItemImage(int itemPositionDeleted) {
         if (mImageSliderAdapter != null) {
             mImageSliderAdapter.notifyItemItem(itemPositionDeleted);
