@@ -13,6 +13,7 @@ import com.example.omega.imageviewer.di.modules.PreferencesModule;
 import com.example.omega.imageviewer.di.modules.UserManagerModule;
 import com.example.omega.imageviewer.models.Preferences;
 import com.example.omega.imageviewer.models.UserManager;
+import com.example.omega.imageviewer.storage.base.StorageManager;
 import com.example.omega.imageviewer.storage.cloud_drive.CloudDrive;
 import com.example.omega.imageviewer.storage.database.Database;
 
@@ -46,6 +47,7 @@ public interface AppComponent extends AndroidInjector<ImageSliderApp> {
         AppComponent.Builder application(Application application);
 
         AppComponent build();
+
     }
 
     CloudDrive getCloudDrive();

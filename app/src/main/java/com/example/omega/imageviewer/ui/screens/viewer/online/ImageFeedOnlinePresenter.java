@@ -2,14 +2,14 @@ package com.example.omega.imageviewer.ui.screens.viewer.online;
 
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.example.omega.imageviewer.R;
-import com.example.omega.imageviewer.app.ImageSliderApp;
 import com.example.omega.imageviewer.models.Image;
 import com.example.omega.imageviewer.storage.base.Storage;
+import com.example.omega.imageviewer.storage.base.StorageManager;
 import com.example.omega.imageviewer.storage.cloud_drive.CloudDrive;
-import com.example.omega.imageviewer.storage.database.Database;
 import com.example.omega.imageviewer.ui.screens.viewer.base.BaseImageFeedPresenter;
 
 import java.util.List;
@@ -19,45 +19,37 @@ import java.util.List;
  */
 
 @InjectViewState
-public class ImageFeedOnlinePresenter extends BaseImageFeedPresenter<ImageFeedOnlineView> implements CloudDrive.Callback {
+public class ImageFeedOnlinePresenter extends BaseImageFeedPresenter<ImageFeedOnlineView>
+        implements CloudDrive.Callback {
 
-    @NonNull
-    private CloudDrive mCloudDrive;
-    @NonNull
-    private Database mDatabase;
+    private final StorageManager mStorageManager;
 
     public ImageFeedOnlinePresenter() {
-        mCloudDrive = ImageSliderApp.getAppComponent().getCloudDrive();
-        mDatabase = ImageSliderApp.getAppComponent().getDatabase();
-        mCloudDrive.addCallback(this);
+        mStorageManager = new StorageManager(true);
+        mStorageManager.addCallback(this);
     }
 
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
-        int size = mCloudDrive.getImages().size();
-        getViewState().updateImages(mCloudDrive.getImages());
+        int size = mStorageManager.getCurrentImages().size();
+        getViewState().updateImages(mStorageManager.getCurrentImages());
         if (size >= LIMIT_IMAGES_TO_UPLOAD || size == 0) {
             requestImagesFromCloudDrive(LIMIT_IMAGES_TO_UPLOAD, size);
         }
     }
 
     private void requestImagesFromCloudDrive(final int limit, final int offSet) {
-        mCloudDrive.requestImages(limit, offSet);
+        mStorageManager.requestImages(limit, offSet);
     }
 
-
     @Override
-    public void onRequestImagesEvent(Storage.RequestEvent requestEvent, List<Image> images) {
+    public void onRequestImagesEvent(@NonNull Storage.RequestEvent requestEvent, List<Image> images) {
         switch (requestEvent) {
             case SUCCESS:
-                getViewState().updateImages(mCloudDrive.getImages());
-                if (mCloudDrive.getImages().isEmpty()) {
+                if (mStorageManager.getCurrentImages().isEmpty()) {
                     getViewState().showAttentionScreen(R.string.images_empty);
                 }
-                break;
-            case FINISH:
-                getViewState().hideLoading();
                 break;
             case ERROR:
                 getViewState().showAttentionScreen(R.string.download_image_failed);
@@ -66,48 +58,42 @@ public class ImageFeedOnlinePresenter extends BaseImageFeedPresenter<ImageFeedOn
     }
 
     @Override
-    public void onDeleteImageEvent(Storage.RequestEvent requestEvent, int itemPositionDeleted) {
-        switch (requestEvent) {
+    public void onDeleteImageEvent(@NonNull Storage.RequestEvent requestEvent, int itemPositionDeleted) {
+
+    }
+
+    @Override
+    public void onRequestImageEvent(@NonNull Storage.RequestEvent requestEvent, @Nullable Image image) {
+
+    }
+
+    @Override
+    public void onSaveImageInDatabaseEvent(@NonNull Storage.RequestSaveEvent requestSaveEvent, Image image) {
+        switch (requestSaveEvent) {
             case SUCCESS:
-                getViewState().deletedImage(itemPositionDeleted);
+                getViewState().saveImageOnDisk(image);
                 break;
-            case ERROR:
-                getViewState().showAttentionScreen(R.string.delete_image_failed);
+            case REQUIRED:
+                getViewState().showAttentionScreen(R.string.image_already_exists);
                 break;
         }
     }
 
-    @Override
-    public void onSaveImageEvent(Storage.RequestEvent requestEvent, Image image, boolean isAlreadyExists) {
-
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mCloudDrive.removeCallback(this);
-    }
-
-    @Override
-    public void onDeleteClicked() {
-        mCloudDrive.deleteImage(mCloudDrive.getImages().get(mItemPositionLongClicked), mItemPositionLongClicked);
-    }
-
     protected void onRefresh() {
-        int size = mCloudDrive.getImages().size();
+        int size = mStorageManager.getCurrentImages().size();
         requestImagesFromCloudDrive(size + LIMIT_IMAGES_TO_UPLOAD,
                 0);
     }
 
+    @Override
+    public void onDeleteClicked() {
+        mStorageManager.deleteImage(mStorageManager.getCurrentImages().get(mItemPositionLongClicked),
+                mItemPositionLongClicked);
+    }
+
     protected void onSaveImageClicked() {
-        Image image = mCloudDrive.getImages().get(mItemPositionLongClicked);
-        Image imageDao = mDatabase.getImageByName(image.getName(), image.getPath());
-        if (imageDao == null) { //TODO transfer logic in dao
-            mDatabase.saveImage(image);
-            getViewState().saveImageOnDisk(image);
-        } else {
-            getViewState().showAttentionScreen(R.string.image_already_exists);
-        }
+        Image image = mStorageManager.getCurrentImages().get(mItemPositionLongClicked);
+        mStorageManager.saveImageInDatabase(image);
     }
 
     @Override

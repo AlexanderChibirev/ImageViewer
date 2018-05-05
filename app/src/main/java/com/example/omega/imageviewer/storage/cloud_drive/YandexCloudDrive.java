@@ -31,11 +31,6 @@ public class YandexCloudDrive extends BaseStorage implements CloudDrive {
     }
 
     @Override
-    public void saveImage(@NonNull Image image) {
-        //TODO added logic
-    }
-
-    @Override
     public void deleteImage(@NonNull final Image image, final int itemPosition) {
         mCloudDriverApi.deleteImage(image.getPath(), true)
                 .onResult(r -> onDeleteImageEvent(RequestEvent.SUCCESS, itemPosition))
@@ -45,10 +40,28 @@ public class YandexCloudDrive extends BaseStorage implements CloudDrive {
 
     private void updateImages(@NonNull ListResources<Image> resources) {
         List<Image> images = resources.getResources();
-        if (!images.equals(mImages) || images.isEmpty()) {
-            mImages.clear();
-            mImages.addAll(images);
+        if (!images.equals(mCurrentImages) || images.isEmpty()) {
+            mCurrentImages.clear();
+            mCurrentImages.addAll(images);
             onRequestImagesEvent(RequestEvent.SUCCESS, images);
         }
     }
+
+    @Override
+    public void requestImage(@NonNull String name, @NonNull String path) {
+        //TODO added logic
+    }
+
+    @Override
+    public void requestAllImages() {
+        //TODO added logic
+    }
+
+    @Override
+    public void addCallback(Callback callback) {
+        if (isEmptyCallbacks()) {
+            super.addCallback(callback);
+        }
+    }
+
 }

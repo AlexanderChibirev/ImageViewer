@@ -23,7 +23,6 @@ public class AppModule {
     @Provides
     AppDatabase provideDb(Application application) {
         return Room.databaseBuilder(application, AppDatabase.class, BuildConfig.DATABASE_NAME)
-                .allowMainThreadQueries() //for testing //TODO deleted this method and added work thread in database manager
                 .build();
     }
 

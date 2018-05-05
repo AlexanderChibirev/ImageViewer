@@ -1,9 +1,17 @@
 package com.example.omega.imageviewer.ui.screens.viewer.base;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.app.ImageSliderApp;
+import com.example.omega.imageviewer.models.Image;
 import com.example.omega.imageviewer.models.Preferences;
+import com.example.omega.imageviewer.storage.base.Storage;
+import com.example.omega.imageviewer.storage.base.StorageManager;
 import com.example.omega.imageviewer.ui.screens.base.BasePresenter;
+
+import java.util.List;
 
 /**
  * Created by Alexander Chibirev on 4/15/2018.
@@ -12,7 +20,6 @@ import com.example.omega.imageviewer.ui.screens.base.BasePresenter;
 public abstract class BaseImageFeedPresenter<V extends BaseImageFeedView> extends BasePresenter<V> {
 
     protected static final int LIMIT_IMAGES_TO_UPLOAD = 50;
-
     protected int mItemPositionLongClicked;
 
     public BaseImageFeedPresenter() {
@@ -34,4 +41,5 @@ public abstract class BaseImageFeedPresenter<V extends BaseImageFeedView> extend
     protected void onImageLongClick(int position) {
         mItemPositionLongClicked = position;
     }
+
 }

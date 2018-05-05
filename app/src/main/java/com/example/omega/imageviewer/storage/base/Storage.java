@@ -1,6 +1,7 @@
 package com.example.omega.imageviewer.storage.base;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.example.omega.imageviewer.models.Image;
 
@@ -15,24 +16,35 @@ public interface Storage {
 
     void removeCallback(Callback callback);
 
-    void requestImages(final int limit, final int offSet);
-
     void deleteImage(@NonNull final Image image, final int position);
 
-    void saveImage(@NonNull final Image image);
+    void requestImage(@NonNull String name, @NonNull String path);
 
-    List<Image> getImages();
+    void requestImages(final int limit, final int offSet);
+
+    void requestAllImages();
+
+    List<Image> getCurrentImages();
 
     interface Callback {
-        void onRequestImagesEvent(RequestEvent requestEvent, List<Image> images);
+        void onRequestImagesEvent(@NonNull RequestEvent requestEvent, @Nullable List<Image> images);
 
-        void onDeleteImageEvent(RequestEvent requestEvent, int itemPositionDeleted);
+        void onDeleteImageEvent(@NonNull RequestEvent requestEvent, int itemPositionDeleted);
 
-        void onSaveImageEvent(RequestEvent requestEvent, Image image, boolean isAlreadyExists);
+        void onSaveImageInDatabaseEvent(@NonNull RequestSaveEvent requestSaveEvent, Image image);
+
+        void onRequestImageEvent(@NonNull RequestEvent requestEvent, @Nullable Image image);
     }
 
     enum RequestEvent {
         SUCCESS,
+        ERROR,
+        FINISH
+    }
+
+    enum RequestSaveEvent {
+        SUCCESS,
+        REQUIRED,
         ERROR,
         FINISH
     }

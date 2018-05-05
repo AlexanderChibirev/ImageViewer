@@ -7,6 +7,7 @@ import com.example.omega.imageviewer.backend.Error;
 import com.example.omega.imageviewer.backend.ErrorException;
 import com.example.omega.imageviewer.models.Image;
 import com.example.omega.imageviewer.models.Text;
+import com.example.omega.imageviewer.storage.database.Database;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ public abstract class BaseStorage implements Storage {
 
     private Set<Callback> mCallbackSet = new CopyOnWriteArraySet<>();
     @NonNull
-    protected List<Image> mImages = new ArrayList<>();
+    protected List<Image> mCurrentImages = new ArrayList<>();
 
     @Override
     public void addCallback(Callback callback) {
@@ -43,15 +44,21 @@ public abstract class BaseStorage implements Storage {
         }
     }
 
-    protected void onSaveImageEvent(RequestEvent requestEvent, Image image, boolean isAlreadyExists) {
+    protected void onSaveImageInDatabaseEvent(Database.RequestSaveEvent requestSaveEvent, Image image) {
         for (Callback callback : mCallbackSet) {
-            callback.onSaveImageEvent(requestEvent, image, isAlreadyExists);
+            callback.onSaveImageInDatabaseEvent(requestSaveEvent, image);
         }
     }
 
     protected void onDeleteImageEvent(RequestEvent requestEvent, int itemPositionDeleted) {
         for (Callback callback : mCallbackSet) {
             callback.onDeleteImageEvent(requestEvent, itemPositionDeleted);
+        }
+    }
+
+    protected void onRequestImageEvent(RequestEvent requestEvent, Image image) {
+        for (Callback callback : mCallbackSet) {
+            callback.onRequestImageEvent(requestEvent, image);
         }
     }
 
@@ -73,8 +80,8 @@ public abstract class BaseStorage implements Storage {
 
     @NonNull
     @Override
-    public List<Image> getImages() {
-        return mImages;
+    public List<Image> getCurrentImages() {
+        return mCurrentImages;
     }
 
 }

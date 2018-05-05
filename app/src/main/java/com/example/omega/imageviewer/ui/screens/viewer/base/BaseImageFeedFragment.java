@@ -82,8 +82,8 @@ public abstract class BaseImageFeedFragment extends ScreenMenuBinderFragment imp
     public abstract void onDeleteClicked();
 
     @Override
-    public void deletedImage(int itemPositionDeleted) {
-        mImageFeedAdapter.deleteItem(itemPositionDeleted);
+    public void notifyItemImage(int itemPositionDeleted) {
+        mImageFeedAdapter.notifyItemItem(itemPositionDeleted);
     }
 
 }

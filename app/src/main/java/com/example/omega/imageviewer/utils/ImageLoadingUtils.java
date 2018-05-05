@@ -50,12 +50,17 @@ public class ImageLoadingUtils {
     public static void saveImageOnDisk(Context context, @NonNull final Image image) {
         Picasso.get()
                 .load(image.getPublicUrl())
-                .into(picassoImageTarget(context.getApplicationContext(), image.getName()));
+                .into(picassoImageTarget(context.getApplicationContext(), getCorrectName(image)));
     }
 
-    public static boolean deleteImageFromDisk(Context context, @NonNull final String imageName) {
-        File myImageFile = createFile(context, imageName);
+    public static boolean deleteImageFromDisk(Context context, @NonNull final Image image) {
+        File myImageFile = createFile(context, getCorrectName(image));
         return myImageFile.exists() && myImageFile.delete();
+    }
+
+    @NonNull
+    private static String getCorrectName(Image image) {
+        return image.getName() + image.getPath();
     }
 
     @Nullable

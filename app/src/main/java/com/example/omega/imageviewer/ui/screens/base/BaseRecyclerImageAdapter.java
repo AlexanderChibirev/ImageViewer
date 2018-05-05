@@ -41,8 +41,7 @@ public abstract class BaseRecyclerImageAdapter<VH extends BaseRecyclerImageAdapt
         return LayoutInflater.from(parent.getContext()).inflate(layout, parent, false);
     }
 
-    public void deleteItem(int itemPositionDeleted) {
-        mImages.remove(itemPositionDeleted);
+    public void notifyItemItem(int itemPositionDeleted) {
         notifyItemRemoved(itemPositionDeleted);
     }
 

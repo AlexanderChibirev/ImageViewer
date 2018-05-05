@@ -104,4 +104,5 @@ public class ImageFeedOnlineFragment extends BaseImageFeedFragment implements Im
             ImageLoadingUtils.saveImageOnDisk(context, image);
         }
     }
+
 }

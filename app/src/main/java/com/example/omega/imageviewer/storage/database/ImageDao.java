@@ -19,5 +19,6 @@ public interface ImageDao extends BaseDao<Image> {
     List<Image> getImages();
 
     @Query("SELECT * FROM image where mName LIKE  :name AND mPath LIKE :path")
-    Image findImageByName(String name, String path);
+    Image getImage(String name, String path);
+
 }

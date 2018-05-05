@@ -115,9 +115,9 @@ public class ImageSliderActivity extends BaseActivity implements ImageSliderView
     }
 
     @Override
-    public void deletedImage(int itemPositionDeleted) {
+    public void notifyItemImage(int itemPositionDeleted) {
         if (mImageSliderAdapter != null) {
-            mImageSliderAdapter.deleteItem(itemPositionDeleted);
+            mImageSliderAdapter.notifyItemItem(itemPositionDeleted);
         }
     }
 

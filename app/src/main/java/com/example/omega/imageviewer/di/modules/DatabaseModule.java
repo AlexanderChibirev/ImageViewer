@@ -22,8 +22,8 @@ public class DatabaseModule {
 
     @Singleton
     @Provides
-    Database provideDatabase(Context context, @NonNull final ImageDao imageDao) {
-        return new RoomDatabase(context, imageDao);
+    Database provideDatabase(@NonNull final ImageDao imageDao) {
+        return new RoomDatabase(imageDao);
     }
 
 }

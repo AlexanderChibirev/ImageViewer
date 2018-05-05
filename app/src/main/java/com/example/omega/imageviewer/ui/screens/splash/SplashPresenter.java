@@ -22,8 +22,6 @@ import com.example.omega.imageviewer.ui.screens.base.BasePresenter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.inject.Inject;
-
 /**
  * Created by Alexander Chibirev on 4/20/2018.
  */
@@ -35,12 +33,10 @@ public class SplashPresenter extends BasePresenter<SplashView> {
     private static final int LIMIT_IMAGES_TO_UPLOAD = 100;
     private static final String GET_TOKEN_PATTERN = "access_token=(.*?)(&|$)";
 
-    @Inject
-    CloudDrive mCloudDrive;
-    @Inject
-    UserManager mUserManager;
-    @Inject
-    Preferences mPreferences;
+
+    private final CloudDrive mCloudDrive;
+    private final UserManager mUserManager;
+    private final Preferences mPreferences;
 
     public SplashPresenter() {
         mUserManager = ImageSliderApp.getAppComponent().getUserManager();
@@ -67,12 +63,11 @@ public class SplashPresenter extends BasePresenter<SplashView> {
         getViewState().showAuthorizationMessage(R.string.auth_message, R.string.exit, R.string.yes);
     }
 
-    protected void onOkPressed() {//TODO
+    protected void onOkPressed() {
         getViewState().showWebScreen(BuildConfig.AUTH_URL + BuildConfig.CLIENT_ID);
     }
 
-    protected void onCancelPressed() {//TODO
-        //TODO added transfer on offline mode remove finishScreen()
+    protected void onCancelPressed() {
         getViewState().finishScreen();
     }
 
@@ -105,7 +100,7 @@ public class SplashPresenter extends BasePresenter<SplashView> {
     }
 
     private void requestImages() {
-        mCloudDrive.requestImages(LIMIT_IMAGES_TO_UPLOAD, mCloudDrive.getImages().size());
+        mCloudDrive.requestImages(LIMIT_IMAGES_TO_UPLOAD, mCloudDrive.getCurrentImages().size());
         startPostDelayedAnimate();
     }
 
