@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import com.example.omega.imageviewer.R;
 import com.example.omega.imageviewer.models.Image;
 import com.example.omega.imageviewer.ui.screens.base.BaseRecyclerImageAdapter;
+import com.github.chrisbanes.photoview.PhotoView;
 
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class ImageSliderAdapter extends BaseRecyclerImageAdapter<BaseRecyclerIma
 
     class ViewHolder extends BaseViewHolder {
         @BindView(R.id.imageview)
-        ImageView imageView;
+        PhotoView imageView;
 
         public ViewHolder(View itemView) {
             super(itemView);
