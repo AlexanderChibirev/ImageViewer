@@ -23,7 +23,6 @@
     <string name="request_finish">запрос окончен</string>
     <string name="menu_main_page">Онлайн режим</string>
     <string name="menu_offline_page">Офлайн режим</string>
-    <string name="scheme_cloud_drive">yandexdisk</string>
     <string name="dialog_cloud_drive_options_save_image">\@string/label_save_image</string>
     <string name="dialog_cloud_drive_options_delete_image">\@string/label_delete_image</string>
     <string name="dialog_cloud_drive_options_full_mode_image">\@string/label_full_mode_image</string>
