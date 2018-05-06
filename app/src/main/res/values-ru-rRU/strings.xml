@@ -32,7 +32,7 @@
     <string name="ok">ОК</string>
     <string name="image_success_deleted">Картинка успешно удалена</string>
     <string name="download_image_failed">Произошла ошибка при загрузке данных. Проверьте сетевое соединение.</string>
-    <string name="delete_image_failed">Ошибка удаления изображения</string>
+    <string name="delete_image_failed">Ошибка удаления изображения, подключитесь к интернету и попробуйте снова</string>
     <string name="loading">Загрузка</string>
     <string name="images_empty">На облачном диске нет изображений, загрузите их и потяните вниз</string>
     <string name="of">%1$d из %2$d</string>
