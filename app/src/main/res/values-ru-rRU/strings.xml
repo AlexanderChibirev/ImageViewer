@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Image Viewer</string>
+    <string name="error_connection">Кажется, что интернет-соединение потеряно. Повторите попытку или перейдите в оффлайн режим.</string>
+    <string name="error_unknown">"Неизвестная ошибка "</string>
+    <string name="label_image_slider">Слайдер</string>
+    <string name="splash_first_part_title">ндекс</string>
+    <string name="yandex_title">Яндекс</string>
+    <string name="splash_second_part_title">Я</string>
+    <string name="splash_description">Школа мобильной разработки</string>
+    <string name="all_content_description">Мне жаль, что ты слепой</string>
+    <string name="font_family_medium" translatable="false">sans-serif-medium</string>
+    <string name="font_family_regular" translatable="false">sans-serif</string>
+    <string name="label_attention">Внимание</string>
+    <string name="label_confirm">Hello world!</string>
+    <string name="cancel">Отмена</string>
+    <string name="logout">Выйти</string>
+    <string name="exit">Выйти</string>
+    <string name="yes">Да</string>
+    <string name="go_to_offline_mode">Нет подключения к Интернету, перейти в офлайн режиме?</string>
+    <string name="auth_message">Запустить браузер для авторизации?</string>
+    <string name="image_success_download">Картинка успешно загрузилась</string>
+    <string name="request_finish">запрос окончен</string>
+    <string name="menu_main_page">Онлайн режим</string>
+    <string name="menu_offline_page">Офлайн режим</string>
+    <string name="scheme_cloud_drive">yandexdisk</string>
+    <string name="dialog_cloud_drive_options_save_image">\@string/label_save_image</string>
+    <string name="dialog_cloud_drive_options_delete_image">\@string/label_delete_image</string>
+    <string name="dialog_cloud_drive_options_full_mode_image">\@string/label_full_mode_image</string>
+    <string name="label_save_image">Сохранить картинку</string>
+    <string name="label_delete_image">Удалить картинку</string>
+    <string name="label_full_mode_image">Открыть в полный вид</string>
+    <string name="ok">ОК</string>
+    <string name="image_success_deleted">Картинка успешно удалена</string>
+    <string name="download_image_failed">Произошла ошибка при загрузке данных. Проверьте сетевое соединение.</string>
+    <string name="delete_image_failed">Ошибка удаления изображения</string>
+    <string name="loading">Загрузка</string>
+    <string name="images_empty">На облачном диске нет изображений, загрузите их и потяните вниз</string>
+    <string name="of">%1$d из %2$d</string>
+    <string name="helper_for_online_feed">Для сохранения или удаления изображения удерживайте элемент</string>
+    <string name="go_to_online_mode">В этом разделе нет изображений, хотите перейти в онлайн-режим?</string>
+    <string name="network_connection">Появилось подключение к Интернету, пожалуйста, обновите картинки</string>
+    <string name="image_already_exists">Изображение уже сохранено</string>
+    <string name="dialog_cloud_drive_options_title">Что бы вы хотели сделать?</string>
+</resources>
